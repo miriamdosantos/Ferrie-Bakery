@@ -1,0 +1,63 @@
+{% load static %}
+{% load i18n %}
+
+<div class="collapse navbar-collapse rounded-lg" id="main-nav" style="background-color: #F9F9F9;">
+    <ul class="navbar-nav w-auto mx-auto">
+        <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {% trans "Sort Options" %}
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="sort-link">
+                <a href="#" class="dropdown-item">{% trans "By Price" %}</a>
+                <a href="#" class="dropdown-item">{% trans "By Popularity" %}</a>
+                <a href="#" class="dropdown-item">{% trans "By New Arrivals" %}</a>
+                <a href="#" class="dropdown-item">{% trans "View All" %}</a>
+            </div>
+        </li>
+
+
+        <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="clothing-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-cake-candles" style="color: #FF13A4;"></i> {% trans "Cakes" %}
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="cakes-link">
+                <a href="#" class="dropdown-item">{% trans "Birthday Cakes" %}</a>
+                <a href="#" class="dropdown-item">{% trans "Wedding Cakes" %}</a>
+                <a href="#" class="dropdown-item">{% trans "All Cakes" %}</a>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="homeware-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {% trans "Desserts" %}
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="desserts-link">
+                <a href="#" class="dropdown-item">{% trans "Tarts" %}</a>
+                <a href="#" class="dropdown-item">{% trans "Mousses" %}</a>
+                <a href="#" class="dropdown-item">{% trans "Cakes in a Pot" %}</a>
+                <a href="#" class="dropdown-item">{% trans "All Desserts" %}</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link font-weight-bold text-danger" href="#" id="special-offers-link">
+                {% trans "On Sale" %} <span class="badge bg-danger text-white flashing-sale">{% trans "SALE" %}</span>
+            </a>
+        </li>
+
+
+        <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black" href="#" id="specials-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {% trans "Party Sweets" %}
+            </a>
+            <div class="dropdown-menu border-0" aria-labelledby="party-sweets-link">
+                <a href="#" class="dropdown-item">{% trans "Brigadeiros" %}</a>
+                <a href="#" class="dropdown-item">{% trans "Beijinhos" %}</a>
+                <a href="#" class="dropdown-item">{% trans "All Party Sweets" %}</a>
+            </div>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="logo-font font-weight-bold nav-link text-black" href="#" id="specials-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {% trans "About Us" %}
+            </a>
+    </ul>
+</div>
