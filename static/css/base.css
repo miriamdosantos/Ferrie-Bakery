@@ -1,0 +1,184 @@
+
+/* Cores principais */
+:root {
+    --primary-color: #FF13A4; /* Rosa Principal */
+    --secondary-color: #A8E6CF; /* Verde Água */
+    --background-color: #F9F9F9; /* Fundo Geral */
+    --text-color: #333333; /* Texto Primário */
+    --text-secondary-color: #666666; /* Texto Secundário */
+    --link-color: #FF70C0; /* Links */
+    --footer-bg-color: #C41284; /* Fundo do Rodapé */
+    --button-text-color: #FFFFFF; /* Texto dos Botões */
+  }
+  
+  /* Configurações de Fonte */
+  body {
+    font-family: 'Roboto', sans-serif; /* Fonte Secundária para texto geral */
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Cabeçalhos */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif; /* Fonte Principal para Destaques */
+    font-weight: 600; /* Semi-bold */
+    color: var(--text-color);
+    margin: 0;
+    padding: 0.5em 0;
+  }
+  
+  /* Links */
+  a {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: var(--link-color);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--primary-color); /* Rosa Principal */
+    text-decoration: underline;
+  }
+  
+  
+  
+  
+  /* Inputs e Campos de Formulário */
+  input, textarea, select {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: var(--secondary-color);
+    border: 1px solid var(--text-secondary-color);
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+  }
+  
+  /* Fundo das Seções */
+  .section {
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  /* Rodapé */
+  footer {
+    background-color: var(--footer-bg-color);
+    color: var(--button-text-color);
+    text-align: center;
+    padding: 20px 10px;
+  }
+  
+  footer a {
+    color: var(--button-text-color);
+  }
+  
+  footer a:hover {
+    color: var(--link-color);
+  }
+  
+
+html {
+    height: 100%;
+}
+
+#topnav{
+    background-color:  rgba(255, 19, 164, 0.4)
+    ; 
+}
+
+#topnav img {
+    border-radius: 50%;
+    width: 30%;
+    height: 30%;
+    margin-left: 8rem;
+    box-shadow: 5px  5px  15px rgba(0, 0, 0, 0.659); /* Efeito de sombra */
+}
+
+
+/* from Bulma */
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+header i{
+    color:black;
+}
+
+ul a{
+    color: #ffffff;
+}
+ul a:hover{
+    color: var(--primary-color);
+}
+
+.dropdown-menu{
+    background-color: var(--secondary-color);
+}
+.dropdown-menu a:hover{
+    color: var(--primary-color);
+    background-color: --
+}
+
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  
+  .btn-whatsapp {
+    background-color: #25D366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-whatsapp i {
+    margin-right: 10px;
+  }
+  
+  .btn-whatsapp:hover {
+    background-color: #128C7E;
+  }
+
+  /* -------------------------------- Media Queries */
+
+/* Slightly larger container on xl screens */
+@media (min-width: 1200px) {
+    .container {
+      max-width: 80%;
+    }
+  }
+  
+  /* fixed top navbar only on medium and up */
+  @media (min-width: 992px) {
+      .fixed-top-desktop-only {
+          position: fixed;
+          top: 0;
+          right: 0;
+          left: 0;
+          z-index: 1030;
+      }
+  
+      .header-container {
+          padding-top: 164px;
+      }
+  }
