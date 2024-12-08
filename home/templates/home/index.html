@@ -4,100 +4,97 @@
 
 {% block content %}
 <main class="container-fluid mt-5">
-  <!-- Carrossel de Produtos / Sugestões -->
-  <div id="carouselExample" class="carousel slide " data-ride="carousel">
-    <div class="carousel-inner">
-      <!-- Slide único (imagem destacada) -->
-      <div class="carousel-item active">
-        <img src="/media/mouses.jpeg" class="d-block w-100 zoom-effect" alt="Bolo de Casamento ou Aniversário">
-        <div class="carousel-caption  text-center">
-          <h5 style="font-size: 3rem; color: #fff; text-shadow: 2px 2px 5px rgba(0,0,0,0.7);">Encomende Agora!</h5>
-          <p class="d-none d-lg-block" style="font-size: 1.8rem; color: #fff; text-shadow: 10px 10px 15px rgba(0,0,0,0.7); background-color:#FF70C0; border-radius: 8rem;">Seu bolo de casamento ou aniversário personalizado para um dia especial.</p>
-          <a href="#product1" class="btn btn-danger btn-lg btn-action" style="box-shadow: 0px 4px 50px rgba(255,0,0,0.7); ">Peça Já</a>
+    <!-- Carrossel de Produtos / Sugestões -->
+    <div id="carouselExample" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <!-- Slide único (imagem destacada) -->
+            <div class="carousel-item active">
+                <img src="/media/mouses.jpeg" class="d-block w-100 zoom-effect" alt="Bolo de Casamento ou Aniversário">
+                <div class="carousel-caption text-center">
+                    <h5 style="font-size: 3rem; color: #fff; text-shadow: 2px 2px 5px rgba(0,0,0,0.7);">
+                        Encomende Agora!
+                    </h5>
+                    <p class="d-none d-lg-block" style="font-size: 1.8rem; color: #fff; 
+                        text-shadow: 10px 10px 15px rgba(0,0,0,0.7); background-color:#FF70C0; border-radius: 8rem;">
+                        Seu bolo de casamento ou aniversário personalizado para um dia especial.
+                    </p>
+                    <a href="#product1" class="btn btn-danger btn-lg btn-action"
+                        style="box-shadow: 0px 4px 50px rgba(255,0,0,0.7);">Peça Já</a>
+                </div>
+            </div>
         </div>
-      </div>
+        <!-- Controle de Navegação -->
+        <!-- Sem navegação pois agora temos apenas uma imagem -->
     </div>
-    <!-- Controle de Navegação -->
-    <!-- Sem navegação pois agora temos apenas uma imagem -->
-  </div>
-  <section class="featured-sections mt-5">
-    <div class="container">
-      <div class="row">
-        <!-- Best Sellers -->
-        <div class="col-md-6">
-          <h2 class="text-center font-weight-bold mb-4" style="color: #FF13A4;">{% trans "Best Sellers" %}</h2>
-          <div class="row">
-            <div class="col-md-6 mb-4">
-              <div class="card shadow-sm">
-                <img src="/media/best_seller1.jpg"  alt="Best Seller 1">
-                <div class="card-body">
-                  <h5 class="card-title">Produto 1</h5>
-                  <p class="card-text">Descrição do produto em destaque.</p>
+
+    <!-- Seção de Best Sellers -->
+    <section class="featured-sections mt-5">
+        <div class="container">
+            <div class="row">
+                <!-- Best Sellers -->
+                <div class="col-12">
+                    <h2 class="text-center font-weight-bold mb-4" style="color: #FF13A4;">
+                        {% trans "Best Sellers" %}
+                    </h2>
+                    <div class="row">
+                        {% for product in best_sellers %}
+                        <div class="col-md-4 mb-4 offset-md-2">
+                            <div class="card shadow-sm" style="height: 500px;">
+                                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                    <!-- Representação do Rating -->
+                                    <div class="mb-2">
+                                        {% if product.rating %}
+                                            <span class="fw-bold text-muted bg-light p-2 rounded-pill">Rating:</span>
+                                            {% for i in stars_range %}
+                                                {% if i <= product.rating %}
+                                                    <span class="text-warning">&#9733;</span> <!-- Estrela cheia -->
+                                                {% else %}
+                                                    <span class="text-muted">&#9733;</span> <!-- Estrela vazia -->
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            <span class="fw-bold text-muted bg-light p-2 rounded-pill">Rating not found</span>
+                                        {% endif %}
+                                    </div>                                    
+                                    <a href="#" class="btn btn-primary btn-small product-btn product-btn-small">
+                                        {{ product.description|truncatewords:15 }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="col-md-6 mb-4">
-              <div class="card shadow-sm">
-                <img src="/media/best_seller2.jpg"  alt="Best Seller 2">
-                <div class="card-body">
-                  <h5 class="card-title">Produto 2</h5>
-                  <p class="card-text">Descrição do produto em destaque.</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-  
-        <!-- New Arrivals -->
-        <div class="col-md-6">
-          <h2 class="text-center font-weight-bold mb-4" style="color: #FF13A4;">{% trans "New Arrivals" %}</h2>
-          <div class="row">
-            <div class="col-md-6 mb-4">
-              <div class="card shadow-sm">
-                <img src="/media/new_arrival1.jpg"  alt="New Arrival 1">
-                <div class="card-body">
-                  <h5 class="card-title">Produto Novo 1</h5>
-                  <p class="card-text">Descrição do produto recém-chegado.</p>
+    </section>
+
+    <!-- Seção de Novidades Fresquinhas -->
+    <section class="store-updates mt-5">
+        <div class="container">
+            <h2 class="text-center font-weight-bold mb-4" style="color: #FF13A4;">
+                {% trans "Novidades Fresquinhas" %}
+            </h2>
+            <div class="row">
+                {% for update in stores_updates %}
+                <div class="col-md-6 mb-4">
+                    <div class="card shadow-sm" style="min-height: 470px;">
+                        {% if update.image %}
+                        <img src="{{ update.image.url }}" class="card-img-top update-image" alt="{{ update.title }}">
+                        {% endif %}
+                        <div class="card-body" style="background-color: #a8e6cfac;">
+                            <h5 class="card-title">{{ update.title }}</h5>
+                            <p class="card-text">{{ update.description|truncatewords:20 }}</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                {% empty %}
+                <p class="text-center w-100">{% trans "No updates available at the moment." %}</p>
+                {% endfor %}
             </div>
-            <div class="col-md-6 mb-4">
-              <div class="card shadow-sm">
-                <img src="/media/new_arrival2.jpg" alt="New Arrival 2">
-                <div class="card-body">
-                  <h5 class="card-title">Produto Novo 2</h5>
-                  <p class="card-text">Descrição do produto recém-chegado.</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
-  
-  <section class="store-updates mt-5">
-    <div class="container">
-      <h2 class="text-center font-weight-bold mb-4" style="color: #FF13A4;">{% trans "Novidades Fresquinhas" %}</h2>
-      <div class="row">
-        {% for update in stores_updates %}
-          <div class="col-md-6 mb-4">
-            <div class="card shadow-sm" style="min-height: 470px; " >
-              {% if update.image %}
-                <img src="{{ update.image.url }}" class="card-img-top update-image" alt="{{ update.title }}">
-              {% endif %}
-              <div class="card-body" style="background-color: #a8e6cfac;">
-                <h5 class="card-title ">{{ update.title }}</h5>
-                <p class="card-text">{{ update.description|truncatewords:20 }}</p>
-              </div>
-            </div>
-          </div>
-        {% empty %}
-          <p class="text-center w-100">{% trans "No updates available at the moment." %}</p>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-   
+    </section>
 </main>
 {% endblock %}

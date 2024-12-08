@@ -261,6 +261,41 @@ header i{
                  0 0 5px rgba(255, 19, 164, 0.5);
 }
 
+.product-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-image img {
+  box-shadow: 5px 5px 15px var(--secondary-color);
+  border-radius: 50px;
+  height: 320px; /* Imagem maior para mais destaque */
+  object-fit:contain;
+  width: 100%; /* Garante que a imagem ocupe toda a largura */
+}
+
+.product-btn{
+  background-color: var(--primary-color);
+  border-radius: 20px;
+}
+
+.product-btn-small{
+  min-width:220px ;
+  padding-top: 12px;
+  height: 3.5rem;
+}
+.product-btn:hover {
+  background-color: #FF70C0;
+}
+
+
+
 /* Definição da animação */
 @keyframes flash {
     0%, 100% {

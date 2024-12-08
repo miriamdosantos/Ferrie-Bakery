@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+
+<main class="container mb-4">
+    <!-- Título da Página -->
+    <div class="row mt-5">
+        <div class="col-12 offset-3 mt-5"></div>
+        <h1 class="text-center" style="color:#FF13A4; text-shadow: 5px 5px 15px #17010e73">Our Products</h1>
+    </div>
+
+    <!-- Linha <hr> após o título -->
+    <div class="row">
+        <div class="col-12">
+            <hr>
+        </div>
+    </div>
+
+    <!-- Grid de Produtos -->
+    <div class="row">
+        {% for product in products %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="product-card card shadow-lg h-100">
+                <!-- Imagem com Maior Destaque -->
+                <div class="product-image">
+                    <img src="{{ product.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }}">
+                </div>
+
+                <!-- Conteúdo do Card -->
+                <div class="card-body text-center">
+                    <p class="card-title product-name">{{ product.name }}</p>
+
+                    <!-- Representação do Rating -->
+                    <div class="mb-2">
+                        {% if product.rating %}
+                            <span class="fw-bold text-muted">Rating:</span>
+                            {% for i in stars_range %}
+                                {% if i <= product.rating %}
+                                    <span class="text-warning">&#9733;</span> <!-- Estrela cheia -->
+                                {% else %}
+                                    <span class="text-muted">&#9733;</span> <!-- Estrela vazia -->
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <span class="fw-bold text-muted bg-light p-2 rounded-pill">Rating not found</span>
+                        {% endif %}
+                    </div>
+                    
+                    <a href="#" class="btn btn-primary btn-lg product-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Linha <hr> após cada 3 cards em telas grandes -->
+        {% if forloop.counter|divisibleby:3 %}
+        <div class="col-12 d-none d-lg-block mb-5">
+            <hr>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock %}

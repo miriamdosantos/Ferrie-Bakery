@@ -1,5 +1,7 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
+
 
 class Category(models.Model):
     name = models.CharField(max_length=254)
@@ -35,13 +37,32 @@ class Product(models.Model):
         choices=PRICE_UNIT_CHOICES,
         default="unit"
     )
-    rating = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    rating = models.IntegerField(
+        null=True,
+        blank=True,
+        default=0,
+        validators=[
+            MinValueValidator(0),  # Rating mínimo
+            MaxValueValidator(5),  # Rating máximo
+        ]
+    )
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     is_best_seller = models.BooleanField(default=False)
     image = models.ImageField(null=True, blank=True)
-
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['-rating', 'name']
+
+    def get_rating_stars(self):
+        full_stars = int(self.rating)  # Estrelas completas
+        half_star = 1 if self.rating % 1 >= 0.5 else 0  # Estrela pela metade
+        empty_stars = 5 - full_stars - half_star  # Estrelas vazias
+
+        return full_stars, half_star, empty_stars
+
+    
 
     def calculate_total_price(self, quantity):
         if self.price_unit == "unit":
