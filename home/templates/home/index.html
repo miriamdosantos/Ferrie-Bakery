@@ -9,17 +9,17 @@
         <div class="carousel-inner">
             <!-- Slide único (imagem destacada) -->
             <div class="carousel-item active">
-                <img src="/media/mouses.jpeg" class="d-block w-100 zoom-effect" alt="Bolo de Casamento ou Aniversário">
+                <img src="/media/mouses.jpeg" class="d-block w-100 zoom-effect" alt="{% trans 'Wedding or Birthday Cake' %}">
                 <div class="carousel-caption text-center">
                     <h5 style="font-size: 3rem; color: #fff; text-shadow: 2px 2px 5px rgba(0,0,0,0.7);">
-                        Encomende Agora!
+                        {% trans "Order Now!" %}
                     </h5>
                     <p class="d-none d-lg-block" style="font-size: 1.8rem; color: #fff; 
                         text-shadow: 10px 10px 15px rgba(0,0,0,0.7); background-color:#FF70C0; border-radius: 8rem;">
-                        Seu bolo de casamento ou aniversário personalizado para um dia especial.
+                        {% trans "Your wedding or birthday cake customized for a special day." %}
                     </p>
                     <a href="#product1" class="btn btn-danger btn-lg btn-action"
-                        style="box-shadow: 0px 4px 50px rgba(255,0,0,0.7);">Peça Já</a>
+                        style="box-shadow: 0px 4px 50px rgba(255,0,0,0.7);">{% trans "Order Now" %}</a>
                 </div>
             </div>
         </div>
@@ -39,14 +39,14 @@
                     <div class="row">
                         {% for product in best_sellers %}
                         <div class="col-md-4 mb-4 offset-md-2">
-                            <div class="card shadow-sm" style="height: 500px;">
+                            <div class="card shadow-sm" >
                                 <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                                <div class="card-body">
+                                <div class="card-body" style="height: 180px;">
                                     <h5 class="card-title">{{ product.name }}</h5>
                                     <!-- Representação do Rating -->
                                     <div class="mb-2">
                                         {% if product.rating %}
-                                            <span class="fw-bold text-muted bg-light p-2 rounded-pill">Rating:</span>
+                                            <span class="fw-bold text-muted bg-light p-2 rounded-pill">{% trans "Rating" %}:</span>
                                             {% for i in stars_range %}
                                                 {% if i <= product.rating %}
                                                     <span class="text-warning">&#9733;</span> <!-- Estrela cheia -->
@@ -55,7 +55,7 @@
                                                 {% endif %}
                                             {% endfor %}
                                         {% else %}
-                                            <span class="fw-bold text-muted bg-light p-2 rounded-pill">Rating not found</span>
+                                            <span class="fw-bold text-muted bg-light p-2 rounded-pill">{% trans "Rating not found" %}</span>
                                         {% endif %}
                                     </div>                                    
                                     <a href="#" class="btn btn-primary btn-small product-btn product-btn-small">
@@ -75,12 +75,12 @@
     <section class="store-updates mt-5">
         <div class="container">
             <h2 class="text-center font-weight-bold mb-4" style="color: #FF13A4;">
-                {% trans "Novidades Fresquinhas" %}
+                {% trans "Fresh News" %}
             </h2>
             <div class="row">
                 {% for update in stores_updates %}
                 <div class="col-md-6 mb-4">
-                    <div class="card shadow-sm" style="min-height: 470px;">
+                    <div class="card shadow-sm" style="height: 550px;">
                         {% if update.image %}
                         <img src="{{ update.image.url }}" class="card-img-top update-image" alt="{{ update.title }}">
                         {% endif %}

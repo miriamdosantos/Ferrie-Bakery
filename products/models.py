@@ -37,34 +37,25 @@ class Product(models.Model):
         choices=PRICE_UNIT_CHOICES,
         default="unit"
     )
-    rating = models.IntegerField(
-        null=True,
-        blank=True,
-        default=0,
-        validators=[
-            MinValueValidator(0),  # Rating mínimo
-            MaxValueValidator(5),  # Rating máximo
-        ]
-    )
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     is_best_seller = models.BooleanField(default=False)
     image = models.ImageField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 
-    class Meta:
-        ordering = ['-rating', 'name']
-
-    def get_rating_stars(self):
-        full_stars = int(self.rating)  # Estrelas completas
-        half_star = 1 if self.rating % 1 >= 0.5 else 0  # Estrela pela metade
-        empty_stars = 5 - full_stars - half_star  # Estrelas vazias
-
-        return full_stars, half_star, empty_stars
-
-    
+    def get_average_rating(self):
+        """Calcula a média das avaliações associadas."""
+        reviews = self.reviews.all()  # Obtem todas as reviews associadas
+        if reviews.exists():
+            return sum(review.rating for review in reviews) / reviews.count()
+        return None
 
     def calculate_total_price(self, quantity):
+        """Calcula o preço total com base no tipo de unidade."""
         if self.price_unit == "unit":
             return self.price * quantity
         elif self.price_unit == "hundred":
@@ -72,3 +63,23 @@ class Product(models.Model):
         elif self.price_unit == "kilo":
             return self.price * (quantity / 1000)
         return self.price
+
+
+class Review(models.Model):
+    product = models.ForeignKey("Product", on_delete=models.CASCADE, related_name="reviews")
+    rating = models.IntegerField(
+        validators=[
+            MinValueValidator(1),  # Rating mínimo
+            MaxValueValidator(5),  # Rating máximo
+        ]
+    )
+    comment = models.TextField(max_length=500, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _("Review")
+        verbose_name_plural = _("Reviews")
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"Review for {self.product.name} with rating {self.rating}"

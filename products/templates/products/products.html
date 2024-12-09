@@ -1,11 +1,15 @@
 {% extends "base.html" %}
+{% load i18n %}
+
 {% block content %}
 
 <main class="container mb-4">
     <!-- Título da Página -->
     <div class="row mt-5">
         <div class="col-12 offset-3 mt-5"></div>
-        <h1 class="text-center" style="color:#FF13A4; text-shadow: 5px 5px 15px #17010e73">Our Products</h1>
+        <h1 class="text-center" style="color:#FF13A4; text-shadow: 5px 5px 15px #17010e73;">
+            {% trans "Our Products" %}
+        </h1>
     </div>
 
     <!-- Linha <hr> após o título -->
@@ -18,7 +22,7 @@
     <!-- Grid de Produtos -->
     <div class="row">
         {% for product in products %}
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="col-12 col-md-6 col-lg-4 mb-2">
             <div class="product-card card shadow-lg h-100">
                 <!-- Imagem com Maior Destaque -->
                 <div class="product-image">
@@ -31,21 +35,25 @@
 
                     <!-- Representação do Rating -->
                     <div class="mb-2">
-                        {% if product.rating %}
-                            <span class="fw-bold text-muted">Rating:</span>
-                            {% for i in stars_range %}
-                                {% if i <= product.rating %}
-                                    <span class="text-warning">&#9733;</span> <!-- Estrela cheia -->
-                                {% else %}
-                                    <span class="text-muted">&#9733;</span> <!-- Estrela vazia -->
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            <span class="fw-bold text-muted bg-light p-2 rounded-pill">Rating not found</span>
-                        {% endif %}
+                        {% with product.get_average_rating as avg_rating %}
+                            {% if avg_rating > 0 %}
+                                <span class="fw-bold text-muted">{% trans "Rating" %}:</span>
+                                {% for i in stars_range %}
+                                    {% if i <= avg_rating %}
+                                        <span class="text-warning">&#9733;</span> <!-- Estrela cheia -->
+                                    {% else %}
+                                        <span class="text-muted">&#9733;</span> <!-- Estrela vazia -->
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                <span class="fw-bold text-muted bg-light p-2 rounded-pill">{% trans "No reviews yet" %}</span>
+                            {% endif %}
+                        {% endwith %}
                     </div>
-                    
-                    <a href="#" class="btn btn-primary btn-lg product-btn">View Details</a>
+
+                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary btn-lg product-btn">
+                        {% trans "View Details" %}
+                    </a>
                 </div>
             </div>
         </div>

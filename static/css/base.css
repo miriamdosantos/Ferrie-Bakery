@@ -64,6 +64,8 @@
     color: var(--text-color);
     margin: 0;
     padding: 0.5em 0;
+   
+    
   }
   
   /* Links */
@@ -228,7 +230,7 @@ header i{
 /* Garantir que todas as imagens no card tenham a mesma largura e altura */
 .card-img-top {
   width: 100%;
-  height: 300px; /* Tamanho consistente */
+  height: 380px; /* Tamanho consistente */
   object-fit: cover; /* Faz a imagem se ajustar sem distorcer */
   object-position: 50% left;
   
@@ -236,12 +238,13 @@ header i{
 
 /* Adicionando mais consistência no layout do card */
 .card-body {
+ 
   text-align: center;
   font-family: 'Cookie', cursive;
   border-radius: 8px; /* Borda arredondada para suavidade */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 
                 0 2px 4px rgba(255, 19, 164, 0.2); /* Sombra leve com tom rosa */
-    padding: 16px; /* Ajuste do espaçamento interno */
+    padding-top: 2px; /* Ajuste do espaçamento interno */
     transition: transform 0.3s, box-shadow 0.3s; /* Suavidade ao passar o mouse */
 }
 
@@ -275,7 +278,7 @@ header i{
 .product-image img {
   box-shadow: 5px 5px 15px var(--secondary-color);
   border-radius: 50px;
-  height: 320px; /* Imagem maior para mais destaque */
+  height: 350px; /* Imagem maior para mais destaque */
   object-fit:contain;
   width: 100%; /* Garante que a imagem ocupe toda a largura */
 }
@@ -294,7 +297,64 @@ header i{
   background-color: #FF70C0;
 }
 
+.image-container {
+  position: relative;
+  overflow: hidden; /* Garante que o reflexo não ultrapasse os limites */
+}
 
+.image-container img {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra inicial */
+  display: block;
+  width: 100%;
+  
+}
+
+.image-container {
+    position: relative; /* Necessário para o pseudo-elemento */
+    overflow: hidden; /* Garante que o pseudo-elemento não ultrapasse os limites do container */
+    border-radius: 8px;
+}
+
+.image-container img {
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 450px;
+}
+
+.image-container img:hover {
+    transform: scale(1.05); /* Zoom sutil ao passar o mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Intensifica a sombra no hover */
+}
+
+/* Efeito de espelho */
+.image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent, rgba(255, 255, 255, 0.2)); /* Gradiente suave */
+    pointer-events: none; /* Permite interação apenas com a imagem */
+    z-index: 1;
+    mix-blend-mode: screen; /* Cria o efeito de reflexo */
+}
+.product-details-container {
+  background-color: #ff70c142;
+  padding: 20px;
+  height: 90%;
+  width: 600px;
+  border-radius: 15px;
+  
+ 
+}
+
+.product-details-container > h2, h6, p{
+  font-size: 1.5rem;
+}
 
 /* Definição da animação */
 @keyframes flash {
@@ -402,5 +462,10 @@ header i{
 @media (max-width: 992px) {
   .card {
     width: 350px;
+  }
+  .image-container{
+    margin-left: 6rem;
+    width: 100vw;
+    margin-top: 2rem;
   }
 }
