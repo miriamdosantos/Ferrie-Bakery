@@ -59,7 +59,7 @@
                                         {% endif %}
                                     </div>                                    
                                     <a href="#" class="btn btn-primary btn-small product-btn product-btn-small">
-                                        {{ product.description|truncatewords:15 }}
+                                        {{ product.custom_title }}
                                     </a>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
             <div class="row">
                 {% for update in stores_updates %}
                 <div class="col-md-6 mb-4">
-                    <div class="card shadow-sm" style="height: 550px;">
+                    <div class="card shadow-sm" style="height: 600px;">
                         {% if update.image %}
                         <img src="{{ update.image.url }}" class="card-img-top update-image" alt="{{ update.title }}">
                         {% endif %}

@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-10 10:25+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#: .\home\models.py:15
+msgid "Store Update"
+msgstr ""
+
+#: .\home\models.py:16
+msgid "Store Updates"
+msgstr ""
+
+#: .\home\templates\home\index.html:12
+msgid "Wedding or Birthday Cake"
+msgstr ""
+
+#: .\home\templates\home\index.html:15
+msgid "Order Now!"
+msgstr ""
+
+#: .\home\templates\home\index.html:19
+msgid "Your wedding or birthday cake customized for a special day."
+msgstr ""
+
+#: .\home\templates\home\index.html:22
+msgid "Order Now"
+msgstr ""
+
+#: .\home\templates\home\index.html:37
+msgid "Best Sellers"
+msgstr ""
+
+#: .\home\templates\home\index.html:49
+msgid "Rating"
+msgstr ""
+
+#: .\home\templates\home\index.html:58
+msgid "Rating not found"
+msgstr ""
+
+#: .\home\templates\home\index.html:78
+msgid "Fresh News"
+msgstr ""
+
+#: .\home\templates\home\index.html:94
+msgid "No updates available at the moment."
+msgstr ""
