@@ -283,8 +283,12 @@ header i{
   width: 100%; /* Garante que a imagem ocupe toda a largura */
 }
 
-.product-btn{
+.product-btn-pink{
   background-color: var(--primary-color);
+  border-radius: 20px;
+}
+.product-btn-blue{
+  background-color: var(--secondary-color);
   border-radius: 20px;
 }
 
@@ -293,7 +297,7 @@ header i{
   padding-top: 12px;
   height: 3.5rem;
 }
-.product-btn:hover {
+.product-btn-pink:hover, .product-btn-blue:hover {
   background-color: #FF70C0;
 }
 

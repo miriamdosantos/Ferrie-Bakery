@@ -39,7 +39,7 @@
                     <div class="row">
                         {% for product in best_sellers %}
                         <div class="col-md-4 mb-4 offset-md-2">
-                            <div class="card shadow-sm" >
+                            <div class="card shadow-sm" style="background-color: #a8e6cfac;" >
                                 <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
                                 <div class="card-body" style="height: 180px;">
                                     <h5 class="card-title">{{ product.name }}</h5>
@@ -58,7 +58,7 @@
                                             <span class="fw-bold text-muted bg-light p-2 rounded-pill">{% trans "Rating not found" %}</span>
                                         {% endif %}
                                     </div>                                    
-                                    <a href="#" class="btn btn-primary btn-small product-btn product-btn-small">
+                                    <a href="#" class="btn btn-primary btn-small product-btn-pink product-btn-small">
                                         {{ product.custom_title }}
                                     </a>
                                 </div>

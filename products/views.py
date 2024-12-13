@@ -1,24 +1,42 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product, Category
 from django.db.models import Min
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.contrib import messages
+from django.db.models import Q
+from .models import Product, Category
+
 
 def all_products(request):
-    """A view to show the first product of each category."""
+    """A view to show all products, including search queries"""
     
-    # Obtem todas as categorias com o menor ID de produto para cada uma
-    products = (
+    products = Product.objects.all()
+    query = None
+
+    if request.GET:
+        if 'q' in request.GET:
+            query = request.GET['q']
+            if not query:
+                messages.error(request, "You didn't enter any search criteria!")
+                return redirect(reverse('products'))
+            
+            # Corrigindo a lógica de busca
+            queries = Q(name__icontains=query) | Q(description__icontains=query) | Q(flavors__name__icontains=query)
+            products = products.filter(queries).distinct()
+
+    # Se não houver busca, pegue apenas o primeiro produto de cada categoria
+    first_product_ids = (
         Product.objects
         .values('category')
-        .annotate(first_product_id=Min('id'))  # Identifica o menor ID de produto por categoria
-        .values_list('first_product_id', flat=True)  # Pega apenas os IDs dos primeiros produtos
+        .annotate(first_product_id=Min('id'))
+        .values_list('first_product_id', flat=True)
     )
     
-    # Filtra os produtos com base nos IDs obtidos
-    unique_products = Product.objects.filter(id__in=products)
-    
+    products = products.filter(id__in=first_product_ids)
+
     context = {
-        'products': unique_products,
+        'products': products,
         'stars_range': range(1, 6),
+        'search_term': query,
     }
 
     return render(request, 'products/products.html', context)
@@ -56,4 +74,4 @@ def products_by_category(request, slug):
         'category': category,
         'products': products,
     }
-    return render(request, 'products/products.html', context)
+    return render(request, 'products/category_products.html', context)
