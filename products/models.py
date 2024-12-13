@@ -2,7 +2,6 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 
-
 class Category(models.Model):
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
@@ -17,21 +16,18 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
 class Flavor(models.Model):
     name = models.CharField(max_length=254, verbose_name=_("Flavor"))
-    category = models.ForeignKey(
-        "Category", on_delete=models.CASCADE, related_name="flavors"
-    )
+
+    is_truffled = models.BooleanField(default=False, verbose_name=_("Is Truffled"))
 
     class Meta:
-        verbose_name = _("Flavor")
-        verbose_name_plural = _("Flavors")
+            verbose_name = _("Flavor")
+            verbose_name_plural = _("Flavors")
 
     def __str__(self):
-        return self.name
-
-
+            return f"{self.name} ({'Truffled' if self.is_truffled else 'Traditional'})"
+    
 class Product(models.Model):
     PRICE_UNIT_CHOICES = [
         ("unit", _("Per Unit")),
@@ -47,6 +43,12 @@ class Product(models.Model):
         ("large", _("Large")),
     ]
 
+    SIZE_PRICES = {
+        "small": 7.00,
+        "medium": 30.00,
+        "large": 75.00,
+    }
+
     category = models.ForeignKey("Category", null=True, blank=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True)
     name = models.CharField(max_length=254, null=True, blank=True)
@@ -56,7 +58,7 @@ class Product(models.Model):
         blank=True,
         verbose_name=_("Custom Title"),
     )
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     sale_option = models.CharField(
         max_length=20,
@@ -88,7 +90,7 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name or self.custom_title or _("Unnamed Product")
-
+    
     def get_average_rating(self):
         """Calcula a média das avaliações associadas."""
         reviews = self.reviews.all()
@@ -96,22 +98,24 @@ class Product(models.Model):
             return sum(review.rating for review in reviews) / reviews.count()
         return None
 
-    def calculate_price_by_size(self, size):
-        """Calcula o preço com base no tamanho selecionado"""
-        if size == "small":
-            return 7.00
-        elif size == "medium":
-            return 30.00
-        elif size == "large":
-            return 75.00
-        return self.price
 
-    def calculate_total_price(self, quantity, size=None):
-        """Calcula o preço total com base no tipo de unidade e tamanho."""
+    def calculate_price_by_size(self, size):
+        """Calcula o preço com base no tamanho selecionado."""
+        return self.SIZE_PRICES.get(size, self.price)  # Retorna o preço baseado no tamanho ou o preço padrão se não encontrado
+
+    def calculate_total_price(self, quantity, size=None, flavor=None):
+        """Calcula o preço total com base no tipo de unidade, tamanho e sabor."""
+        if flavor and flavor.is_truffled:
+            base_price = 75.00  # Preço por quilo para sabores trufados
+        else:
+            base_price = 50.00  # Preço por quilo para sabores tradicionais
+
+        # Se um tamanho foi escolhido, use o preço baseado no tamanho
         if size:
             price = self.calculate_price_by_size(size)
         else:
-            price = self.price
+            price = base_price  # Use o preço padrão se nenhum tamanho for selecionado
+
         if self.sale_option == "unit":
             return price * quantity
         elif self.sale_option == "hundred":

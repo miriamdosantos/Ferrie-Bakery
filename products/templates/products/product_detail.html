@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<main class="container " style="margin-top: 5rem;">
+<main class="container" style="margin-top: 5rem;">
     <div class="row">
         <div class="col-12 col-md-6 col-lg-4 offset-lg-2 px-0">
             <div class="image-container" style="margin-top: 3.5rem;">
@@ -19,10 +19,22 @@
                 {% endif %}
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4  px-0 pe-3" >
+        <div class="col-12 col-md-6 col-lg-4 px-0 pe-3">
             <div class="product-details-container mb-5 mt-md-5">
                 <h1 class="mb-0 mt-5 py-3">{{ product.custom_title|default:product.name }}</h1>
-                <h2 class="lead mb-0 text-left font-weight-bold mt-4"  >${{ product.price }}</h2>
+
+                <!-- Exibir preço baseado em tamanho -->
+                {% if product.size %}
+                    <h2 class="lead mb-0 text-left font-weight-bold mt-4">Prices by Size:</h2>
+                    <ul>
+                        <li>Small: $7.00</li>
+                        <li>Medium: $30.00</li>
+                        <li>Large: $75.00</li>
+                    </ul>
+                {% else %}
+                    <h2 class="lead mb-0 text-left font-weight-bold mt-4">${{ product.price }}</h2>
+                {% endif %}
+
                 {% if product.get_average_rating %}
                     <h6 class="text-muted">
                         <i class="fas fa-star mr-1 text-warning"></i>{{ product.get_average_rating }} / 5
@@ -30,6 +42,7 @@
                 {% else %}
                     <h6 class="text-muted">{% trans "No Rating" %}</h6>
                 {% endif %}
+                
                 <p class="mt-3">{{ product.description }}</p>
             </div>
         </div>

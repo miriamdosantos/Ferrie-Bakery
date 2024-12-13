@@ -26,15 +26,17 @@
             <div class="product-card card shadow-lg h-100">
                 <!-- Imagem com Maior Destaque -->
                 <div class="product-image">
-                    <img src="{{ product.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }}">
+                    <img src="{{ product.image.url }}" class="card-img-top img-fluid" alt="{{ product.name|default:'Product Image' }}">
                 </div>
 
                 <!-- Conteúdo do Card -->
                 <div class="card-body text-center">
-                    <p class="card-title product-name">{{ product.name}}</p>
+                    {% if product.name %}
+                        <p class="card-title product-name">{{ product.name }}</p>
+                    {% endif %}
 
                     <!-- Representação do Rating -->
-                    <div class="mb-2">
+                    <div class="mb-2 {% if not product.name %}mt-3{% endif %}">
                         {% with product.get_average_rating as avg_rating %}
                             {% if avg_rating > 0 %}
                                 <span class="fw-bold text-muted">{% trans "Rating" %}:</span>
@@ -51,9 +53,15 @@
                         {% endwith %}
                     </div>
 
-                    <a href="{% url 'product_detail' product.id %}" class="btn btn-primary btn-lg product-btn">
-                        {% trans "View Details" %}
-                    </a>
+                    {% if product.name %}
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-primary btn-lg product-btn">
+                            {% trans "View Details" %}
+                        </a>
+                    {% else %}
+                        <a href="{% url 'products_by_category' product.category.slug %}" class="btn btn-primary btn-lg product-btn">
+                            {% trans "View More Products" %}
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -321,7 +321,7 @@ header i{
     transition: transform 0.2s ease, box-shadow 0.3s ease;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 450px;
+    height: 55%;
 }
 
 .image-container img:hover {
@@ -346,7 +346,7 @@ header i{
   background-color: #ff70c142;
   padding: 20px;
   height: 90%;
-  min-width: 600px;
+  min-width: 700px;
   
 
   border-radius: 15px;

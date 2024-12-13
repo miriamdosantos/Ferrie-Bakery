@@ -21,9 +21,10 @@
                 <i class="fa-solid fa-cake-candles" style="color: #FF13A4;"></i> {% trans "Cakes" %}
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="cakes-link">
-                <a href="#" class="dropdown-item">{% trans "Birthday Cakes" %}</a>
-                <a href="#" class="dropdown-item">{% trans "Wedding Cakes" %}</a>
-                <a href="#" class="dropdown-item">{% trans "All Cakes" %}</a>
+                <a href="{% url 'products_by_category' 'birthday-cake' %}" class="dropdown-item">{% trans "Birthday Cakes" %}</a>
+                <a href="{% url 'products_by_category' 'wedding-cake' %}" class="dropdown-item">{% trans "Wedding Cakes" %}</a>
+                <a href="{% url 'products_by_category' 'homemade-cakes' %}" class="dropdown-item">{% trans "Homemade Cakes" %}</a>
+                <a href="{% url 'products_by_category' 'all-cakes' %}" class="dropdown-item">{% trans "All Cakes" %}</a>
             </div>
         </li>
 
@@ -32,10 +33,12 @@
                 {% trans "Desserts" %}
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="desserts-link">
-                <a href="#" class="dropdown-item">{% trans "Pies" %}</a>
-                <a href="#" class="dropdown-item">{% trans "Mousses" %}</a>
-                <a href="#" class="dropdown-item">{% trans "Cakes in a Pot" %}</a>
-                <a href="#" class="dropdown-item">{% trans "All Desserts" %}</a>
+                <a href="{% url 'products_by_category' 'pies' %}" class="dropdown-item">{% trans "Pies" %}</a>
+                <a href="{% url 'products_by_category' 'mousses' %}" class="dropdown-item">{% trans "Mousses" %}</a>
+                <a href="{% url 'products_by_category' 'cakes-in-a-pot' %}" class="dropdown-item">{% trans "Cakes in a Pot" %}</a>
+                <a href="{% url 'products_by_category' 'party-desserts' %}" class="dropdown-item">{% trans "Party Desserts" %}</a>
+                <a href="{% url 'products_by_category' 'all-desserts' %}" class="dropdown-item">{% trans "All Desserts" %}</a>
+                
             </div>
         </li>
         <li class="nav-item">
@@ -45,15 +48,11 @@
         </li>
 
 
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black" href="#" id="specials-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item ">
+            <a class="logo-font font-weight-bold nav-link text-black" href="{% url 'products_by_category' 'party-sweets' %}" >
                 {% trans "Party Sweets" %}
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="party-sweets-link">
-                <a href="#" class="dropdown-item">{% trans "Brigadeiros" %}</a>
-                <a href="#" class="dropdown-item">{% trans "Beijinhos" %}</a>
-                <a href="#" class="dropdown-item">{% trans "All Party Sweets" %}</a>
-            </div>
+            
         </li>
         <li class="nav-item dropdown">
             <a class="logo-font font-weight-bold nav-link text-black" href="#" id="specials-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
