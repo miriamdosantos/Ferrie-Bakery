@@ -38,14 +38,14 @@
 </head>
 
 <body>
-    <header class="container-fluid fixed-top">
+    <header class="container-fluid  ">
         <div id="topnav" class="row pt-lg-2 d-none d-lg-flex">
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 d-block">
-                <a href="{% url 'home' %}" class="nav-link main-logo-link p-2 pb-2">
+            <div class="col-12- col-lg-4 my-auto py-1 py-lg-0 d-block">
+                <a href="{% url 'home' %}" class="nav-link main-logo-link p-1 pb-2">
                     <img src="/media/logo1.peg" alt="">
                 </a>
             </div>
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
+            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 ">
                 <form method="GET" action="{% url 'products' %}">
                     <div class="input-group w-100">
                         <input class="form-control border-3 border-dark rounded-0" type="text" name="q"
@@ -67,11 +67,11 @@
                         <a class="nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             <div class="text-center">
-                                <div><i class="fas fa-user fa-lg"></i></div>
-                                <p class="my-0">{% trans "My Account" %}</p>
+                                <div ><i class="fas fa-user fa-lg"></i></div>
+                                <p class="my-0 mt-2">{% trans "My Account" %}</p>
                             </div>
                         </a>
-                        <div class="dropdown-menu border-0" aria-labelledby="user-options">
+                        <div class="dropdown-menu border-0" aria-labelledby="user-options" >
                             {% if request.user.is_authenticated %}
                             {% if request.user.is_superuser %}
                             <a href="#" class="dropdown-item">{% trans "Product Management" %}</a>
@@ -89,7 +89,7 @@
                             href="#">
                             <div class="text-center">
                                 <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-                                <p class="my-0">
+                                <p class="my-0  mt-2">
                                     {% if grand_total %}
                                     ${{ grand_total|floatformat:2 }}
                                     {% else %}
@@ -105,12 +105,16 @@
 
         <!-- Navigation Bar -->
         <div class="row " style="background-color:  rgb(255, 19, 165);">
-            <nav class="navbar navbar-expand-lg navbar-light w-100">
+            <nav class="navbar navbar-expand-lg navbar-light w-100 ">
+
                 <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#main-nav"
                     aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon" style="font-size: 2.2rem;"></span>
                 </button>
+
+                {% include 'includes/mobile-top-header.html' %}
                 {% include 'includes/main-nav.html' %}
+
             </nav>
         </div>
     </header>
@@ -121,20 +125,21 @@
             <i class="fab fa-whatsapp"></i> Chat on WhatsApp
         </a>
     </div>
+    <main>
+        {% if messages %}
+        <div class="message-container"></div>
+        {% endif %}
 
-    {% if messages %}
-      <div class="message-container"></div>
-    {% endif %}
+        {% block page_header %}
+        {% endblock %}
 
-    {% block page_header %}
-    {% endblock %}
+        {% block content %}
+        {% endblock %}
 
-    {% block content %}
-    {% endblock %}
-
-    {% block postloadjs %}
-    <script src="{% static 'js/script.js' %}"></script>
-    {% endblock %}
+        {% block postloadjs %}
+        <script src="{% static 'js/script.js' %}"></script>
+        {% endblock %}
+    </main>
 </body>
 
 </html>

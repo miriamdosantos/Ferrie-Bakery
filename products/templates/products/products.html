@@ -7,8 +7,8 @@
     <!-- Título da Página -->
     <div class="row mt-5">
         <div class="col-12 offset-3 mt-5"></div>
-        <h1 class="text-center" style="color:#FF13A4; text-shadow: 5px 5px 15px #17010e73;">
-            {% trans "Our Products" %}
+        <h1 class="text-center" style="color:#FF13A4; text-shadow: 5px 5px 15px #17010e73; font-weight: bold; text-decoration: underline;">
+            {% trans "Discorver Our Delicious Products" %}
         </h1>
     </div>
 
@@ -48,16 +48,16 @@
                                     {% endif %}
                                 {% endfor %}
                             {% else %}
-                                <span class="fw-bold text-muted bg-light p-2 rounded-pill">{% trans "No reviews yet" %}</span>
+                                <span class="fw-bold text-muted bg-light p-2 rounded-pill ">{% trans "No reviews yet" %}</span>
                             {% endif %}
                         {% endwith %}
                     </div>
                      
-                    <div class="d-flex justify-content-around">
-                        <a href="{% url 'product_detail' product.id %}" class="btn product-btn-pink btn-primary btn-lg">
+                    <div class="d-flex justify-content-around ">
+                        <a href = "{% url 'product_detail' product.id %}" class="btn product-btn-pink btn-primary btn-lg me-2">
                             {% trans "Order Now" %}
                         </a>
-                        <a href="{% url 'products_by_category' product.category.slug %}" class="btn product-btn-blue btn-light btn-lg" >
+                        <a href="{% url 'products_by_category' product.category.slug %}" class="btn product-btn-blue btn-primary btn-light btn-lg" >
                             {% trans "See More" %}
                         </a>
                     </div>

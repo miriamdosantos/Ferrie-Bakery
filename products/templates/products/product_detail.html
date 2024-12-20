@@ -3,47 +3,145 @@
 {% load i18n %}
 
 {% block content %}
-
-<main class="container" style="margin-top: 5rem;">
-    <div class="row">
-        <div class="col-12 col-md-6 col-lg-4 offset-lg-2 px-0">
-            <div class="image-container" style="margin-top: 3.5rem;">
+<main class="container-fluid" >
+    <div class="row" >
+        <div class="col-12 col-md-6 col-lg-5 custom-height" >
+            <div class="image-container  ">
                 {% if product.image %}
-                    <a href="{{ product.image.url }}" target="_blank">
-                        <img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
-                    </a>
+                <a href="{{ product.image.url }}" target="_blank">
+                    <img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+                </a>
                 {% else %}
-                    <a href="">
-                        <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                    </a>
+                <a href="">
+                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                </a>
                 {% endif %}
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 px-0 pe-3">
-            <div class="product-details-container mb-5 mt-md-5">
-                <h1 class="mb-0 mt-5 py-3">{{ product.custom_title|default:product.name }}</h1>
+        <div class="col-12 col-md-6 col-lg-7 px-0 ps-lg-4 ">
+            <div class="product-details-container">
+                <h1 class="mb-0 mt-5 ">{{ product.custom_title|default:product.name }}</h1>
 
-                <!-- Exibir preço baseado em tamanho -->
-                {% if product.size %}
-                    <h2 class="lead mb-0 text-left font-weight-bold mt-4">Prices by Size:</h2>
-                    <ul>
-                        <li>Small: $7.00</li>
-                        <li>Medium: $30.00</li>
-                        <li>Large: $75.00</li>
-                    </ul>
+                <!-- Exibir preço baseado em tamanho ou preço base -->
+                {% if product.category.name == "Birthday Cake" %}
+                <h2 class="lead mb-0 text-left font-weight-bold mt-4">{% trans "Price from:" %} ${{ base_price }} {% trans "per kilo" %}</h2>
+                <small class="text-muted">
+                    {% trans "Traditional:" %} $50.00 {% trans "per kilo" %} |
+                    {% trans "Truffled:" %} $75.00 {% trans "per kilo" %}
+                </small>
+                {% elif product.size %}
+                <h2 class="lead mb-0 text-left font-weight-bold mt-4">{% trans "Prices by Size:" %}</h2>
+                {% if size_prices %}
+                <ul>
+                    <li>{% trans "Small:" %} ${{ size_prices.small }}</li>
+                    <li>{% trans "Medium:" %} ${{ size_prices.medium }}</li>
+                    <li>{% trans "Large:" %} ${{ size_prices.large }}</li>
+                </ul>
                 {% else %}
-                    <h2 class="lead mb-0 text-left font-weight-bold mt-4">${{ product.price }}</h2>
+                <p>{% trans "No size options available." %}</p>
+                {% endif %}
+                {% else %}
+                <h2 class="lead mb-0 text-left font-weight-bold mt-4">{% trans "Price:" %} ${{ product.price }}</h2>
                 {% endif %}
 
-                {% if product.get_average_rating %}
-                    <h6 class="text-muted">
-                        <i class="fas fa-star mr-1 text-warning"></i>{{ product.get_average_rating }} / 5
-                    </h6>
+                {% if avg_rating %}
+                <h6 class="text-muted">
+                    <i class="fas fa-star mr-1 text-warning"></i>{{ avg_rating }} / 5
+                </h6>
                 {% else %}
-                    <h6 class="text-muted">{% trans "No Rating" %}</h6>
+                <h6 class="text-muted">{% trans "No Rating" %}</h6>
                 {% endif %}
-                
+
                 <p class="mt-3">{{ product.description }}</p>
+
+                {% if product.category.name == "Wedding Cake" or product.category.name == "Birthday Cake" %}
+                <div class="mt-2 text-center">
+                    <a href="#" class="btn btn-lg product-btn-blue center" style="min-width: 350px; font-family: 'Cookie', cursive; font-size: 1.5rem;">{% trans "Customize Your Cake" %}</a>
+                </div>
+                {% endif %}
+
+                <!-- Formulário para seleção de sabores e opções adicionais -->
+                <form method="POST" action="#">
+                    {% csrf_token %}
+                    <h3>{% trans "Choose Your Flavor:" %}</h3>
+
+                    {% if product.category.name == "Birthday Cake" %}
+                    <!-- Seção de sabores trufados -->
+                    <div class="form-group mt-4">
+                        <label for="flavor-select">{% trans "Truffled Flavors:" %}</label>
+                        <select id="flavor-select" name="flavor" class="form-control" >
+                            {% for flavor in product.flavors.all %}
+                            {% if flavor.is_truffled %}
+                            <option value="{{ flavor.id }}" >{{ flavor.name }} (Truffled)</option>
+                            {% endif %}
+                            {% empty %}
+                            <option disabled>{% trans "No truffled flavors available." %}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Seção de sabores tradicionais -->
+                    <div class="form-group mt-4">
+                        <label for="traditional-flavor-select">{% trans "Traditional Flavors:" %}</label>
+                        <select id="traditional-flavor-select" name="traditional_flavor" class="form-control"  >
+                            {% for flavor in product.flavors.all %}
+                            {% if not flavor.is_truffled %}
+                            <option value="{{ flavor.id }}">{{ flavor.name }}</option>
+                            {% endif %}
+                            {% empty %}
+                            <option disabled>{% trans "No traditional flavors available." %}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% else %}
+                    <div class="form-group mt-4">
+                        <label for="flavor-select">{% trans "Available Flavors:" %}</label>
+                        <select id="flavor-select" name="flavor" class="form-control">
+                            {% for flavor in product.flavors.all %}
+                            <option value="{{ flavor.id }}">
+                                {{ flavor.name }}{% if flavor.is_truffled %} (Truffled){% endif %}
+                            </option>
+                            {% empty %}
+                            <option disabled>{% trans "No flavors available." %}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    {% endif %}
+
+                    {% if product.has_topper or product.has_roses %}
+                    <h3>{% trans "Additionals:" %}</h3>
+                    <small class="text-muted">
+                        {% if product.has_topper %}
+                        {% trans "Topper:" %} $10.00
+                        {% endif %}
+                        {% if product.has_roses %}
+                        {% if product.has_topper %} | {% endif %}
+                        {% trans "Roses:" %} $5.00 {% trans "each" %}
+                        {% endif %}
+                    </small>
+                    {% endif %}
+
+
+                    {% if product.has_topper %}
+                    <div class="form-group mt-4">
+                        <label for="topper-text">{% trans "Topper Text:" %}</label>
+                        <input type="text" id="topper-text" name="topper_text" class="form-control"
+                            placeholder="{% trans 'Enter topper text' %}">
+                    </div>
+                    {% endif %}
+
+                    {% if product.has_roses %}
+                    <div class="form-group mt-4">
+                        <label for="roses-quantity">{% trans "Number of Roses:" %}</label>
+                        <input type="number" id="roses-quantity" name="roses_quantity" class="form-control" min="0"
+                            value="0">
+                    </div>
+                    {% endif %}
+
+
+                    <!-- Botão para adicionar ao carrinho -->
+                    <button type="submit" class="btn btn-primary mt-3">{% trans "Add to Cart" %}</button>
+                </form>
             </div>
         </div>
     </div>
@@ -52,30 +150,28 @@
     <div class="reviews mt-5">
         <h3 class="text-center font-weight-bold">{% trans "Customer Reviews" %}</h3>
         <div class="row">
-            {% for review in product.reviews.all %}
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ review.user.username }}</h5>
-                            <p class="card-text">{{ review.comment }}</p>
-                            <div class="mb-2">
-                                <span class="fw-bold text-muted">{% trans "Rating" %}:</span>
-                                {% for i in stars_range %}
-                                    {% if i <= review.rating %}
-                                        <span class="text-warning">&#9733;</span> <!-- Estrela cheia -->
-                                    {% else %}
-                                        <span class="text-muted">&#9733;</span> <!-- Estrela vazia -->
-                                    {% endif %}
+            {% for review in reviews %}
+            <div class="col-12 col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ review.user.username }}</h5>
+                        <p class="card-text">{{ review.comment }}</p>
+                        <div class="mb-2">
+                            <span class="fw-bold text-muted">{% trans "Rating" %}:</span>
+                            {% for i in stars_range %}
+                            {% if i <= review.rating %} <span class="text-warning">&#9733;</span>
+                                {% else %}
+                                <span class="text-muted">&#9733;</span>
+                                {% endif %}
                                 {% endfor %}
-                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
             {% empty %}
-                <p class="text-center w-100">{% trans "No reviews yet." %}</p>
+            <p class="text-center w-100">{% trans "No reviews yet." %}</p>
             {% endfor %}
         </div>
     </div>
 </main>
-
 {% endblock %}

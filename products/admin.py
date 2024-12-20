@@ -13,8 +13,9 @@ class FlavorAdmin(TranslationAdmin):
 
 @admin.register(Product)
 class ProductAdmin(TranslationAdmin):
-    list_display = ('name', 'category', 'price', 'sale_option', 'is_best_seller')
-    filter_horizontal = ('flavors',)
+    list_display = ('name', 'category', 'price', 'sale_option', 'is_best_seller','has_topper', 'has_roses')
+    list_filter = ('category', 'has_topper', 'has_roses')
+    filter_horizontal = ('flavors', )
 
 @admin.register(Review)
 class ReviewAdmin(TranslationAdmin):

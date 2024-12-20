@@ -80,6 +80,8 @@ class Product(models.Model):
     )
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     is_best_seller = models.BooleanField(default=False)
+    has_topper = models.BooleanField(default=False, verbose_name=_("Has Topper"))
+    has_roses = models.BooleanField(default=False, verbose_name=_("Has Roses"))
     image = models.ImageField(null=True, blank=True)
     flavors = models.ManyToManyField(Flavor, blank=True, verbose_name=_("Flavors"))
 
@@ -103,8 +105,8 @@ class Product(models.Model):
         """Calcula o preço com base no tamanho selecionado."""
         return self.SIZE_PRICES.get(size, self.price)  # Retorna o preço baseado no tamanho ou o preço padrão se não encontrado
 
-    def calculate_total_price(self, quantity, size=None, flavor=None):
-        """Calcula o preço total com base no tipo de unidade, tamanho e sabor."""
+    def calculate_total_price(self, quantity, size=None, flavor=None, topper_text=None, roses_quantity=0):
+        """Calcula o preço total com base no tipo de unidade, tamanho, sabor, topper e rosas."""
         if flavor and flavor.is_truffled:
             base_price = 75.00  # Preço por quilo para sabores trufados
         else:
@@ -116,13 +118,26 @@ class Product(models.Model):
         else:
             price = base_price  # Use o preço padrão se nenhum tamanho for selecionado
 
+        # Cálculo do preço base
         if self.sale_option == "unit":
-            return price * quantity
+            total_price = price * quantity
         elif self.sale_option == "hundred":
-            return price * (quantity / 100)
+            total_price = price * (quantity / 100)
         elif self.sale_option == "kilo":
-            return price * (quantity / 1000)
-        return price
+            total_price = price * (quantity / 1000)
+        else:
+            total_price = price
+
+        # Adiciona o preço do topper, se aplicável
+        if self.has_topper and topper_text:
+            total_price += 10.00  # Preço fixo para topper
+
+        # Adiciona o preço das rosas, se aplicável
+        if self.has_roses:
+            rose_price = 5.00  # Preço por rosa
+            total_price += rose_price * roses_quantity
+
+        return total_price
 
 
 class Review(models.Model):

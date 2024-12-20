@@ -11,32 +11,47 @@
     --button-text-color: #FFFFFF; /* Texto dos Botões */
   }
   
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
   /* Configurações de Fonte */
   /* Ajustes no layout */
   body {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Garante que a altura do body ocupe 100% da tela */
+   
   }
   
   header {
-    z-index: 99999; /* Cabeçalho acima dos outros elementos */
+    z-index: 99999; /* O header ainda está acima de outros elementos */
     position: fixed;
     width: 100%;
     top: 0;
-    left: 0; /* Garante que o cabeçalho ocupe toda a largura */
-  }
-  
-  main {
-    flex-grow: 1;
-    padding-top: 8rem; /* Ajuste esse valor conforme a altura do seu cabeçalho */
-   
+    left: 0;
+    background-color: #fff; /* Garante que o header tenha um fundo visível */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para separação */
 }
-  
 
+  
+main {
+  flex-grow: 1;
+  padding-top: 60px; /* Altura aproximada do header */
+}
+
+   
+
+  
+html, body {
+  overflow-x: hidden;
+}
   
   
 .carousel-item img {
+  margin-top: 5rem;
     width: 100%;
     height: 40rem;
     object-fit: cover;  /* Assegura que as imagens cubram o espaço sem distorcer */
@@ -44,11 +59,19 @@
   }
   .carousel-inner {
     height: 500px; /* Aumenta a altura do carrossel */
+    width: 470px;
   }
   
   .carousel-item {
     height: 100%; /* Faz com que as imagens se ajustem ao novo tamanho */
   }
+
+
+  .carousel-inner img {
+    width: 100%;
+    height: 400px
+  }
+  
   
   footer {
     margin-top: auto; /* Empurra o rodapé para o final da página */
@@ -67,11 +90,16 @@
    
     
   }
+
+
+.mobile-font-size{
+  font-size: 1.3rem;
+}
   
   /* Links */
   a {
     font-family: 'Poppins', sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--button-text-color);
     text-decoration: none;
   }
@@ -79,6 +107,7 @@
   a:hover {
     color: var(--text-color); /* Rosa Principal */
     text-decoration: underline;
+    
   }
 
   .btn-action:hover{
@@ -133,15 +162,14 @@ html {
 }
 
 #topnav{
-    background-color:  rgb(255, 19, 165)
-    ; 
+    background-color:  rgb(255, 19, 165); 
 }
 
 .main-logo-link img {
     border-radius: 50%;
     width: 30%;
     height: 30%;
-    margin-top: -15px;
+    margin-top: -6px;
     box-shadow: 5px  5px  20px rgb(0, 0, 0); /* Efeito de sombra */
 }
 
@@ -166,7 +194,7 @@ header i{
 }
 .dropdown-menu a:hover{
     color: var(--primary-color);
-    background-color: --
+    background-color: var(--background-color)
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -215,6 +243,9 @@ header i{
   padding: 0.5rem 1.5rem;
 }
 
+.btn-primary{
+  margin-left: 0.3rem;
+}
 .btn-action {
   background-color: var(--background-color);
   color: var(--primary-color);
@@ -232,7 +263,7 @@ header i{
   width: 100%;
   height: 380px; /* Tamanho consistente */
   object-fit: cover; /* Faz a imagem se ajustar sem distorcer */
-  object-position: 50% left;
+  object-position: left 50%;
   
 }
 
@@ -240,11 +271,13 @@ header i{
 .card-body {
  
   text-align: center;
-  font-family: 'Cookie', cursive;
+  font-family: 'Lato', sans-serif;
+  
   border-radius: 8px; /* Borda arredondada para suavidade */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 
                 0 2px 4px rgba(255, 19, 164, 0.2); /* Sombra leve com tom rosa */
     padding-top: 2px; /* Ajuste do espaçamento interno */
+    padding-left: 4px;
     transition: transform 0.3s, box-shadow 0.3s; /* Suavidade ao passar o mouse */
 }
 
@@ -265,6 +298,7 @@ header i{
 }
 
 .product-card {
+  margin-left: 1rem;
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -278,8 +312,8 @@ header i{
 .product-image img {
   box-shadow: 5px 5px 15px var(--secondary-color);
   border-radius: 50px;
-  height: 350px; /* Imagem maior para mais destaque */
-  object-fit:contain;
+  height: 450px; /* Imagem maior para mais destaque */
+  object-fit:cover;
   width: 100%; /* Garante que a imagem ocupe toda a largura */
 }
 
@@ -293,9 +327,9 @@ header i{
 }
 
 .product-btn-small{
-  min-width:220px ;
+  min-width:320px ;
   padding-top: 12px;
-  height: 3.5rem;
+  height: 3.5rem
 }
 .product-btn-pink:hover, .product-btn-blue:hover {
   background-color: #FF70C0;
@@ -316,17 +350,27 @@ header i{
 }
 
 .image-container {
-    position: relative; /* Necessário para o pseudo-elemento */
-    overflow: hidden; /* Garante que o pseudo-elemento não ultrapasse os limites do container */
-    border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  margin-left: 7.5rem;
+ 
 }
 
 .image-container img {
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    height: 55%;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 12px var(--secondary-color);
+  width: 94%;
+  height: 80%;
+  margin-top: 7rem;
+  object-fit: cover;
+  
+  
 }
+
 
 .image-container img:hover {
     transform: scale(1.05); /* Zoom sutil ao passar o mouse */
@@ -348,19 +392,47 @@ header i{
 }
 .product-details-container {
   background-color: #ff70c142;
-  padding: 20px;
-  height: 90%;
-  min-width: 700px;
-  
-
+  padding:  0px 2.5rem;
   border-radius: 15px;
-  
+  min-height: 900px;
+  max-height: 100%;
+  width: 850px;
  
 }
 
-.product-details-container > h2, h6, p{
-  font-size: 1.5rem;
+.product-details-container h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
 }
+
+.product-details-container h2,
+.product-details-container h6,
+.product-details-container p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-details-container small,
+.product-details-container label {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+}
+
+.product-details-container select,
+.product-details-container option{
+  background-color: var(--secondary-color);
+}
+
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.btn-primary {
+  margin-top: 1rem;
+  width: 100%;
+}
+
 
 /* Definição da animação */
 @keyframes flash {
@@ -411,12 +483,13 @@ header i{
 .jump-effect {
   animation: jump 1s ease-in-out infinite; /* Duração e tipo de animação */
 }
-.whatsapp-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-  }
+.whatsapp-container {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
   
   .btn-whatsapp {
     background-color: #25D366;
@@ -437,41 +510,235 @@ header i{
     background-color: #128C7E;
   }
 
+
+.navbar {
+    width: 100%;
+    padding: 0.5rem 1rem; /* Ajusta o espaçamento para caber em telas menores */
+}
+
+
+
+
   /* -------------------------------- Media Queries */
+
+/* -------------------------------- Media Queries */
+
+/* Extra small (menos de 576px) */
+@media (max-width: 575.98px) {
+  .image-container {
+    width: 600vw;/* Garantir que a imagem ocupe a largura total da tela */
+    height: 500px;
+    margin-left: 1rem; /* Centralizar imagem */
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    
+    
+    
+   
+  }
+
+  .image-container img {
+    
+    width: 90%;
+    height: 50vh; /* A imagem ocupa toda a largura da div */
+     /* Manter a proporção da imagem */
+    
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-radius: 20px;
+   
+  
+ 
+  }
+
+  .main-logo-link img {
+    
+    width: 12rem;
+    height: 11rem;
+    margin-left: 4rem;
+    
+   
+   
+  }
+  
+  .dropdown-menu{
+    margin-right: -20rem;
+  }
+  
+  .navbar {
+    height: auto;
+   
+  }
+  
+.custom-height {
+  height: 448px;
+}
+  
+
+  
+  
+}
+
+
+
+/* Small (de 576px até 767.98px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .main-logo-link img {
+    margin-top: 0.5rem;
+    width: 10rem;
+    height: 12rem;
+    
+  }
+  .custom-height {
+    height: 550px;
+  }
+ 
+  .image-container {
+    width: 600vw;/* Garantir que a imagem ocupe a largura total da tela */
+    height: 900px;
+    margin-left: 1rem; /* Centralizar imagem */
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    
+    
+    
+   
+  }
+
+  .image-container img {
+    
+   
+    height: 65vh; /* A imagem ocupa toda a largura da div */
+   
+  
+ 
+  }
+}
+/* Medium (de 768px até 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Seus estilos aqui */
+  .main-logo-link img {
+    margin-top: 0.5rem;
+    width: 15rem;
+    height: 15rem;
+    margin-left: 8rem;
+  }
+  .image-container {
+    width: 600vw;/* Garantir que a imagem ocupe a largura total da tela */
+    height: 900px;
+    margin-left: 1rem; /* Centralizar imagem */
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    
+    
+    
+   
+  }
+
+  .image-container img {
+    
+   
+    height: 65vh; /* A imagem ocupa toda a largura da div */
+   
+  
+ 
+  }
+  
+}
+
+/* Large (de 992px até 1199.98px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* Seus estilos aqui */
+  
+}
+
+/* Extra large (de 1200px até 1399.98px) */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  /* Seus estilos aqui */
+}
+
+/* Extra extra large (mais de 1400px) */
+@media (min-width: 1400px) {
+  /* Seus estilos aqui */
+}
+
+/* -------------------------------- Custom Media Queries */
 
 /* Slightly larger container on xl screens */
 @media (min-width: 1200px) {
-    .container {
+  .container {
       max-width: 80%;
-    }
-  }
-  
-  /* fixed top navbar only on medium and up */
-  @media (min-width: 992px) {
-      .fixed-top-desktop-only {
-          position: fixed;
-          top: 0;
-          right: 0;
-          left: 0;
-          z-index: 1030;
-          
-      }
-      .main-logo-link img{
-        margin-top: 0;
-      }
-  
-      .header-container {
-          padding-top: 164px;
-      }
-  }
-
-@media (max-width: 992px) {
-  .card {
-    width: 350px;
-  }
-  .image-container{
-    margin-left: 6rem;
-    width: 100vw;
-    margin-top: 2rem;
   }
 }
+
+/* Fixed top navbar only on medium and up */
+@media (min-width: 992px) {
+  .fixed-top-desktop-only {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 1030;
+  }
+
+  
+
+  .header-container {
+      padding-top: 164px;
+    
+  }
+ .product-details-container{
+  padding-top: 2rem;
+  margin-top: 7rem;
+ }
+  
+ .product-details-container h2,
+ .product-details-container h6,
+ .product-details-container p {
+   font-size: 1.5rem;
+ }
+}
+
+/* Card adjustments for medium screens */
+@media (max-width: 992px) {
+  .card {
+      width: 350px;
+  }
+  .product-details-container ul li{
+    font-size: 0.9rem;
+  }
+  .product-details-container{
+    
+    width: 100%;
+  }
+
+  .product-details-container{
+    font-size: 2rem ;
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    padding-top: 0;
+  }
+  
+  .product-details-container h2,
+.product-details-container h6,
+.product-details-container p {
+  font-size: 1.5rem;
+  margin-bottom: 0px;
+  margin-top: 0;
+  padding: 0px;
+  
+}
+.product-details-container h1{
+  padding-top: 1rem;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+  
+}
+@media (max-width: 768px) {
+  /* Seus estilos aqui */
+}
+
+
+

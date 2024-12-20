@@ -7,8 +7,11 @@
     <!-- Título da Página -->
     <div class="row mt-5">
         <div class="col-12 offset-3 mt-5"></div>
-        <h1 class="text-center" style="color:#FF13A4; text-shadow: 5px 5px 15px #17010e73;">
-            {% trans "Products in Category: " %} {{ category.name }}
+        <h1 class="text-center" style="color:#FF13A4; text-shadow: 5px 10px 15px #17010e73;">
+            {% trans "Explore Our Exclusive" %}
+            <span style="font-weight: bold; text-decoration: underline;">
+                {{ category.name }}
+            </span> Collection
         </h1>
     </div>
 
@@ -18,6 +21,13 @@
             <hr>
         </div>
     </div>
+
+    <!-- Mensagem caso haja apenas um produto -->
+    {% if products|length == 1 %}
+        <div class="alert alert-warning text-center">
+            {{ no_more_items_message }}
+        </div>
+    {% endif %}
 
     <!-- Grid de Produtos -->
     <div class="row">
@@ -35,18 +45,18 @@
                     <!-- Representação do Rating -->
                     <div class="mb-3 mt-3">
                         {% with product.get_average_rating as avg_rating %}
-                            {% if avg_rating > 0 %}
-                                <span class="fw-bold text-muted">{% trans "Rating" %}:</span>
-                                {% for i in stars_range %}
-                                    {% if i <= avg_rating %}
-                                        <span class="text-warning">&#9733;</span> <!-- Estrela cheia -->
-                                    {% else %}
-                                        <span class="text-muted">&#9733;</span> <!-- Estrela vazia -->
-                                    {% endif %}
-                                {% endfor %}
-                            {% else %}
-                                <span class="fw-bold text-muted bg-light p-2 rounded-pill">{% trans "No reviews yet" %}</span>
-                            {% endif %}
+                        {% if avg_rating > 0 %}
+                        <span class="fw-bold text-muted">{% trans "Rating" %}:</span>
+                        {% for i in stars_range %}
+                        {% if i <= avg_rating %}
+                        <span class="text-warning">&#9733;</span> <!-- Estrela cheia -->
+                        {% else %}
+                        <span class="text-muted">&#9733;</span> <!-- Estrela vazia -->
+                        {% endif %}
+                        {% endfor %}
+                        {% else %}
+                        <span class="fw-bold text-muted bg-light p-2 rounded-pill">{% trans "No reviews yet" %}</span>
+                        {% endif %}
                         {% endwith %}
                     </div>
 
@@ -65,6 +75,7 @@
         {% endif %}
         {% endfor %}
     </div>
+
 </main>
 
 {% endblock %}

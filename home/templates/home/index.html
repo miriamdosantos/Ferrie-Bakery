@@ -3,15 +3,15 @@
 {% load i18n %}
 
 {% block content %}
-<main class="container-fluid mt-5">
+
     <!-- Carrossel de Produtos / Sugestões -->
     <div id="carouselExample" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <!-- Slide único (imagem destacada) -->
-            <div class="carousel-item active">
-                <img src="/media/mouses.jpeg" class="d-block w-100 zoom-effect" alt="{% trans 'Wedding or Birthday Cake' %}">
+            <div class="carousel-item active" style="margin-left: -50px; ">
+                <img src="/media/mouses.jpeg" class="img-fluid zoom-effect" alt="{% trans 'Wedding or Birthday Cake' %}">
                 <div class="carousel-caption text-center">
-                    <h5 style="font-size: 3rem; color: #fff; text-shadow: 2px 2px 5px rgba(0,0,0,0.7);">
+                    <h5 style="font-size: 3rem; color: #fff; text-shadow: 2px 2px 5px rgba(0,0,0,0.7); ">
                         {% trans "Order Now!" %}
                     </h5>
                     <p class="d-none d-lg-block" style="font-size: 1.8rem; color: #fff; 
@@ -28,21 +28,21 @@
     </div>
 
     <!-- Seção de Best Sellers -->
-    <section class="featured-sections mt-5">
+    <section class="featured-sections mt-3">
         <div class="container">
             <div class="row">
                 <!-- Best Sellers -->
                 <div class="col-12">
-                    <h2 class="text-center font-weight-bold mb-4" style="color: #FF13A4;">
+                    <h2 class="text-center font-weight-bold mb-5" style="color: #FF13A4;">
                         {% trans "Best Sellers" %}
                     </h2>
                     <div class="row">
                         {% for product in best_sellers %}
-                        <div class="col-md-4 mb-4 offset-md-2">
+                        <div class="col-md-6 col-lg-4 mb-4 offset-md-2 " style="padding-left: 2rem;">
                             <div class="card shadow-sm" style="background-color: #a8e6cfac;" >
                                 <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                                <div class="card-body" style="height: 180px;">
-                                    <h5 class="card-title">{{ product.name }}</h5>
+                                <div class="card-body" style="min-height: 200px;">
+                                    <h4 class="card-title">{{ product.name }}</h4>
                                     <!-- Representação do Rating -->
                                     <div class="mb-2">
                                         {% if product.rating %}
@@ -55,10 +55,10 @@
                                                 {% endif %}
                                             {% endfor %}
                                         {% else %}
-                                            <span class="fw-bold text-muted bg-light p-2 rounded-pill">{% trans "Rating not found" %}</span>
+                                            <span class="fw-bold text-muted bg-light p-2 rounded-pill ">{% trans "Rating not found" %}</span>
                                         {% endif %}
                                     </div>                                    
-                                    <a href="#" class="btn btn-primary btn-small product-btn-pink product-btn-small">
+                                    <a href="#" class="btn btn-primary btn-large product-btn-pink product-btn-small " style="font-size: 1.15rem;">
                                         {{ product.custom_title }}
                                     </a>
                                 </div>
@@ -79,14 +79,14 @@
             </h2>
             <div class="row">
                 {% for update in stores_updates %}
-                <div class="col-md-6 mb-4">
-                    <div class="card shadow-sm" style="height: 600px;">
+                <div class="col-sm-12 col-md-6 mb-4  ">
+                    <div class="card shadow-sm " style="height: 600px; min-width: 22rem;margin-left: 1rem; ">
                         {% if update.image %}
-                        <img src="{{ update.image.url }}" class="card-img-top update-image" alt="{{ update.title }}">
+                        <img src="{{ update.image.url }}" class="card-img-top update-image" alt="{{ update.title }}"  >
                         {% endif %}
-                        <div class="card-body" style="background-color: #a8e6cfac;">
+                        <div class="card-body " style="background-color: #a8e6cfac;">
                             <h5 class="card-title">{{ update.title }}</h5>
-                            <p class="card-text">{{ update.description|truncatewords:20 }}</p>
+                            <p class="card-text mobile-font-size" >{{ update.description|truncatewords:20 }}</p>
                         </div>
                     </div>
                 </div>
@@ -96,5 +96,5 @@
             </div>
         </div>
     </section>
-</main>
+
 {% endblock %}
