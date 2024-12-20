@@ -338,6 +338,24 @@ header i{
   background-color: #FF70C0;
 }
 
+.btn-black {
+  background: black;
+  color: white;
+}
+
+.btn-outline-black {
+  background: white;
+  color: black !important; /* use important to override link colors for <a> elements */
+  border: 1px solid black;
+}
+
+.btn-outline-black:hover,
+.btn-outline-black:active,
+.btn-outline-black:focus {
+  background: black;
+  color: white !important;
+}
+
 .image-container {
   position: relative;
   overflow: hidden; /* Garante que o reflexo não ultrapasse os limites */
@@ -418,12 +436,13 @@ header i{
 .product-details-container small,
 .product-details-container label {
   font-family: 'Lato', sans-serif;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
 }
 
 .product-details-container select,
 .product-details-container option{
   background-color: var(--secondary-color);
+  font-size: 1.2rem;
 }
 
 
