@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "modeltranslation",
     'home',
     'products',
+    'bag',
 
 
 ]
