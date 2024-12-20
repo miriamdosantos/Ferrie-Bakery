@@ -40,6 +40,9 @@
 main {
   flex-grow: 1;
   padding-top: 60px; /* Altura aproximada do header */
+  margin-top: 1.5rem;
+  
+ 
 }
 
    
@@ -169,7 +172,7 @@ html {
     border-radius: 50%;
     width: 30%;
     height: 30%;
-    margin-top: -6px;
+    margin-top: -9px;
     box-shadow: 5px  5px  20px rgb(0, 0, 0); /* Efeito de sombra */
 }
 
@@ -582,7 +585,13 @@ header i{
 
 
 /* Small (de 576px até 767.98px) */
+@media (max-width: 392px) {
+  main{
+    margin-top: 3.3rem;
+  }
+}
 @media (min-width: 576px) and (max-width: 767.98px) {
+  
   .main-logo-link img {
     margin-top: 0.5rem;
     width: 10rem;

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}  <!-- Adicionado para suportar a tag trans -->
+
+{% block content %}
+<main class="container mb-4 ">
+    <!-- Título da Página -->
+    <div class="row mt-5">
+        <div class="col-12 offset-3 mt-5"></div>
+        <h1 class="text-center" style="color:#FF13A4; text-shadow: 5px 5px 15px #17010e73; font-weight: bold; text-decoration: underline;">
+            {% trans "Shopping Bag" %}
+        </h1>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {% if bag_items %}
+                <div class="table-responsive rounded">
+                    <!-- Conteúdo para exibir itens no carrinho -->
+                </div>
+            {% else %}
+                <p class="lead mb-5">{% trans "Your bag is empty." %}</p>
+                <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
+                    <span class="icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <span class="text-uppercase">{% trans "Keep Shopping" %}</span>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</main>
+{% endblock %}
