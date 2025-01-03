@@ -1,0 +1,45 @@
+<script type="text/javascript">
+    // Função para habilitar/desabilitar os botões de incremento e decremento
+    function handleEnableDisable(itemId) {
+        var currentValue = parseInt($(`#id_qty_${itemId}`).val());
+        var minusDisabled = currentValue <= 1;  // Para garantir que a quantidade não seja menor que 1
+        var plusDisabled = currentValue >= 99;  // Limite superior para 99
+        $(`#decrement-qty_${itemId}`).prop('disabled', minusDisabled);
+        $(`#increment-qty_${itemId}`).prop('disabled', plusDisabled);
+    }
+
+    // Garantir que todos os inputs estejam corretamente habilitados/desabilitados ao carregar a página
+    var allQtyInputs = $('.qty_input');
+    for(var i = 0; i < allQtyInputs.length; i++){
+        var itemId = $(allQtyInputs[i]).data('item_id');
+        handleEnableDisable(itemId);
+    }
+
+    // Verificar a habilitação/desabilitação toda vez que o valor do input mudar
+    $('.qty_input').change(function() {
+        var itemId = $(this).data('item_id');
+        handleEnableDisable(itemId);
+    });
+
+    // Incrementar a quantidade
+    $('.increment-qty').click(function(e) {
+        e.preventDefault();
+        var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
+        var currentValue = parseInt($(closestInput).val());  // Garantir que seja um número inteiro
+        $(closestInput).val(currentValue + 1);  // Aumentar o valor
+        var itemId = $(this).data('item_id');
+        handleEnableDisable(itemId);
+    });
+
+    // Decrementar a quantidade
+    $('.decrement-qty').click(function(e) {
+        e.preventDefault();
+        var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
+        var currentValue = parseInt($(closestInput).val());  // Garantir que seja um número inteiro
+        if (currentValue > 1) {  // Não permitir que o valor seja menor que 1
+            $(closestInput).val(currentValue - 1);  // Diminuir o valor
+        }
+        var itemId = $(this).data('item_id');
+        handleEnableDisable(itemId);
+    });
+</script>

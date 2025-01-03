@@ -356,6 +356,18 @@ header i{
   color: white !important;
 }
 
+.increment-qty,
+.decrement-qty{
+  background-color:rgb(252, 250, 250); 
+  border-color: #FF13A4
+}
+.increment-qty i,
+.decrement-qty i{
+  color: #C41284;
+}
+
+
+
 .image-container {
   position: relative;
   overflow: hidden; /* Garante que o reflexo não ultrapasse os limites */
