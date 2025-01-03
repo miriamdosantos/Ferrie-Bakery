@@ -51,6 +51,8 @@ def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     reviews = product.reviews.all()  # Todas as reviews associadas ao produto
     avg_rating = product.get_average_rating()  # Média das reviews
+    truffled_flavors = product.flavors.filter(is_truffled=True)
+    traditional_flavors = product.flavors.filter(is_truffled=False)
 
     # Inicializa as variáveis de preço
     base_price = product.price
@@ -78,6 +80,8 @@ def product_detail(request, product_id):
         "base_price": base_price,
         "size_prices": size_prices if size_prices else None,  # Passa size_prices apenas se não for vazio
         "stars_range": range(1, 6),  # Usado para representar estrelas no template
+        'truffled_flavors': truffled_flavors,
+        'traditional_flavors': traditional_flavors,
     }
 
     return render(request, 'products/product_detail.html', context)

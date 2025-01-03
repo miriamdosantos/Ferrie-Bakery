@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
+from decimal import Decimal
+
 
 class Category(models.Model):
     name = models.CharField(max_length=254)
@@ -105,40 +107,55 @@ class Product(models.Model):
         """Calcula o preço com base no tamanho selecionado."""
         return self.SIZE_PRICES.get(size, self.price)  # Retorna o preço baseado no tamanho ou o preço padrão se não encontrado
 
-    def calculate_total_price(self, quantity, size=None, flavor=None, topper_text=None, roses_quantity=0):
-        """Calcula o preço total com base no tipo de unidade, tamanho, sabor, topper e rosas."""
+    def calculate_total_price(self, quantity, quantity_kilo=0, size=None, flavor=None, topper_text=None, roses_quantity=0):
+        base_price = Decimal(self.price)
+        print(f"Base price: {base_price}")
+
+        # Ajusta o preço base de acordo com o tamanho, se aplicável
+        if self.sale_option == "size" and size:
+            if self.category.name == "Pies":
+                base_price = Decimal(self.SIZE_PRICES.get(size, self.price))
+            else:
+                base_price = self.calculate_price_by_size(size)
+        print(f"Adjusted base price: {base_price}")
+
+        # Ajusta o preço para sabores trufados, se aplicável
         if flavor and flavor.is_truffled:
-            base_price = 75.00  # Preço por quilo para sabores trufados
-        else:
-            base_price = 50.00  # Preço por quilo para sabores tradicionais
+            base_price = Decimal('75.00')  # Preço por quilo para sabores trufados
+        print(f"Final base price: {base_price}")
 
-        # Se um tamanho foi escolhido, use o preço baseado no tamanho
-        if size:
-            price = self.calculate_price_by_size(size)
+        # Calcula o preço total
+        if quantity == 1:
+            # Se há apenas uma unidade, use o maior entre o preço da unidade e o preço por quilo
+            unit_price = base_price
+            kilo_price = base_price * Decimal(quantity_kilo)
+            total_price = max(unit_price, kilo_price)
+            print(f"Single unit price: {unit_price}")
+            print(f"Single unit kilo price: {kilo_price}")
         else:
-            price = base_price  # Use o preço padrão se nenhum tamanho for selecionado
+            # Se há mais de uma unidade, calcule tanto o preço por unidade quanto por quilo
+            unit_price = base_price * quantity
+            kilo_price = base_price * Decimal(quantity_kilo)
+            total_price = unit_price + kilo_price
+            print(f"Unit price: {quantity} x {base_price} = {unit_price}")
+            print(f"Kilo price: {quantity_kilo} x {base_price} = {kilo_price}")
 
-        # Cálculo do preço base
-        if self.sale_option == "unit":
-            total_price = price * quantity
-        elif self.sale_option == "hundred":
-            total_price = price * (quantity / 100)
-        elif self.sale_option == "kilo":
-            total_price = price * (quantity / 1000)
-        else:
-            total_price = price
+        print(f"Total before extras: {total_price}")
 
         # Adiciona o preço do topper, se aplicável
         if self.has_topper and topper_text:
-            total_price += 10.00  # Preço fixo para topper
+            topper_price = Decimal('10.00')
+            total_price += topper_price
+            print(f"Added topper price: {topper_price}")
 
         # Adiciona o preço das rosas, se aplicável
         if self.has_roses:
-            rose_price = 5.00  # Preço por rosa
-            total_price += rose_price * roses_quantity
+            rose_price = Decimal('5.00') * Decimal(roses_quantity)
+            total_price += rose_price
+            print(f"Added roses price: {rose_price}")
 
-        return total_price
-
+        print(f"Final total price: {total_price}")
+        return total_price.quantize(Decimal('0.01'))  # Arredonda para 2 casas decimais
 
 class Review(models.Model):
     product = models.ForeignKey("Product", on_delete=models.CASCADE, related_name="reviews")

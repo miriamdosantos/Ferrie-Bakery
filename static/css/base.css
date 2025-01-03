@@ -338,8 +338,8 @@ header i{
   background-color: #FF70C0;
 }
 
-.btn-black {
-  background: black;
+.btn-primary-pink {
+  background: #FF13A4;
   color: white;
 }
 
@@ -538,8 +538,21 @@ header i{
     padding: 0.5rem 1rem; /* Ajusta o espaçamento para caber em telas menores */
 }
 
+.icon-container {
+  text-align: center;
+}
+.icon-container i {
+  font-size: 1.5rem; /* Ajuste o tamanho conforme necessário */
+  line-height: 1.2;
+}
+.icon-container p {
+  margin-top: 0.5rem;
+  font-size: 0.9rem; /* Ajuste para o texto abaixo do ícone */
+}
 
-
+.text-primary {
+  color: var(--button-text-color) !important;
+}
 
   /* -------------------------------- Media Queries */
 
