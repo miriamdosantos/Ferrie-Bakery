@@ -115,10 +115,16 @@
                         <h3>{% trans "Additionals:" %}</h3>
                         {% if product.has_topper %}
                         <label for="topper-text">{% trans "Topper Text:" %}</label>
+                        <small class="text-muted">
+                            ($ 8.00 for {% trans "Topper" %})
+                        </small>
                         <input type="text" id="topper-text" name="topper_text" class="form-control" placeholder="{% trans 'Enter topper text' %}">
                         {% endif %}
                         {% if product.has_roses %}
                         <label for="roses-quantity">{% trans "Number of Roses:" %}</label>
+                        <small class="text-muted">
+                            ($ 5.00  {% trans "each" %} )
+                        </small>
                         <input type="number" id="roses-quantity" name="roses_quantity" class="form-control" min="0" value="0">
                         {% endif %}
                     </div>

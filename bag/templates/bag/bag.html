@@ -3,82 +3,111 @@
 {% load i18n %}
 
 {% block content %}
-<main class="container mb-4 ">
+<main class="container mb-4">
     <!-- Título da Página -->
     <div class="row mt-5">
-        <div class="col-12  mt-5">
-        <h1 class="text-center" style="color:#FF13A4; text-shadow: 5px 5px 15px #17010e73; font-weight: bold; text-decoration: underline;">
-            {% trans "Shopping Bag" %}
-        </h1>
+        <div class="col-12 mt-5">
+            <h1 class="text-center" style="color:#FF13A4; text-shadow: 5px 5px 15px #17010e73; font-weight: bold; text-decoration: underline;">
+                {% trans "Shopping Bag" %}
+            </h1>
         </div>
     </div>
 
     <div class="row">
         <div class="col">
             {% if bag_items %}
-                <div class="table-responsive rounded " style="background-color: #A8E6CF;">
-                    <table class="table table-sm table-borderless p-4 mt-3" >
+                <div class="table-responsive rounded" style="background-color: #A8E6CF;">
+                    <table class="table table-sm table-borderless p-4 mt-3">
                         <thead class="text-black">
                             <tr>
-                                <th scope="col">Product Info</th>
+                                <th scope="col">{% trans "Product Info" %}</th>
                                 <th scope="col"></th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Qty</th>
-                                <th scope="col">Subtotal</th>
+                                <th scope="col">{% trans "Price" %}</th>
+                                <th scope="col">{% trans "Qty" %}</th>
+                                <th scope="col">{% trans "Subtotal" %}</th>
                             </tr>
                         </thead>
 
                         {% for item in bag_items %}
                             <tr>
+                                <!-- Imagem do Produto -->
                                 <td class="p-3 w-25">
-                                    <a href="{{ item.product.image.url }}" target="_blank">
+                                    {% if item.product.image %}
                                         <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                                    </a>
-                                </td>
-                                <td class="py-3">
-                                    <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                                    {% if item.flavor %}
-                                        <p class="my-0 small">Flavor: {{ item.flavor }}</p>
+                                    {% else %}
+                                        <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
                                     {% endif %}
                                 </td>
+
+                                <!-- Informações do Produto -->
+                                <td class="py-3">
+                                    <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                                    {% if item.size %}
+                                        <p class="my-0 small">{% trans "Size" %}: {{ item.size }}</p>
+                                    {% endif %}
+                                    {% if item.flavor %}
+                                        <p class="my-0 small">{% trans "Flavor" %}: {{ item.flavor }}</p>
+                                    {% endif %}
+                                    {% if item.topper_text %}
+                                        <p class="my-0 small">{% trans "Topper" %}: {{ item.topper_text }} $ 8.00 for {% trans "Topper" %}</p>
+                                    {% endif %}
+                                    {% if item.roses_quantity %}
+                                        <p class="my-0 small">{% trans "Roses" %}: {{ item.roses_quantity }} $ 5.00 each</p>
+                                    {% endif %}
+                                </td>
+
+                                <!-- Preço do Produto -->
                                 <td class="py-3">
                                     <p class="my-0">
-                                        ${{ item.product.price }}
+                                        ${{ item.base_price|floatformat:2 }}
                                         {% if item.product.sale_option == 'kilo' %}
-                                            per kg
+                                            {% trans "per kg" %}
                                         {% endif %}
                                     </p>
                                 </td>
+
+                                <!-- Quantidade -->
                                 <td class="py-3 w-25">
-                                    <p class="my-0">{{ item.quantity }} {% if item.quantity_kilo %}({{ item.quantity_kilo }}kg){% endif %}</p>
+                                    <p class="my-0">
+                                        {{ item.quantity }}
+                                        {% if item.quantity_kilo %}
+                                            ({{ item.quantity_kilo }}kg)
+                                        {% endif %}
+                                    </p>
                                 </td>
+
+                                <!-- Subtotal -->
                                 <td class="py-3">
                                     <p class="my-0">${{ item.total_price|floatformat:2 }}</p>
                                 </td>
                             </tr>
                         {% endfor %}
+
+                        <!-- Total da Sacola -->
                         <tr>
                             <td colspan="5" class="pt-5 text-right">
-                                <h6><strong>Bag Total: ${{ total|floatformat:2 }}</strong></h6>
-                                <h6>Delivery: ${{ delivery|floatformat:2 }}</h6>
-                                <h4 class="mt-4"><strong>Grand Total: ${{ grand_total|floatformat:2 }}</strong></h4>
+                                <h6><strong>{% trans "Bag Total" %}: ${{ total|floatformat:2 }}</strong></h6>
+                                <h6>{% trans "Delivery" %}: ${{ delivery|floatformat:2 }}</h6>
+                                <h4 class="mt-4"><strong>{% trans "Grand Total" %}: ${{ grand_total|floatformat:2 }}</strong></h4>
                                 {% if free_delivery_delta > 0 %}
                                     <p class="mb-1 text-danger">
-                                        You could get free delivery by spending just <strong>${{ free_delivery_delta }}</strong> more!
+                                        {% trans "You could get free delivery by spending just" %} <strong>${{ free_delivery_delta }}</strong> {% trans "more!" %}
                                     </p>
                                 {% endif %}
                             </td>
                         </tr>
+
+                        <!-- Botões de Ação -->
                         <tr>
                             <td colspan="5" class="text-right">
                                 <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
                                     <span class="icon">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
-                                    <span class="text-uppercase">Keep Shopping</span>
+                                    <span class="text-uppercase">{% trans "Keep Shopping" %}</span>
                                 </a>
-                                <a href="" class="btn btn-primary-pink rounded-0 btn-lg">
-                                    <span class="text-uppercase">Secure Checkout</span>
+                                <a href="#" class="btn btn-primary-pink rounded-0 btn-lg">
+                                    <span class="text-uppercase">{% trans "Secure Checkout" %}</span>
                                     <span class="icon">
                                         <i class="fas fa-lock"></i>
                                     </span>
@@ -88,17 +117,20 @@
                     </table>
                 </div>
             {% else %}
-                <p class="lead mb-5">Your bag is empty.</p>
+                <!-- Sacola Vazia -->
+                <p class="lead mb-5">{% trans "Your bag is empty." %}</p>
                 <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
                     <span class="icon">
                         <i class="fas fa-chevron-left"></i>
                     </span>
-                    <span class="text-uppercase">Keep Shopping</span>
+                    <span class="text-uppercase">{% trans "Keep Shopping" %}</span>
                 </a>
             {% endif %}
-            <form action="{% url 'clear_bag' %}" method="post">
+
+            <!-- Botão para Limpar Sacola -->
+            <form action="{% url 'clear_bag' %}" method="post" class="mt-3">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Limpar Carrinho</button>
+                <button type="submit" class="btn btn-danger">{% trans "Clear Bag" %}</button>
             </form>
         </div>
     </div>

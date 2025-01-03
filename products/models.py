@@ -144,7 +144,7 @@ class Product(models.Model):
 
         # Adiciona o preço do topper, se aplicável
         if self.has_topper and topper_text:
-            topper_price = Decimal('10.00')
+            topper_price = Decimal('08.00')
             total_price += topper_price
             print(f"Added topper price: {topper_price}")
 
@@ -156,7 +156,17 @@ class Product(models.Model):
 
         print(f"Final total price: {total_price}")
         return total_price.quantize(Decimal('0.01'))  # Arredonda para 2 casas decimais
+    def get_topper_price(self):
+        """Retorna o preço do topper, se aplicável."""
+        if self.has_topper:
+            return Decimal('8.00')  # Preço do topper
+        return Decimal('0.00')  # Sem topper
 
+    def get_roses_price(self, roses_quantity):
+        """Retorna o preço das rosas com base na quantidade."""
+        if self.has_roses:
+            return Decimal('5.00') * Decimal(roses_quantity)  # Preço por rosa
+        return Decimal('0.00')  # Sem rosas
 class Review(models.Model):
     product = models.ForeignKey("Product", on_delete=models.CASCADE, related_name="reviews")
     rating = models.IntegerField(

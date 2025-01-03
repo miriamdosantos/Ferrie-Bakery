@@ -30,6 +30,12 @@ def bag_contents(request):
                 topper_text = item_data.get('topper_text') if product.has_topper else None
                 roses_quantity = item_data.get('roses_quantity', 0) if product.has_roses else 0
 
+                # Calcular o preço base considerando o tamanho
+                if product.sale_option == 'size' and size:
+                    base_price = product.calculate_price_by_size(size)
+                else:
+                    base_price = product.price
+
                 total_price = product.calculate_total_price(
                     quantity, quantity_kilo, size=size, flavor=flavor,
                     topper_text=topper_text, roses_quantity=roses_quantity
@@ -42,7 +48,7 @@ def bag_contents(request):
                 flavor = None
                 topper_text = None
                 roses_quantity = 0
-
+                base_price = product.price
                 total_price = product.calculate_total_price(quantity, quantity_kilo)
 
             total += total_price
@@ -57,6 +63,7 @@ def bag_contents(request):
                 'flavor': flavor_name,
                 'topper_text': topper_text,
                 'roses_quantity': roses_quantity,
+                'base_price': base_price,
                 'total_price': total_price,
             })
 
