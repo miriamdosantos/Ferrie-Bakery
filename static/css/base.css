@@ -366,6 +366,12 @@ header i{
   color: #C41284;
 }
 
+.update-form button,
+.remove-form button {
+    cursor: pointer;
+   
+}
+
 
 
 .image-container {

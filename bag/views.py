@@ -19,7 +19,7 @@ def view_bag(request):
     return render(request, 'bag/bag.html')
 
 
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
 from django.contrib import messages
 from products.models import Product, Flavor
 from decimal import Decimal
@@ -47,6 +47,9 @@ def add_to_bag(request, item_id):
         topper_text = request.POST.get('topper_text', None)
         roses_quantity = int(request.POST.get('roses_quantity', 0))
         print(f"Topper text: {topper_text}, Roses quantity: {roses_quantity}")
+
+       
+
 
         # Calcular o preço total
         total_price = product.calculate_total_price(
@@ -98,3 +101,48 @@ def clear_bag(request):
 
     # Redirecionar o usuário para a página do carrinho ou outra página desejada
     return redirect('view_bag')  # Substitua 'view_bag' pelo nome da URL do carrinho
+
+def adjust_bag(request, item_key):
+    """Adjust the quantity of the specified product in the shopping bag"""
+    try:
+        quantity = int(request.POST.get('quantity', 1))  # Pega a quantidade do POST
+        size = request.POST.get('product_size', None)  # Verifica se há um tamanho do produto
+        bag = request.session.get('bag', {})
+
+        if item_key in bag:
+            # Se houver tamanho, atualiza a quantidade do item com o tamanho específico
+            if size:
+                if quantity > 0:
+                    bag[item_key]['quantity'] = quantity
+                    bag[item_key]['size'] = size
+                else:
+                    del bag[item_key]  # Remove o item caso a quantidade seja 0 ou negativa
+            else:
+                # Atualiza a quantidade do item
+                if quantity > 0:
+                    bag[item_key]['quantity'] = quantity
+                else:
+                    del bag[item_key]  # Remove o item caso a quantidade seja 0 ou negativa
+
+        # Salva o carrinho de volta na sessão
+        request.session['bag'] = bag
+        return redirect(reverse('view_bag'))
+    
+    except Exception as e:
+        messages.error(request, "Erro ao ajustar o carrinho.")
+        return redirect(reverse('view_bag'))
+
+def remove_from_bag(request, item_key):
+    """Remove the item from the shopping bag"""
+    try:
+        bag = request.session.get('bag', {})
+
+        if item_key in bag:
+            del bag[item_key]  # Remove o item
+
+        request.session['bag'] = bag  # Atualiza a sessão com o carrinho modificado
+        return HttpResponse(status=200)
+    
+    except Exception as e:
+        messages.error(request, "Erro ao remover item do carrinho.")
+        return HttpResponse(status=500)
