@@ -20,3 +20,4 @@ document.getElementById('submit-btn').addEventListener('click', function(event) 
         alert('{% trans "Please select at least one flavor: truffled or traditional." %}');
     }
 });
+

@@ -1,28 +1,21 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from products.models import Product, Flavor
-from decimal import Decimal
-# Create your views here.
-
-def view_bag(request):
-    """ A view that renders the bag contents page """
-
-    return render(request, 'bag/bag.html')
-
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from products.models import Product, Flavor
-from decimal import Decimal
-
-def view_bag(request):
-    """ A view that renders the bag contents page """
-    return render(request, 'bag/bag.html')
-
-
 from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
 from django.contrib import messages
 from products.models import Product, Flavor
 from decimal import Decimal
+
+def view_bag(request):
+    """ A view that renders the bag contents page """
+
+    return render(request, 'bag/bag.html')
+
+
+
+def view_bag(request):
+    """ A view that renders the bag contents page """
+    return render(request, 'bag/bag.html')
+
+
+
 
 def add_to_bag(request, item_id):
     try:
@@ -82,7 +75,7 @@ def add_to_bag(request, item_id):
         request.session['bag'] = bag
         print(f"Updated session bag: {bag}")
 
-        messages.success(request, f"Added {quantity}x and {quantity_kilo}kg of {product.name} to your bag!")
+        messages.success(request, f"Added  {product.name} to your bag!")
 
         return redirect(redirect_url)
 

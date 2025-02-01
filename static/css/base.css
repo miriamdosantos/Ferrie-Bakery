@@ -366,11 +366,6 @@ header i{
   color: #C41284;
 }
 
-.update-form button,
-.remove-form button {
-    cursor: pointer;
-   
-}
 
 
 
@@ -571,6 +566,33 @@ header i{
 .text-primary {
   color: var(--button-text-color) !important;
 }
+.update-link,
+.remove-item {
+    cursor: pointer;
+   
+}
+/* ------------------------------- bootstrap toasts */
+
+
+   
+
+.custom-toast {
+    overflow: visible;
+}
+
+.toast-capper {
+    height: 2px;
+}
+
+.toast {
+  opacity: 1 !important;
+  position: fixed;
+  top: 120px;
+  right: 15px;
+  z-index:100000;
+}
+
+
 
   /* -------------------------------- Media Queries */
 

@@ -1,7 +1,7 @@
 <!-- Base HTML -->
 {% load static %}
 {% load i18n %}
-{% include 'includes/messages.html' %}
+
 
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE }}">
@@ -67,11 +67,11 @@
                         <a class="nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             <div class="text-center">
-                                <div ><i class="fas fa-user fa-lg"></i></div>
+                                <div><i class="fas fa-user fa-lg"></i></div>
                                 <p class="my-0 mt-2">{% trans "My Account" %}</p>
                             </div>
                         </a>
-                        <div class="dropdown-menu border-0" aria-labelledby="user-options" >
+                        <div class="dropdown-menu border-0" aria-labelledby="user-options">
                             {% if request.user.is_authenticated %}
                             {% if request.user.is_superuser %}
                             <a href="#" class="dropdown-item">{% trans "Product Management" %}</a>
@@ -121,8 +121,8 @@
             <div class="col bg-black text-white">
                 <h6 class="logo-font my-1">
                     {% blocktrans %}Free delivery on orders over ${{ free_delivery_threshold }}!{% endblocktrans %}
-                </h6>            
-            </div>            
+                </h6>
+            </div>
         </div>
     </header>
 
@@ -134,7 +134,21 @@
     </div>
     <main>
         {% if messages %}
-        <div class="message-container"></div>
+        <div class="message-container">
+            {% for message in messages %}
+            {% with message.level as level %}
+            {% if level == 40 %}
+            {% include 'includes/toasts/toast_error.html' %}
+            {% elif level == 30 %}
+            {% include 'includes/toasts/toast_warning.html' %}
+            {% elif level == 25 %}
+            {% include 'includes/toasts/toast_success.html' %}
+            {% else %}
+            {% include 'includes/toasts/toast_info.html' %}
+            {% endif %}
+            {% endwith %}
+            {% endfor %}
+        </div>
         {% endif %}
 
         {% block page_header %}
@@ -144,8 +158,11 @@
         {% endblock %}
 
         {% block postloadjs %}
-        <script src="{% static 'js/script.js' %}"></script>
-        {% endblock %}
+        <!-- Bootstrap Toast JavaScript -->
+        <script type="text/javascript">
+            $('.toast').toast('show');
+        </script>
+            {% endblock %}
     </main>
 </body>
 
