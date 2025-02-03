@@ -83,7 +83,7 @@
                     </div>
 
                     <!-- Opção de Tamanho -->
-                    {% if product.sale_option == 'size' %}
+                    {% if product.sale_option == 'size' and size_prices %}
                     <div class="form-group mt-4">
                         <label for="size-select">{% trans "Choose a Size:" %}</label>
                         <select id="size-select" name="size" class="form-control" required>
@@ -93,7 +93,10 @@
                             {% endfor %}
                         </select>
                     </div>
+                    {% else %}
+                    <p>{% trans "No sizes available for this product." %}</p>
                     {% endif %}
+
 
                     <!-- Quantidade em Quilos -->
                     <!-- Quantidade em Quilos -->
@@ -140,8 +143,8 @@
                                 <input class="form-control qty_input" type="number" name="quantity" value="1" min="1"
                                     max="99" step="1" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
                                 <div class="input-group-append">
-                                    <button class="increment-qty btn  rounded-0"
-                                        data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}" >
+                                    <button class="increment-qty btn  rounded-0" data-item_id="{{ product.id }}"
+                                        id="increment-qty_{{ product.id }}">
                                         <span class="icon">
                                             <i class="fas fa-plus" style="color: #FF13A4;"></i>
                                         </span>

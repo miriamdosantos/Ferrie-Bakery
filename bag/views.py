@@ -95,34 +95,60 @@ def clear_bag(request):
     # Redirecionar o usuário para a página do carrinho ou outra página desejada
     return redirect('view_bag')  # Substitua 'view_bag' pelo nome da URL do carrinho
 
-def adjust_bag(request, item_key):
-    """Adjust the quantity of the specified product in the shopping bag"""
+def adjust_bag(request, item_id):
+    """Adjust the quantity of the specified product in the shopping bag with toast messages"""
     try:
-        quantity = int(request.POST.get('quantity', 1))  # Pega a quantidade do POST
-        size = request.POST.get('product_size', None)  # Verifica se há um tamanho do produto
+        product = get_object_or_404(Product, pk=item_id)
+        quantity = int(request.POST.get('quantity', 0))
+        quantity_kilo = float(request.POST.get('quantity_kilo', 0))
+        size = request.POST.get('size')
         bag = request.session.get('bag', {})
 
-        if item_key in bag:
-            # Se houver tamanho, atualiza a quantidade do item com o tamanho específico
-            if size:
-                if quantity > 0:
-                    bag[item_key]['quantity'] = quantity
-                    bag[item_key]['size'] = size
+        if str(item_id) in bag:
+            if product.sale_option == "size":
+                if size:
+                    if quantity > 0:
+                        bag[str(item_id)]['quantity'] = quantity
+                        bag[str(item_id)]['size'] = size
+                        messages.success(request, f'Updated size {size.upper()} {product.name} quantity to {quantity}')
+                    else:
+                        del bag[str(item_id)]
+                        messages.success(request, f'Removed size {size.upper()} {product.name} from your bag')
                 else:
-                    del bag[item_key]  # Remove o item caso a quantidade seja 0 ou negativa
-            else:
-                # Atualiza a quantidade do item
-                if quantity > 0:
-                    bag[item_key]['quantity'] = quantity
+                    existing_size = bag[str(item_id)].get('size')
+                    if existing_size:
+                        if quantity > 0:
+                            bag[str(item_id)]['quantity'] = quantity
+                            messages.success(request, f'Updated size {existing_size.upper()} {product.name} quantity to {quantity}')
+                        else:
+                            del bag[str(item_id)]
+                            messages.success(request, f'Removed size {existing_size.upper()} {product.name} from your bag')
+                    else:
+                        messages.error(request, "Size is required for this product.")
+                        return redirect(reverse('view_bag'))
+            elif product.sale_option == "kilo":
+                if quantity_kilo > 0:
+                    bag[str(item_id)]['quantity_kilo'] = quantity_kilo
+                    messages.success(request, f'Updated {product.name} quantity to {quantity_kilo:.2f} kg')
                 else:
-                    del bag[item_key]  # Remove o item caso a quantidade seja 0 ou negativa
+                    del bag[str(item_id)]
+                    messages.success(request, f'Removed {product.name} from your bag')
+            else:  # "unit" or "piece"
+                if quantity > 0:
+                    bag[str(item_id)]['quantity'] = quantity
+                    messages.success(request, f'Updated {product.name} quantity to {quantity}')
+                else:
+                    del bag[str(item_id)]
+                    messages.success(request, f'Removed {product.name} from your bag')
+        else:
+            messages.error(request, f"{product.name} is not in your bag.")
+            return redirect(reverse('view_bag'))
 
-        # Salva o carrinho de volta na sessão
         request.session['bag'] = bag
         return redirect(reverse('view_bag'))
-    
+
     except Exception as e:
-        messages.error(request, "Erro ao ajustar o carrinho.")
+        messages.error(request, f"Error adjusting your bag: {str(e)}")
         return redirect(reverse('view_bag'))
 
 def remove_from_bag(request, item_key):

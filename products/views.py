@@ -49,8 +49,8 @@ def product_detail(request, product_id):
     """ A view to show individual product details """
 
     product = get_object_or_404(Product, pk=product_id)
-    reviews = product.reviews.all()  # Todas as reviews associadas ao produto
-    avg_rating = product.get_average_rating()  # Média das reviews
+    reviews = product.reviews.all()
+    avg_rating = product.get_average_rating()
     truffled_flavors = product.flavors.filter(is_truffled=True)
     traditional_flavors = product.flavors.filter(is_truffled=False)
 
@@ -58,28 +58,24 @@ def product_detail(request, product_id):
     base_price = product.price
     size_prices = {}
 
-    # Calcular o preço base se o produto for um "Birthday Cake"
-    if product.category.name == "Birthday Cake":
-        base_price = product.price  # Preço padrão do produto
-        size_prices = {
-            'small': product.calculate_price_by_size('small'),
-            'medium': product.calculate_price_by_size('medium'),
-            'large': product.calculate_price_by_size('large'),
-        }
-    elif product.size:  # Para outros produtos que têm tamanho
+    # Verifica se o produto deve ter opções de tamanho
+    if product.sale_option == "size":
         size_prices = {
             'small': product.calculate_price_by_size('small'),
             'medium': product.calculate_price_by_size('medium'),
             'large': product.calculate_price_by_size('large'),
         }
 
+    # Debug: Verifique se os tamanhos estão sendo passados corretamente
+    print(f"Product: {product.name}, Sale Option: {product.sale_option}, Size Prices: {size_prices}")
+
     context = {
         "product": product,
         "reviews": reviews,
         "avg_rating": avg_rating,
         "base_price": base_price,
-        "size_prices": size_prices if size_prices else None,  # Passa size_prices apenas se não for vazio
-        "stars_range": range(1, 6),  # Usado para representar estrelas no template
+        "size_prices": size_prices,  # Passa sempre, mesmo que vazio
+        "stars_range": range(1, 6),
         'truffled_flavors': truffled_flavors,
         'traditional_flavors': traditional_flavors,
     }
