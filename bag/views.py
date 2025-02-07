@@ -2,17 +2,21 @@ from django.shortcuts import render, redirect, reverse, HttpResponse, get_object
 from django.contrib import messages
 from products.models import Product, Flavor
 from decimal import Decimal
+from django.http import JsonResponse
 
-def view_bag(request):
-    """ A view that renders the bag contents page """
 
-    return render(request, 'bag/bag.html')
 
 
 
 def view_bag(request):
     """ A view that renders the bag contents page """
-    return render(request, 'bag/bag.html')
+    bag = request.session.get('bag', {})
+    product_count = sum(item['quantity'] for item in bag.values()) if bag else 0
+    
+    return render(request, 'bag/bag.html', {'product_count': product_count})
+
+
+
 
 
 
@@ -22,123 +26,128 @@ def add_to_bag(request, item_id):
         quantity = int(request.POST.get('quantity', 0))
         quantity_kilo = float(request.POST.get('quantity_kilo', 0))
         redirect_url = request.POST.get('redirect_url', '/')
-
-        print(f"Adding to bag - Item ID: {item_id}, Quantity: {quantity}, Quantity Kilo: {quantity_kilo}")
+        edit_mode = request.POST.get('edit_mode', 'false') == 'true'
+        item_key = request.POST.get('item_key', None)  # Pega o item_key caso esteja editando
 
         product = get_object_or_404(Product, id=item_id)
-        print(f"Product found: {product.name}, Price: {product.price}")
-
         flavor = None
         flavor_id = request.POST.get('flavor')
         if flavor_id:
             flavor = get_object_or_404(Flavor, id=flavor_id)
-            print(f"Flavor selected: {flavor.name}")
 
         size = request.POST.get('size', "standard")
-        print(f"Size selected: {size}")
-
         topper_text = request.POST.get('topper_text', None)
         roses_quantity = int(request.POST.get('roses_quantity', 0))
-        print(f"Topper text: {topper_text}, Roses quantity: {roses_quantity}")
 
-       
-
-
-        # Calcular o preço total
         total_price = product.calculate_total_price(
-            quantity, quantity_kilo, size=size, flavor=flavor, 
+            quantity, quantity_kilo, size=size, flavor=flavor,
             topper_text=topper_text, roses_quantity=roses_quantity
         )
-        print(f"Total price calculated: {total_price}")
 
         bag = request.session.get('bag', {})
 
-        if item_id in bag:
-            bag[item_id]['quantity'] += quantity
-            bag[item_id]['quantity_kilo'] += quantity_kilo
-            bag[item_id]['total_price'] = float(total_price)
-            bag[item_id]['flavor'] = flavor.name if flavor else None
-            print(f"Updated existing item in bag: {bag[item_id]}")
+        # Criar um novo item key com todas as propriedades para identificar itens únicos
+        new_item_key = f"{item_id}_size_{size}_flavor_{flavor_id if flavor else 'none'}_topper_{topper_text}_roses_{roses_quantity}"
+
+        if edit_mode and item_key in bag:
+            # Guarda os dados do item que está sendo editado
+            edited_item = bag.pop(item_key)
+
+            # Se o item editado já existe, atualiza a quantidade
+            if new_item_key in bag:
+                bag[new_item_key]['quantity'] += quantity
+                bag[new_item_key]['quantity_kilo'] += quantity_kilo
+                bag[new_item_key]['total_price'] = float(total_price)
+                messages.success(request, f"Updated {product.name} and merged with existing item in your bag!")
+            else:
+                bag[new_item_key] = {
+                    'product_id': product.id,
+                    'quantity': quantity,
+                    'quantity_kilo': quantity_kilo,
+                    'total_price': float(total_price),
+                    'product_name': product.name,
+                    'flavor': flavor.name if flavor else None,
+                    'size': size,
+                    'topper_text': topper_text,
+                    'roses_quantity': roses_quantity,
+                }
+                messages.success(request, f"Updated {product.name} in your bag!")
         else:
-            bag[item_id] = {
-                'quantity': quantity,
-                'quantity_kilo': quantity_kilo,
-                'total_price': float(total_price),
-                'product_name': product.name,
-                'flavor': flavor.name if flavor else None,
-                'size': size,
-                'topper_text': topper_text,
-                'roses_quantity': roses_quantity,
-            }
-            print(f"Added new item to bag: {bag[item_id]}")
+            # Se o item não está sendo editado, apenas adiciona um novo item
+            if new_item_key in bag:
+                bag[new_item_key]['quantity'] += quantity
+                bag[new_item_key]['quantity_kilo'] += quantity_kilo
+                bag[new_item_key]['total_price'] = float(total_price)
+                messages.success(request, f"Updated {product.name} in your bag!")
+            else:
+                bag[new_item_key] = {
+                    'product_id': product.id,
+                    'quantity': quantity,
+                    'quantity_kilo': quantity_kilo,
+                    'total_price': float(total_price),
+                    'product_name': product.name,
+                    'flavor': flavor.name if flavor else None,
+                    'size': size,
+                    'topper_text': topper_text,
+                    'roses_quantity': roses_quantity,
+                }
+                messages.success(request, f"Added {product.name} to your bag!")
 
         request.session['bag'] = bag
-        print(f"Updated session bag: {bag}")
-
-        messages.success(request, f"Added  {product.name} to your bag!")
+        request.session['product_count'] = sum(item['quantity'] for item in bag.values())
 
         return redirect(redirect_url)
 
     except Exception as e:
-        print(f"Error in add_to_bag: {e}")
-        messages.error(request, "Failed to add item to the bag. Please try again.")
+        messages.error(request, "Failed to add/update item in the bag.")
         return redirect(request.POST.get('redirect_url', '/'))
 
 
-def clear_bag(request):
-    """Remove apenas o carrinho (bag) da sessão."""
-    if 'bag' in request.session:
-        del request.session['bag']  # Remove a chave 'bag' da sessão
-        # Opcional: Atualizar a sessão explicitamente para garantir que a alteração seja salva
-        request.session.modified = True
 
-    # Redirecionar o usuário para a página do carrinho ou outra página desejada
-    return redirect('view_bag')  # Substitua 'view_bag' pelo nome da URL do carrinho
 
-def adjust_bag(request, item_id):
-    """Adjust the quantity of the specified product in the shopping bag with toast messages"""
+def adjust_bag(request, item_key):
     try:
-        product = get_object_or_404(Product, pk=item_id)
+        product = get_object_or_404(Product, pk=item_key)
         quantity = int(request.POST.get('quantity', 0))
         quantity_kilo = float(request.POST.get('quantity_kilo', 0))
         size = request.POST.get('size')
         bag = request.session.get('bag', {})
 
-        if str(item_id) in bag:
+        if item_key in bag:
             if product.sale_option == "size":
                 if size:
                     if quantity > 0:
-                        bag[str(item_id)]['quantity'] = quantity
-                        bag[str(item_id)]['size'] = size
+                        bag[item_key]['quantity'] = quantity
+                        bag[item_key]['size'] = size
                         messages.success(request, f'Updated size {size.upper()} {product.name} quantity to {quantity}')
                     else:
-                        del bag[str(item_id)]
+                        del bag[item_key]
                         messages.success(request, f'Removed size {size.upper()} {product.name} from your bag')
                 else:
-                    existing_size = bag[str(item_id)].get('size')
+                    existing_size = bag[item_key].get('size')
                     if existing_size:
                         if quantity > 0:
-                            bag[str(item_id)]['quantity'] = quantity
+                            bag[item_key]['quantity'] = quantity
                             messages.success(request, f'Updated size {existing_size.upper()} {product.name} quantity to {quantity}')
                         else:
-                            del bag[str(item_id)]
+                            del bag[item_key]
                             messages.success(request, f'Removed size {existing_size.upper()} {product.name} from your bag')
                     else:
                         messages.error(request, "Size is required for this product.")
                         return redirect(reverse('view_bag'))
             elif product.sale_option == "kilo":
                 if quantity_kilo > 0:
-                    bag[str(item_id)]['quantity_kilo'] = quantity_kilo
+                    bag[item_key]['quantity_kilo'] = quantity_kilo
                     messages.success(request, f'Updated {product.name} quantity to {quantity_kilo:.2f} kg')
                 else:
-                    del bag[str(item_id)]
+                    del bag[item_key]
                     messages.success(request, f'Removed {product.name} from your bag')
             else:  # "unit" or "piece"
                 if quantity > 0:
-                    bag[str(item_id)]['quantity'] = quantity
+                    bag[item_key]['quantity'] = quantity
                     messages.success(request, f'Updated {product.name} quantity to {quantity}')
                 else:
-                    del bag[str(item_id)]
+                    del bag[item_key]
                     messages.success(request, f'Removed {product.name} from your bag')
         else:
             messages.error(request, f"{product.name} is not in your bag.")
@@ -151,17 +160,42 @@ def adjust_bag(request, item_id):
         messages.error(request, f"Error adjusting your bag: {str(e)}")
         return redirect(reverse('view_bag'))
 
-def remove_from_bag(request, item_key):
-    """Remove the item from the shopping bag"""
-    try:
-        bag = request.session.get('bag', {})
-
-        if item_key in bag:
-            del bag[item_key]  # Remove o item
-
-        request.session['bag'] = bag  # Atualiza a sessão com o carrinho modificado
-        return HttpResponse(status=200)
     
-    except Exception as e:
-        messages.error(request, "Erro ao remover item do carrinho.")
-        return HttpResponse(status=500)
+from django.shortcuts import redirect
+
+def remove_from_bag(request, item_key):
+    bag = request.session.get('bag', {})
+
+    if item_key in bag:
+        item = bag[item_key]
+        quantity_removed = item['quantity']
+        del bag[item_key]
+        request.session['bag'] = bag  # Atualiza a sessão
+        
+        # Atualiza o product_count na sessão
+        product_count = sum(item['quantity'] for item in bag.values())
+        request.session['product_count'] = product_count
+
+        messages.success(request, f"Removed item from your bag.")
+    else:
+        messages.error(request, f"Error removing item: Item not found in bag.")
+
+    return redirect('view_bag')  # Redireciona para a página do carrinho
+
+
+
+
+def product_detail(request, id):
+    product = get_object_or_404(Product, id=id)
+    
+    # Passa o produto para o template
+    return render(request, 'products/product_detail.html', {'product': product})
+def clear_bag(request):
+    """Remove apenas o carrinho (bag) da sessão."""
+    if 'bag' in request.session:
+        del request.session['bag']  # Remove a chave 'bag' da sessão
+        # Opcional: Atualizar a sessão explicitamente para garantir que a alteração seja salva
+        request.session.modified = True
+
+    # Redirecionar o usuário para a página do carrinho ou outra página desejada
+    return redirect('view_bag')  # Substitua 'view_bag' pelo nome da URL do carrinho

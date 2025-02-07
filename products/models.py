@@ -161,12 +161,18 @@ class Product(models.Model):
         if self.has_topper:
             return Decimal('8.00')  # Preço do topper
         return Decimal('0.00')  # Sem topper
+    
+     
 
-    def get_roses_price(self, roses_quantity):
-        """Retorna o preço das rosas com base na quantidade."""
+    def get_roses_price(self, roses_quantity, return_individual=False):
+        """Retorna o preço das rosas com base na quantidade e, opcionalmente, o valor individual por rosa."""
+        individual_price = Decimal('5.00')  # Preço por rosa
         if self.has_roses:
-            return Decimal('5.00') * Decimal(roses_quantity)  # Preço por rosa
-        return Decimal('0.00')  # Sem rosas
+            if return_individual:
+                return individual_price  # Retorna o preço individual
+            return individual_price * Decimal(roses_quantity)  # Preço total
+        return Decimal('0.00')
+
 class Review(models.Model):
     product = models.ForeignKey("Product", on_delete=models.CASCADE, related_name="reviews")
     rating = models.IntegerField(

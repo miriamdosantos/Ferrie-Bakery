@@ -55,7 +55,11 @@
 
                 <!-- Formulário para Adicionar ao Carrinho -->
                 <form method="POST" action="{% url 'add_to_bag' product.id %}">
+
                     {% csrf_token %}
+                    <input type="hidden" name="edit_mode" value="{{ request.GET.edit_mode }}">
+                    <input type="hidden" name="item_key" value="{{ request.GET.item_key }}">
+
                     <div class="form-group mt-4">
                         <!-- Sabores -->
                         {% if truffled_flavors or traditional_flavors %}
@@ -69,6 +73,7 @@
                                 {% endfor %}
                             </optgroup>
                             {% endif %}
+
                             {% if traditional_flavors %}
                             <optgroup label="Traditional Flavors">
                                 {% for flavor in traditional_flavors %}
@@ -76,6 +81,7 @@
                                 {% endfor %}
                             </optgroup>
                             {% endif %}
+
                         </select>
                         {% else %}
                         <p>{% trans "No flavors available." %}</p>

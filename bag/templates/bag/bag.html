@@ -17,107 +17,98 @@
     <div class="row">
         <div class="col">
             {% if bag_items %}
-            <div class="table-responsive rounded" style="background-color: #A8E6CF;">
+            <div class="table-responsive rounded" style="background-color: #f8e6e660; ">
                 <table class="table table-sm table-borderless p-4 mt-3">
                     <thead class="text-black">
                         <tr>
-                            <th scope="col">{% trans "Product Info" %}</th>
-                            <th scope="col"></th>
-                            <th scope="col">{% trans "Price" %}</th>
-                            <th scope="col">{% trans "Qty" %}</th>
-                            <th scope="col">{% trans "Subtotal" %}</th>
+                            <th scope="col" class="align-middle">{% trans "Product Info" %}</th>
+                            <th scope="col" class="align-middle"></th>
+                            <th scope="col" class="align-middle">{% trans "Price" %}</th>
+                            <th scope="col" class="align-middle">{% trans "" %}</th>
+                            <th scope="col" class="align-middle">{% trans "" %}</th>
+                            <th scope="col" class="align-middle">{% trans "Subtotal" %}</th>
+                            <th scope="col" class="align-middle"></th>
                         </tr>
                     </thead>
 
                     {% for item in bag_items %}
                     <tr>
-                        <!-- Imagem do Produto -->
                         <td class="p-3 w-25">
-                            {% if item.product.image %}
-                            <img class="img-fluid rounded" src="{{ item.product.image.url }}"
-                                alt="{{ item.product.name }}">
+                            {% if item.image %}
+                            <img class="img-fluid rounded" src="{{ item.image }}" alt="{{ item.product.name }}">
                             {% else %}
                             <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png"
                                 alt="{{ item.product.name }}">
                             {% endif %}
                         </td>
 
-                        <!-- Informações do Produto -->
                         <td class="py-3">
-                            <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                            {% if item.quantity %}
+                            <span class="my-0"><strong> {{ item.quantity }} X </strong></span>
+                            {% endif %}
+                            <span class="my-0"><strong>{{ item.product.name }}</strong></span>
+
                             {% if item.size %}
-                            <p class="my-0 small">{% trans "Size" %}: {{ item.size }}</p>
+                            <p class="my-0 ">{% trans "Size" %}: {{ item.size }}</p>
                             {% endif %}
                             {% if item.flavor %}
-                            <p class="my-0 small">{% trans "Flavor" %}: {{ item.flavor }}</p>
+                            <p class="my-0 ">{% trans "Flavor" %}: {{ item.flavor.name }}</p>
+                            {% endif %}
+                            {% if item.quantity_kilo %}
+                            <p class="my-0 ">{% trans "Quantity Kilo" %}: {{ item.quantity_kilo}}Kg
+                                {% endif %}
+                            </p>
+                            {% if item.roses_quantity > 0 %}
+                            <p class="my-0 ">{% trans "Roses Quantity" %}: {{ item.roses_quantity }}
+                                (each ${{ item.roses_price_each }} - total ${{ item.roses_price }})
+                            </p>
                             {% endif %}
                             {% if item.topper_text %}
-                            <p class="my-0 small">{% trans "Topper" %}: {{ item.topper_text }} $ 8.00 for {% trans
-                                "Topper" %}</p>
+                            <p class="my-0 ">{% trans "Topper Text" %}: ${{ item.topper_price }} - <small>{% trans " Text " %}:({{ item.topper_text }})</small>
+                            </p>
                             {% endif %}
-                            {% if item.roses_quantity %}
-                            <p class="my-0 small">{% trans "Roses" %}: {{ item.roses_quantity }} $ 5.00 each</p>
-                            {% endif %}
+
+
                         </td>
+
 
                         <td class="py-3">
                             <p class="my-0">
-                                ${{ item.product.price|floatformat:2 }} <!-- Sempre mostra o preço base -->
-                                {% if item.product.sale_option %}
-                                {% if item.product.sale_option == "unit" %}
-                                {% trans "Per Unit" %}
-                                {% elif item.product.sale_option == "hundred" %}
-                                {% trans "Per Hundred" %}
+                                {% if item.product.sale_option == "kilo" and item.is_truffled %}
+                                ${{ 75.00|floatformat:2 }} {% trans "Truffled Per Kilo" %}
                                 {% elif item.product.sale_option == "kilo" %}
-                                {% trans "Per Kilo" %}
+                                ${{ item.product.price|floatformat:2 }} {% trans "Traditional Per Kilo" %}
+                                {% elif item.product.sale_option == "size" and item.size %}
+                                ${{ item.price|floatformat:2 }} {% trans "By Size " %} ({{item.size}})
+
+                                {% elif item.product.sale_option == "unit" %}
+                                ${{ item.product.price|floatformat:2 }} {% trans "Per Unit" %}
+                                {% elif item.product.sale_option == "hundred" %}
+                                ${{ item.product.price|floatformat:2 }} {% trans "Per Hundred" %}
                                 {% elif item.product.sale_option == "piece" %}
-                                {% trans "Per Piece" %}
-                                {% elif item.product.sale_option == "size" %}
-                                {% trans "By Size (Small, Medium, Large)" %}
-                                {% endif %}
+                                ${{ item.product.price|floatformat:2 }} {% trans "Per Piece" %}
+                                {% else %}
+                                ${{ item.product.price|floatformat:2 }}
                                 {% endif %}
                             </p>
                         </td>
 
 
-                        <!-- Quantidade -->
-                        <td class="py-3 w-25">
-                            <form class="form update-form" method="POST" action="{% url 'adjust_bag' item.item_key %}">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <button class="decrement-qty btn btn-sm btn-black rounded-0"
-                                                data-item_id="{{ item.item_key }}"
-                                                id="decrement-qty_{{ item.item_key }}">
-                                                <span><i class="fas fa-minus fa-sm"></i></span>
-                                            </button>
-                                        </div>
-                                        <input class="form-control form-control-sm qty_input" type="number"
-                                            name="quantity" value="{{ item.quantity }}" min="1" max="99"
-                                            data-item_id="{{ item.item_key }}" id="id_qty_{{ item.item_key }}">
-                                        <div class="input-group-append">
-                                            <button class="increment-qty btn btn-sm btn-black rounded-0"
-                                                data-item_id="{{ item.item_key }}"
-                                                id="increment-qty_{{ item.item_key }}">
-                                                <span><i class="fas fa-plus fa-sm"></i></span>
-                                            </button>
-                                        </div>
-                                        {% if item.product.has_sizes %}
-                                        <input type="hidden" name="size" value="{{ item.size }}">
 
-                                        {% endif %}
-                                    </div>
-                                </div>
+                        <!-- Botões Editar e Remover -->
+                        <td class="py-3">
+                            <a href="{% url 'product_detail' item.product.id %}?edit_mode=true&item_key={{ item.item_key }}"
+                                class="btn btn-secondary btn-sm">Edit</a>
+
+                        <td class="py-3">
+                            <form method="post" action="{% url 'remove_item' item.item_key %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                             </form>
-                            <a class="update-link text-info"><small>Update</small></a>
-                            <a class="remove-item text-danger float-right" id="remove_{{ item.item_key }}"
-                                data-product_size="{{ item.size }}"><small>Remove</small></a>
                         </td>
 
-                        <!-- Subtotal -->
                         <td class="py-3">
-                            <p class="my-0">${{ item.total_price|floatformat:2 }}</p>
+                            R$ {{ item.subtotal }}
                         </td>
                     </tr>
                     {% endfor %}
@@ -126,8 +117,9 @@
                     <tr>
                         <td colspan="5" class="pt-5 text-right">
                             <h6><strong>{% trans "Bag Total" %}: ${{ total|floatformat:2 }}</strong></h6>
-                            <h6>{% trans "Delivery" %}: ${{ delivery|floatformat:2 }}</h6>
-                            <h4 class="mt-4"><strong>{% trans "Grand Total" %}: ${{ grand_total|floatformat:2}}</strong></h4>
+                            <h6>{% trans "Delivery" %}: ${{delivery|floatformat:2}}</h6>
+                            <h4 class="mt-4"><strong>{% trans "Grand Total" %}: ${{ grand_total|floatformat:2}}</strong>
+                            </h4>
                             {% if free_delivery_delta > 0 %}
                             <p class="mb-1 text-danger">
                                 {% trans "You could get free delivery by spending just" %} <strong>${{
@@ -174,6 +166,7 @@
             </form>
         </div>
     </div>
+
 </main>
 {% endblock %}
 
@@ -183,24 +176,50 @@
 
 <script type="text/javascript">
     // Update quantity on click
+    // Update quantity on click
     $('.update-link').click(function (e) {
-        var form = $(this).prev('.update-form');
+        e.preventDefault();
+        var form = $(this).closest('.update-form');
         form.submit();
     });
 
     // Remove item and reload on click
-    $('.remove-item').click(function(e) {
-    var csrfToken = "{{ csrf_token }}";
-    var itemId = $(this).attr('id').split('remove_')[1];
-    var size = $(this).data('product_size');
-    var url = `/bag/remove/${itemId}/`;
-    var data = {'csrfmiddlewaretoken': csrfToken, 'size': size};
+    $(document).ready(function () {
+        $('.remove-item').click(function (e) {
+            e.preventDefault();
 
-    $.post(url, data)
-     .done(function() {
-         location.reload();
-     });
-})
+            // Captura o botão e a chave do item
+            var $button = $(this);
+            var itemKey = $button.data('item_key');
+
+            // Depuração
+            console.log("Item Key:", itemKey);  // Verifique se o itemKey está correto
+
+            if (!itemKey) {
+                console.error("Erro: itemKey não encontrado.");
+                return;
+            }
+
+            var csrfToken = "{{ csrf_token }}";  // Token CSRF
+
+            // URL para remover o item
+            var url = `/bag/remove/${itemKey}/`;
+
+            $.post(url, { csrfmiddlewaretoken: csrfToken })
+                .done(function () {
+                    location.reload();  // Recarrega a página após remover o item
+                })
+                .fail(function () {
+                    alert("Erro ao remover o item!");
+                    console.error("Erro ao remover item:", itemKey);
+                });
+        });
+    });
+
+
 
 </script>
+
+
+
 {% endblock %}
