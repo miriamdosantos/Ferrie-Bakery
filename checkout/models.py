@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import Sum
 from django.conf import settings
-from products.models import Product
+from products.models import Product, Flavor
 import uuid
 
 class Order(models.Model):
@@ -50,7 +50,7 @@ class OrderLineItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     size = models.CharField(max_length=20, choices=Product.SIZE_CHOICES, null=True, blank=True)
-    flavor = models.ForeignKey('Flavor', null=True, blank=True, on_delete=models.SET_NULL)
+    flavor = models.ForeignKey(Flavor, null=True, blank=True, on_delete=models.SET_NULL)
     topper_text = models.CharField(max_length=255, null=True, blank=True)
     roses_quantity = models.PositiveIntegerField(default=0)
     lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
