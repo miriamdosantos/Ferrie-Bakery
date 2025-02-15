@@ -4,6 +4,7 @@ charset-normalizer==3.4.0
 defusedxml==0.7.1
 Django==5.1.4
 django-allauth==65.3.0
+django-crispy-forms==1.14.0
 django-modeltranslation==0.19.11
 gunicorn==23.0.0
 idna==3.10
