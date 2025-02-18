@@ -32,15 +32,17 @@ class Order(models.Model):
         else:
             self.delivery_cost = 0
         self.grand_total = self.order_total + self.delivery_cost
-        self.save()
+        self.save(update_fields=['order_total', 'delivery_cost', 'grand_total'])
 
     def save(self, *args, **kwargs):
         """Override the original save method to set the order number if it hasn't been set already."""
         if not self.order_number:
             self.order_number = self._generate_order_number()
         super().save(*args, **kwargs)
-        self.update_total()
-
+        # Call update_total() only if it's a new instance
+        if kwargs.get('force_insert', False):
+            self.update_total()
+    
     def __str__(self):
         return self.order_number
 
@@ -49,21 +51,32 @@ class OrderLineItem(models.Model):
     order = models.ForeignKey(Order, related_name="lineitems", on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+    quantity_kilo = models.DecimalField(max_digits=6, decimal_places=3, default=0)  # Novo campo
     size = models.CharField(max_length=20, choices=Product.SIZE_CHOICES, null=True, blank=True)
     flavor = models.ForeignKey(Flavor, null=True, blank=True, on_delete=models.SET_NULL)
+    is_truffled = models.BooleanField(default=False)  # Novo campo
     topper_text = models.CharField(max_length=255, null=True, blank=True)
     roses_quantity = models.PositiveIntegerField(default=0)
     lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
 
     def save(self, *args, **kwargs):
-        """Override the original save method to set the lineitem total."""
-        # Calculate line item total before saving
+        """Override the original save method to set the lineitem total and update the order total."""
         self.lineitem_total = self.product.calculate_total_price(
-            self.quantity, size=self.size, flavor=self.flavor, topper_text=self.topper_text, roses_quantity=self.roses_quantity
+            self.quantity, 
+            quantity_kilo=self.quantity_kilo,
+            size=self.size, 
+            flavor=self.flavor, 
+            topper_text=self.topper_text, 
+            roses_quantity=self.roses_quantity,
+            is_truffled=self.is_truffled
         )
         super().save(*args, **kwargs)
-        # Update the order total after saving the line item
-        self.order.update_total()
+        if self.order:
+            self.order.update_total()
+
+
+    
+
 
     def __str__(self):
         return f"{self.quantity} x {self.product.name}"

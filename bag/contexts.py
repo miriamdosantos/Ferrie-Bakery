@@ -11,19 +11,21 @@ def bag_contents(request):
     for item_key, item_data in bag.items():
         print(f"Item Key: {item_key}, Item Data: {item_data}")  # Depuração
 
-        # Verificar se o item tem o 'product_id'
-        product_id = item_data.get('product_id')
-        if not product_id:
-            print(f"Item no carrinho sem product_id: {item_data}")
-            continue  # Ignora esse item se não tiver product_id
+        # Extraímos o ID do produto da chave do item (a chave contém o ID, tamanho e sabor)
+        item_key_parts = item_key.split('_')
+        product_id = item_key_parts[0]  # O ID é a primeira parte da chave
 
         try:
-            product = Product.objects.get(id=product_id)  # Tenta recuperar o produto pelo ID
+            # Garante que estamos buscando o produto correto, já que o ID é um número.
+            product = Product.objects.get(id=int(product_id))  # Convertendo para int para garantir que seja um número
         except Product.DoesNotExist:
             print(f"Produto com ID {product_id} não encontrado.")
             continue
         except Product.MultipleObjectsReturned:
             print(f"Erro: Múltiplos produtos com ID {product_id} encontrados.")
+            continue
+        except ValueError:
+            print(f"Erro de valor: ID do produto '{product_id}' não é válido.")
             continue
         except Exception as e:
             print(f"Erro inesperado ao buscar produto {product_id}: {e}")
@@ -40,6 +42,8 @@ def bag_contents(request):
                 is_truffled = flavor.is_truffled  # Pega o atributo is_trufado do Flavor
             except Flavor.DoesNotExist:
                 print(f"Sabor com nome '{flavor_name}' não encontrado.")
+
+        # Condicional de preço com base na opção de tamanho
         if product.sale_option == "size" and item_data.get("size"):
             price = product.calculate_price_by_size(item_data["size"])
         else:
@@ -59,7 +63,9 @@ def bag_contents(request):
             quantity_kilo=quantity_kilo,
             flavor=flavor,
             topper_text=topper_text,
-            roses_quantity=roses_quantity
+            roses_quantity=roses_quantity,
+            is_truffled=is_trufado  # Adicione esta linha
+
         )
 
         # Recuperar preços do topper e das rosas com métodos do produto
@@ -81,7 +87,7 @@ def bag_contents(request):
             'size': size,
             "price": Decimal(price), 
             'flavor': flavor,
-            'is_truffled': is_truffled, 
+            'is_truffled': is_trufado, 
             'topper_text': topper_text,  # Garante que topper_text seja passado
             'roses_quantity': roses_quantity,  # Garante que roses_quantity seja passado
             'image': image_url,

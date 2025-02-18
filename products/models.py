@@ -107,7 +107,7 @@ class Product(models.Model):
         """Calcula o preço com base no tamanho selecionado."""
         return self.SIZE_PRICES.get(size, self.price)  # Retorna o preço baseado no tamanho ou o preço padrão se não encontrado
 
-    def calculate_total_price(self, quantity, quantity_kilo=0, size=None, flavor=None, topper_text=None, roses_quantity=0):
+    def calculate_total_price(self, quantity, quantity_kilo=0, size=None, flavor=None, topper_text=None, roses_quantity=0, is_truffled=False):
         base_price = Decimal(self.price)
         print(f"Base price: {base_price}")
 
