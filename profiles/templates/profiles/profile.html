@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="container mb-4">
+    <div class="row mt-5">
+        <div class="col-12 mt-5">
+            <h1 class="text-center"
+                style="color:#FF13A4; text-shadow: 5px 5px 15px #17010e73; font-weight: bold; text-decoration: underline;">
+                {% trans "My Profile" %}
+            </h1>
+        </div>
+    </div>
+{% endblock %}
+</main>
+
