@@ -39,6 +39,8 @@
 
 
 
+
+
 .stripe-element-wrapper {
     border: 5px solid #ccc;
     border-radius: 4px;
@@ -67,4 +69,14 @@
     justify-content: center;
     margin: 0;
     height: 100%;
+}
+
+select,
+select option {
+    color: #000000;
+}
+
+select:invalid,
+select option[value=""] {
+    color: #aab7c4 !important;
 }
