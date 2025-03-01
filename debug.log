@@ -556,3 +556,8 @@ Webhook received: payment_intent.succeeded | ERROR: NOT NULL constraint failed: 
 Internal Server Error: /checkout/wh/
 C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py changed, reloading.
 Watching for file changes with StatReloader
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\products\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\products\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
