@@ -1,0 +1,459 @@
+Watching for file changes with StatReloader
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\ferrie_bakery\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /checkout/wh/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 170, in __getattr__
+    return self[k]
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 212, in __getitem__
+    raise err
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 200, in __getitem__
+    return super(StripeObject, self).__getitem__(k)
+KeyError: 'bag'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhooks.py", line 55, in webhook
+    response = event_handler(event)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py", line 53, in handle_payment_intent_succeeded
+    bag = intent.metadata.bag
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 172, in __getattr__
+    raise AttributeError(*err.args) from err
+AttributeError: bag
+Watching for file changes with StatReloader
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py changed, reloading.
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/payment_intents
+api_version=2025-01-27.acacia message='Post details' post_data=amount=15000&currency=usd
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/payment_intents HTTP/11" 200 1511
+message='Stripe API response' path=https://api.stripe.com/v1/payment_intents response_code=200
+body='{\n  "id": "pi_3QxnQbJ0NE1ts5c21Z6j6WZV",\n  "object": "payment_intent",\n  "amount": 15000,\n  "amount_capturable": 0,\n  "amount_details": {\n    "tip": {}\n  },\n  "amount_received": 0,\n  "application": null,\n  "application_fee_amount": null,\n  "automatic_payment_methods": {\n    "allow_redirects": "always",\n    "enabled": true\n  },\n  "canceled_at": null,\n  "cancellation_reason": null,\n  "capture_method": "automatic_async",\n  "client_secret": "pi_3QxnQbJ0NE1ts5c21Z6j6WZV_secret_g2o09P8ubFQPRGRJW9moeiGDk",\n  "confirmation_method": "automatic",\n  "created": 1740825473,\n  "currency": "usd",\n  "customer": null,\n  "description": null,\n  "invoice": null,\n  "last_payment_error": null,\n  "latest_charge": null,\n  "livemode": false,\n  "metadata": {},\n  "next_action": null,\n  "on_behalf_of": null,\n  "payment_method": null,\n  "payment_method_configuration_details": {\n    "id": "pmc_1QsmdAJ0NE1ts5c2ytHvjKCH",\n    "parent": null\n  },\n  "payment_method_options": {\n    "card": {\n      "installments": null,\n      "mandate_options": null,\n      "network": null,\n      "request_three_d_secure": "automatic"\n    },\n    "link": {\n      "persistent_token": null\n    }\n  },\n  "payment_method_types": [\n    "card",\n    "link"\n  ],\n  "processing": null,\n  "receipt_email": null,\n  "review": null,\n  "setup_future_usage": null,\n  "shipping": null,\n  "source": null,\n  "statement_descriptor": null,\n  "statement_descriptor_suffix": null,\n  "status": "requires_payment_method",\n  "transfer_data": null,\n  "transfer_group": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_E1J0rvDa9xv91H message='Dashboard link for request'
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/payment_intents/pi_3QxnQbJ0NE1ts5c21Z6j6WZV
+api_version=2025-01-27.acacia message='Post details' post_data=metadata[bag]=%7B%224_size_standard_flavor_15_topper_None_roses_0%22%3A+%7B%22product_id%22%3A+4%2C+%22quantity%22%3A+1%2C+%22quantity_kilo%22%3A+2.0%2C+%22total_price%22%3A+150.0%2C+%22product_name%22%3A+%22Birthday+Cake%22%2C+%22flavor%22%3A+%22White+Chocolate+Ganache%22%2C+%22size%22%3A+%22standard%22%2C+%22topper_text%22%3A+null%2C+%22roses_quantity%22%3A+0%7D%7D&metadata[save_info]=true&metadata[username]=miriammccay
+https://api.stripe.com:443 "POST /v1/payment_intents/pi_3QxnQbJ0NE1ts5c21Z6j6WZV HTTP/11" 200 1869
+message='Stripe API response' path=https://api.stripe.com/v1/payment_intents/pi_3QxnQbJ0NE1ts5c21Z6j6WZV response_code=200
+body='{\n  "id": "pi_3QxnQbJ0NE1ts5c21Z6j6WZV",\n  "object": "payment_intent",\n  "amount": 15000,\n  "amount_capturable": 0,\n  "amount_details": {\n    "tip": {}\n  },\n  "amount_received": 0,\n  "application": null,\n  "application_fee_amount": null,\n  "automatic_payment_methods": {\n    "allow_redirects": "always",\n    "enabled": true\n  },\n  "canceled_at": null,\n  "cancellation_reason": null,\n  "capture_method": "automatic_async",\n  "client_secret": "pi_3QxnQbJ0NE1ts5c21Z6j6WZV_secret_g2o09P8ubFQPRGRJW9moeiGDk",\n  "confirmation_method": "automatic",\n  "created": 1740825473,\n  "currency": "usd",\n  "customer": null,\n  "description": null,\n  "invoice": null,\n  "last_payment_error": null,\n  "latest_charge": null,\n  "livemode": false,\n  "metadata": {\n    "bag": "{\\"4_size_standard_flavor_15_topper_None_roses_0\\": {\\"product_id\\": 4, \\"quantity\\": 1, \\"quantity_kilo\\": 2.0, \\"total_price\\": 150.0, \\"product_name\\": \\"Birthday Cake\\", \\"flavor\\": \\"White Chocolate Ganache\\", \\"size\\": \\"standard\\", \\"topper_text\\": null, \\"roses_quantity\\": 0}}",\n    "save_info": "true",\n    "username": "miriammccay"\n  },\n  "next_action": null,\n  "on_behalf_of": null,\n  "payment_method": null,\n  "payment_method_configuration_details": {\n    "id": "pmc_1QsmdAJ0NE1ts5c2ytHvjKCH",\n    "parent": null\n  },\n  "payment_method_options": {\n    "card": {\n      "installments": null,\n      "mandate_options": null,\n      "network": null,\n      "request_three_d_secure": "automatic"\n    },\n    "link": {\n      "persistent_token": null\n    }\n  },\n  "payment_method_types": [\n    "card",\n    "link"\n  ],\n  "processing": null,\n  "receipt_email": null,\n  "review": null,\n  "setup_future_usage": null,\n  "shipping": null,\n  "source": null,\n  "statement_descriptor": null,\n  "statement_descriptor_suffix": null,\n  "status": "requires_payment_method",\n  "transfer_data": null,\n  "transfer_group": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_JF7fOTEP4IOGG5 message='Dashboard link for request'
+Signal triggered: update_on_save for OrderLineItem 23
+Processing payment_intent.succeeded: pi_3QxnQbJ0NE1ts5c21Z6j6WZV
+Intent metadata: {
+  "bag": "{\"4_size_standard_flavor_15_topper_None_roses_0\": {\"product_id\": 4, \"quantity\": 1, \"quantity_kilo\": 2.0, \"total_price\": 150.0, \"product_name\": \"Birthday Cake\", \"flavor\": \"White Chocolate Ganache\", \"size\": \"standard\", \"topper_text\": null, \"roses_quantity\": 0}}",
+  "save_info": "true",
+  "username": "miriammccay"
+}
+Internal Server Error: /checkout/wh/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 170, in __getattr__
+    return self[k]
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 212, in __getitem__
+    raise err
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 200, in __getitem__
+    return super(StripeObject, self).__getitem__(k)
+KeyError: 'charges'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhooks.py", line 55, in webhook
+    response = event_handler(event)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py", line 63, in handle_payment_intent_succeeded
+    stripe_charge = intent.charges.data[0]
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 172, in __getattr__
+    raise AttributeError(*err.args) from err
+AttributeError: charges
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py changed, reloading.
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py changed, reloading.
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/payment_intents
+api_version=2025-01-27.acacia message='Post details' post_data=amount=5000&currency=usd
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/payment_intents HTTP/11" 200 1510
+message='Stripe API response' path=https://api.stripe.com/v1/payment_intents response_code=200
+body='{\n  "id": "pi_3QxoKmJ0NE1ts5c21CFK9kkv",\n  "object": "payment_intent",\n  "amount": 5000,\n  "amount_capturable": 0,\n  "amount_details": {\n    "tip": {}\n  },\n  "amount_received": 0,\n  "application": null,\n  "application_fee_amount": null,\n  "automatic_payment_methods": {\n    "allow_redirects": "always",\n    "enabled": true\n  },\n  "canceled_at": null,\n  "cancellation_reason": null,\n  "capture_method": "automatic_async",\n  "client_secret": "pi_3QxoKmJ0NE1ts5c21CFK9kkv_secret_hQ3A3AD63AMQHHHTnbCbRZUSQ",\n  "confirmation_method": "automatic",\n  "created": 1740828956,\n  "currency": "usd",\n  "customer": null,\n  "description": null,\n  "invoice": null,\n  "last_payment_error": null,\n  "latest_charge": null,\n  "livemode": false,\n  "metadata": {},\n  "next_action": null,\n  "on_behalf_of": null,\n  "payment_method": null,\n  "payment_method_configuration_details": {\n    "id": "pmc_1QsmdAJ0NE1ts5c2ytHvjKCH",\n    "parent": null\n  },\n  "payment_method_options": {\n    "card": {\n      "installments": null,\n      "mandate_options": null,\n      "network": null,\n      "request_three_d_secure": "automatic"\n    },\n    "link": {\n      "persistent_token": null\n    }\n  },\n  "payment_method_types": [\n    "card",\n    "link"\n  ],\n  "processing": null,\n  "receipt_email": null,\n  "review": null,\n  "setup_future_usage": null,\n  "shipping": null,\n  "source": null,\n  "statement_descriptor": null,\n  "statement_descriptor_suffix": null,\n  "status": "requires_payment_method",\n  "transfer_data": null,\n  "transfer_group": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_kiSQ2ePLLWSGUc message='Dashboard link for request'
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/payment_intents/pi_3QxoKmJ0NE1ts5c21CFK9kkv
+api_version=2025-01-27.acacia message='Post details' post_data=metadata[bag]=%7B%224_size_standard_flavor_8_topper_None_roses_0%22%3A+%7B%22product_id%22%3A+4%2C+%22quantity%22%3A+1%2C+%22quantity_kilo%22%3A+1.0%2C+%22total_price%22%3A+50.0%2C+%22product_name%22%3A+%22Birthday+Cake%22%2C+%22flavor%22%3A+%22Strawberries+with+Dulce+de+Leche%22%2C+%22size%22%3A+%22standard%22%2C+%22topper_text%22%3A+null%2C+%22roses_quantity%22%3A+0%7D%7D&metadata[save_info]=true&metadata[username]=miriammccay
+https://api.stripe.com:443 "POST /v1/payment_intents/pi_3QxoKmJ0NE1ts5c21CFK9kkv HTTP/11" 200 1875
+message='Stripe API response' path=https://api.stripe.com/v1/payment_intents/pi_3QxoKmJ0NE1ts5c21CFK9kkv response_code=200
+body='{\n  "id": "pi_3QxoKmJ0NE1ts5c21CFK9kkv",\n  "object": "payment_intent",\n  "amount": 5000,\n  "amount_capturable": 0,\n  "amount_details": {\n    "tip": {}\n  },\n  "amount_received": 0,\n  "application": null,\n  "application_fee_amount": null,\n  "automatic_payment_methods": {\n    "allow_redirects": "always",\n    "enabled": true\n  },\n  "canceled_at": null,\n  "cancellation_reason": null,\n  "capture_method": "automatic_async",\n  "client_secret": "pi_3QxoKmJ0NE1ts5c21CFK9kkv_secret_hQ3A3AD63AMQHHHTnbCbRZUSQ",\n  "confirmation_method": "automatic",\n  "created": 1740828956,\n  "currency": "usd",\n  "customer": null,\n  "description": null,\n  "invoice": null,\n  "last_payment_error": null,\n  "latest_charge": null,\n  "livemode": false,\n  "metadata": {\n    "bag": "{\\"4_size_standard_flavor_8_topper_None_roses_0\\": {\\"product_id\\": 4, \\"quantity\\": 1, \\"quantity_kilo\\": 1.0, \\"total_price\\": 50.0, \\"product_name\\": \\"Birthday Cake\\", \\"flavor\\": \\"Strawberries with Dulce de Leche\\", \\"size\\": \\"standard\\", \\"topper_text\\": null, \\"roses_quantity\\": 0}}",\n    "save_info": "true",\n    "username": "miriammccay"\n  },\n  "next_action": null,\n  "on_behalf_of": null,\n  "payment_method": null,\n  "payment_method_configuration_details": {\n    "id": "pmc_1QsmdAJ0NE1ts5c2ytHvjKCH",\n    "parent": null\n  },\n  "payment_method_options": {\n    "card": {\n      "installments": null,\n      "mandate_options": null,\n      "network": null,\n      "request_three_d_secure": "automatic"\n    },\n    "link": {\n      "persistent_token": null\n    }\n  },\n  "payment_method_types": [\n    "card",\n    "link"\n  ],\n  "processing": null,\n  "receipt_email": null,\n  "review": null,\n  "setup_future_usage": null,\n  "shipping": null,\n  "source": null,\n  "statement_descriptor": null,\n  "statement_descriptor_suffix": null,\n  "status": "requires_payment_method",\n  "transfer_data": null,\n  "transfer_group": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_spENbZKyMGMDby message='Dashboard link for request'
+Signal triggered: update_on_save for OrderLineItem 24
+Received payment_intent.succeeded event: pi_3QxoKmJ0NE1ts5c21CFK9kkv
+Intent data: {
+  "amount": 5000,
+  "amount_capturable": 0,
+  "amount_details": {
+    "tip": {}
+  },
+  "amount_received": 5000,
+  "application": null,
+  "application_fee_amount": null,
+  "automatic_payment_methods": {
+    "allow_redirects": "always",
+    "enabled": true
+  },
+  "canceled_at": null,
+  "cancellation_reason": null,
+  "capture_method": "automatic_async",
+  "client_secret": "pi_3QxoKmJ0NE1ts5c21CFK9kkv_secret_hQ3A3AD63AMQHHHTnbCbRZUSQ",
+  "confirmation_method": "automatic",
+  "created": 1740828956,
+  "currency": "usd",
+  "customer": null,
+  "description": null,
+  "id": "pi_3QxoKmJ0NE1ts5c21CFK9kkv",
+  "invoice": null,
+  "last_payment_error": null,
+  "latest_charge": "ch_3QxoKmJ0NE1ts5c21YjnVfGG",
+  "livemode": false,
+  "metadata": {
+    "bag": "{\"4_size_standard_flavor_8_topper_None_roses_0\": {\"product_id\": 4, \"quantity\": 1, \"quantity_kilo\": 1.0, \"total_price\": 50.0, \"product_name\": \"Birthday Cake\", \"flavor\": \"Strawberries with Dulce de Leche\", \"size\": \"standard\", \"topper_text\": null, \"roses_quantity\": 0}}",
+    "save_info": "true",
+    "username": "miriammccay"
+  },
+  "next_action": null,
+  "object": "payment_intent",
+  "on_behalf_of": null,
+  "payment_method": "pm_1QxoLDJ0NE1ts5c2L6ULKZnh",
+  "payment_method_configuration_details": {
+    "id": "pmc_1QsmdAJ0NE1ts5c2ytHvjKCH",
+    "parent": null
+  },
+  "payment_method_options": {
+    "card": {
+      "installments": null,
+      "mandate_options": null,
+      "network": null,
+      "request_three_d_secure": "automatic"
+    },
+    "link": {
+      "persistent_token": null
+    }
+  },
+  "payment_method_types": [
+    "card",
+    "link"
+  ],
+  "processing": null,
+  "receipt_email": null,
+  "review": null,
+  "setup_future_usage": null,
+  "shipping": {
+    "address": {
+      "city": "Dublin, County Dublin",
+      "country": "IE",
+      "line1": "19, Liffey Walk, North Lotts, Dublin - Celular",
+      "line2": "",
+      "postal_code": "",
+      "state": "County Dublin"
+    },
+    "carrier": null,
+    "name": "teste miriam",
+    "phone": "0858855718",
+    "tracking_number": null
+  },
+  "source": null,
+  "statement_descriptor": null,
+  "statement_descriptor_suffix": null,
+  "status": "succeeded",
+  "transfer_data": null,
+  "transfer_group": null
+}
+Internal Server Error: /checkout/wh/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 170, in __getattr__
+    return self[k]
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 212, in __getitem__
+    raise err
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 200, in __getitem__
+    return super(StripeObject, self).__getitem__(k)
+KeyError: 'charges'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhooks.py", line 55, in webhook
+    response = event_handler(event)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py", line 63, in handle_payment_intent_succeeded
+    billing_details = intent.charges.data[0].billing_details if intent.charges and intent.charges.data else intent.billing_details
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 172, in __getattr__
+    raise AttributeError(*err.args) from err
+AttributeError: charges
+Watching for file changes with StatReloader
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/payment_intents
+api_version=2025-01-27.acacia message='Post details' post_data=amount=1540&currency=usd
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/payment_intents HTTP/11" 200 1510
+message='Stripe API response' path=https://api.stripe.com/v1/payment_intents response_code=200
+body='{\n  "id": "pi_3QxoMxJ0NE1ts5c21XmHkEyZ",\n  "object": "payment_intent",\n  "amount": 1540,\n  "amount_capturable": 0,\n  "amount_details": {\n    "tip": {}\n  },\n  "amount_received": 0,\n  "application": null,\n  "application_fee_amount": null,\n  "automatic_payment_methods": {\n    "allow_redirects": "always",\n    "enabled": true\n  },\n  "canceled_at": null,\n  "cancellation_reason": null,\n  "capture_method": "automatic_async",\n  "client_secret": "pi_3QxoMxJ0NE1ts5c21XmHkEyZ_secret_jw4gQkNTr2oBgGiUBhKFXOKYZ",\n  "confirmation_method": "automatic",\n  "created": 1740829091,\n  "currency": "usd",\n  "customer": null,\n  "description": null,\n  "invoice": null,\n  "last_payment_error": null,\n  "latest_charge": null,\n  "livemode": false,\n  "metadata": {},\n  "next_action": null,\n  "on_behalf_of": null,\n  "payment_method": null,\n  "payment_method_configuration_details": {\n    "id": "pmc_1QsmdAJ0NE1ts5c2ytHvjKCH",\n    "parent": null\n  },\n  "payment_method_options": {\n    "card": {\n      "installments": null,\n      "mandate_options": null,\n      "network": null,\n      "request_three_d_secure": "automatic"\n    },\n    "link": {\n      "persistent_token": null\n    }\n  },\n  "payment_method_types": [\n    "card",\n    "link"\n  ],\n  "processing": null,\n  "receipt_email": null,\n  "review": null,\n  "setup_future_usage": null,\n  "shipping": null,\n  "source": null,\n  "statement_descriptor": null,\n  "statement_descriptor_suffix": null,\n  "status": "requires_payment_method",\n  "transfer_data": null,\n  "transfer_group": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_dBimZHQ1iKwfBX message='Dashboard link for request'
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/payment_intents/pi_3QxoMxJ0NE1ts5c21XmHkEyZ
+api_version=2025-01-27.acacia message='Post details' post_data=metadata[bag]=%7B%229_size_standard_flavor_12_topper_None_roses_0%22%3A+%7B%22product_id%22%3A+9%2C+%22quantity%22%3A+2%2C+%22quantity_kilo%22%3A+0.0%2C+%22total_price%22%3A+14.0%2C+%22product_name%22%3A+%22Mousses%22%2C+%22flavor%22%3A+%22Chocolate+Mousse+with+Ninho+%28Powdered+Milk%29%22%2C+%22size%22%3A+%22standard%22%2C+%22topper_text%22%3A+null%2C+%22roses_quantity%22%3A+0%7D%7D&metadata[save_info]=true&metadata[username]=miriammccay
+https://api.stripe.com:443 "POST /v1/payment_intents/pi_3QxoMxJ0NE1ts5c21XmHkEyZ HTTP/11" 200 1881
+message='Stripe API response' path=https://api.stripe.com/v1/payment_intents/pi_3QxoMxJ0NE1ts5c21XmHkEyZ response_code=200
+body='{\n  "id": "pi_3QxoMxJ0NE1ts5c21XmHkEyZ",\n  "object": "payment_intent",\n  "amount": 1540,\n  "amount_capturable": 0,\n  "amount_details": {\n    "tip": {}\n  },\n  "amount_received": 0,\n  "application": null,\n  "application_fee_amount": null,\n  "automatic_payment_methods": {\n    "allow_redirects": "always",\n    "enabled": true\n  },\n  "canceled_at": null,\n  "cancellation_reason": null,\n  "capture_method": "automatic_async",\n  "client_secret": "pi_3QxoMxJ0NE1ts5c21XmHkEyZ_secret_jw4gQkNTr2oBgGiUBhKFXOKYZ",\n  "confirmation_method": "automatic",\n  "created": 1740829091,\n  "currency": "usd",\n  "customer": null,\n  "description": null,\n  "invoice": null,\n  "last_payment_error": null,\n  "latest_charge": null,\n  "livemode": false,\n  "metadata": {\n    "bag": "{\\"9_size_standard_flavor_12_topper_None_roses_0\\": {\\"product_id\\": 9, \\"quantity\\": 2, \\"quantity_kilo\\": 0.0, \\"total_price\\": 14.0, \\"product_name\\": \\"Mousses\\", \\"flavor\\": \\"Chocolate Mousse with Ninho (Powdered Milk)\\", \\"size\\": \\"standard\\", \\"topper_text\\": null, \\"roses_quantity\\": 0}}",\n    "save_info": "true",\n    "username": "miriammccay"\n  },\n  "next_action": null,\n  "on_behalf_of": null,\n  "payment_method": null,\n  "payment_method_configuration_details": {\n    "id": "pmc_1QsmdAJ0NE1ts5c2ytHvjKCH",\n    "parent": null\n  },\n  "payment_method_options": {\n    "card": {\n      "installments": null,\n      "mandate_options": null,\n      "network": null,\n      "request_three_d_secure": "automatic"\n    },\n    "link": {\n      "persistent_token": null\n    }\n  },\n  "payment_method_types": [\n    "card",\n    "link"\n  ],\n  "processing": null,\n  "receipt_email": null,\n  "review": null,\n  "setup_future_usage": null,\n  "shipping": null,\n  "source": null,\n  "statement_descriptor": null,\n  "statement_descriptor_suffix": null,\n  "status": "requires_payment_method",\n  "transfer_data": null,\n  "transfer_group": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_5ZdTFGZZ4cffq2 message='Dashboard link for request'
+Signal triggered: update_on_save for OrderLineItem 25
+Received payment_intent.succeeded event: pi_3QxoMxJ0NE1ts5c21XmHkEyZ
+Intent data: {
+  "amount": 1540,
+  "amount_capturable": 0,
+  "amount_details": {
+    "tip": {}
+  },
+  "amount_received": 1540,
+  "application": null,
+  "application_fee_amount": null,
+  "automatic_payment_methods": {
+    "allow_redirects": "always",
+    "enabled": true
+  },
+  "canceled_at": null,
+  "cancellation_reason": null,
+  "capture_method": "automatic_async",
+  "client_secret": "pi_3QxoMxJ0NE1ts5c21XmHkEyZ_secret_jw4gQkNTr2oBgGiUBhKFXOKYZ",
+  "confirmation_method": "automatic",
+  "created": 1740829091,
+  "currency": "usd",
+  "customer": null,
+  "description": null,
+  "id": "pi_3QxoMxJ0NE1ts5c21XmHkEyZ",
+  "invoice": null,
+  "last_payment_error": null,
+  "latest_charge": "ch_3QxoMxJ0NE1ts5c21Klf5iIk",
+  "livemode": false,
+  "metadata": {
+    "bag": "{\"9_size_standard_flavor_12_topper_None_roses_0\": {\"product_id\": 9, \"quantity\": 2, \"quantity_kilo\": 0.0, \"total_price\": 14.0, \"product_name\": \"Mousses\", \"flavor\": \"Chocolate Mousse with Ninho (Powdered Milk)\", \"size\": \"standard\", \"topper_text\": null, \"roses_quantity\": 0}}",
+    "save_info": "true",
+    "username": "miriammccay"
+  },
+  "next_action": null,
+  "object": "payment_intent",
+  "on_behalf_of": null,
+  "payment_method": "pm_1QxoNPJ0NE1ts5c2q73Wh6Fa",
+  "payment_method_configuration_details": {
+    "id": "pmc_1QsmdAJ0NE1ts5c2ytHvjKCH",
+    "parent": null
+  },
+  "payment_method_options": {
+    "card": {
+      "installments": null,
+      "mandate_options": null,
+      "network": null,
+      "request_three_d_secure": "automatic"
+    },
+    "link": {
+      "persistent_token": null
+    }
+  },
+  "payment_method_types": [
+    "card",
+    "link"
+  ],
+  "processing": null,
+  "receipt_email": null,
+  "review": null,
+  "setup_future_usage": null,
+  "shipping": {
+    "address": {
+      "city": "Dublin, County Dublin",
+      "country": "IE",
+      "line1": "19, Liffey Walk, North Lotts, Dublin - Celular",
+      "line2": "",
+      "postal_code": "",
+      "state": "County Dublin"
+    },
+    "carrier": null,
+    "name": "teste miriam",
+    "phone": "0858855718",
+    "tracking_number": null
+  },
+  "source": null,
+  "statement_descriptor": null,
+  "statement_descriptor_suffix": null,
+  "status": "succeeded",
+  "transfer_data": null,
+  "transfer_group": null
+}
+Internal Server Error: /checkout/wh/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 170, in __getattr__
+    return self[k]
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 212, in __getitem__
+    raise err
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 200, in __getitem__
+    return super(StripeObject, self).__getitem__(k)
+KeyError: 'charges'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhooks.py", line 55, in webhook
+    response = event_handler(event)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py", line 63, in handle_payment_intent_succeeded
+    billing_details = intent.charges.data[0].billing_details if intent.charges and intent.charges.data else intent.billing_details
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 172, in __getattr__
+    raise AttributeError(*err.args) from err
+AttributeError: charges
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/payment_intents
+api_version=2025-01-27.acacia message='Post details' post_data=amount=12000&currency=usd
+Starting new HTTPS connection (1): api.stripe.com:443
+https://api.stripe.com:443 "POST /v1/payment_intents HTTP/11" 200 1511
+message='Stripe API response' path=https://api.stripe.com/v1/payment_intents response_code=200
+body='{\n  "id": "pi_3Qxp3HJ0NE1ts5c20in2RW3Q",\n  "object": "payment_intent",\n  "amount": 12000,\n  "amount_capturable": 0,\n  "amount_details": {\n    "tip": {}\n  },\n  "amount_received": 0,\n  "application": null,\n  "application_fee_amount": null,\n  "automatic_payment_methods": {\n    "allow_redirects": "always",\n    "enabled": true\n  },\n  "canceled_at": null,\n  "cancellation_reason": null,\n  "capture_method": "automatic_async",\n  "client_secret": "pi_3Qxp3HJ0NE1ts5c20in2RW3Q_secret_qdNlWt7IDjmIWeLeGu95p2sBR",\n  "confirmation_method": "automatic",\n  "created": 1740831715,\n  "currency": "usd",\n  "customer": null,\n  "description": null,\n  "invoice": null,\n  "last_payment_error": null,\n  "latest_charge": null,\n  "livemode": false,\n  "metadata": {},\n  "next_action": null,\n  "on_behalf_of": null,\n  "payment_method": null,\n  "payment_method_configuration_details": {\n    "id": "pmc_1QsmdAJ0NE1ts5c2ytHvjKCH",\n    "parent": null\n  },\n  "payment_method_options": {\n    "card": {\n      "installments": null,\n      "mandate_options": null,\n      "network": null,\n      "request_three_d_secure": "automatic"\n    },\n    "link": {\n      "persistent_token": null\n    }\n  },\n  "payment_method_types": [\n    "card",\n    "link"\n  ],\n  "processing": null,\n  "receipt_email": null,\n  "review": null,\n  "setup_future_usage": null,\n  "shipping": null,\n  "source": null,\n  "statement_descriptor": null,\n  "statement_descriptor_suffix": null,\n  "status": "requires_payment_method",\n  "transfer_data": null,\n  "transfer_group": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_0WvqqzQkbqZmUq message='Dashboard link for request'
+message='Request to Stripe api' method=post url=https://api.stripe.com/v1/payment_intents/pi_3Qxp3HJ0NE1ts5c20in2RW3Q
+api_version=2025-01-27.acacia message='Post details' post_data=metadata[bag]=%7B%2214_size_standard_flavor_30_topper_None_roses_0%22%3A+%7B%22product_id%22%3A+14%2C+%22quantity%22%3A+1%2C+%22quantity_kilo%22%3A+0.0%2C+%22total_price%22%3A+120.0%2C+%22product_name%22%3A+%22Party+Sweets%22%2C+%22flavor%22%3A+%22Chocolate+Fudge+%28Brigadeiro%29%22%2C+%22size%22%3A+%22standard%22%2C+%22topper_text%22%3A+null%2C+%22roses_quantity%22%3A+0%7D%7D&metadata[save_info]=true&metadata[username]=miriammccay
+https://api.stripe.com:443 "POST /v1/payment_intents/pi_3Qxp3HJ0NE1ts5c20in2RW3Q HTTP/11" 200 1875
+message='Stripe API response' path=https://api.stripe.com/v1/payment_intents/pi_3Qxp3HJ0NE1ts5c20in2RW3Q response_code=200
+body='{\n  "id": "pi_3Qxp3HJ0NE1ts5c20in2RW3Q",\n  "object": "payment_intent",\n  "amount": 12000,\n  "amount_capturable": 0,\n  "amount_details": {\n    "tip": {}\n  },\n  "amount_received": 0,\n  "application": null,\n  "application_fee_amount": null,\n  "automatic_payment_methods": {\n    "allow_redirects": "always",\n    "enabled": true\n  },\n  "canceled_at": null,\n  "cancellation_reason": null,\n  "capture_method": "automatic_async",\n  "client_secret": "pi_3Qxp3HJ0NE1ts5c20in2RW3Q_secret_qdNlWt7IDjmIWeLeGu95p2sBR",\n  "confirmation_method": "automatic",\n  "created": 1740831715,\n  "currency": "usd",\n  "customer": null,\n  "description": null,\n  "invoice": null,\n  "last_payment_error": null,\n  "latest_charge": null,\n  "livemode": false,\n  "metadata": {\n    "bag": "{\\"14_size_standard_flavor_30_topper_None_roses_0\\": {\\"product_id\\": 14, \\"quantity\\": 1, \\"quantity_kilo\\": 0.0, \\"total_price\\": 120.0, \\"product_name\\": \\"Party Sweets\\", \\"flavor\\": \\"Chocolate Fudge (Brigadeiro)\\", \\"size\\": \\"standard\\", \\"topper_text\\": null, \\"roses_quantity\\": 0}}",\n    "save_info": "true",\n    "username": "miriammccay"\n  },\n  "next_action": null,\n  "on_behalf_of": null,\n  "payment_method": null,\n  "payment_method_configuration_details": {\n    "id": "pmc_1QsmdAJ0NE1ts5c2ytHvjKCH",\n    "parent": null\n  },\n  "payment_method_options": {\n    "card": {\n      "installments": null,\n      "mandate_options": null,\n      "network": null,\n      "request_three_d_secure": "automatic"\n    },\n    "link": {\n      "persistent_token": null\n    }\n  },\n  "payment_method_types": [\n    "card",\n    "link"\n  ],\n  "processing": null,\n  "receipt_email": null,\n  "review": null,\n  "setup_future_usage": null,\n  "shipping": null,\n  "source": null,\n  "statement_descriptor": null,\n  "statement_descriptor_suffix": null,\n  "status": "requires_payment_method",\n  "transfer_data": null,\n  "transfer_group": null\n}' message='API response body'
+link=https://dashboard.stripe.com/test/logs/req_a414ZG17MVdgdr message='Dashboard link for request'
+Signal triggered: update_on_save for OrderLineItem 26
+Received payment_intent.succeeded event: pi_3Qxp3HJ0NE1ts5c20in2RW3Q
+Intent data: {
+  "amount": 12000,
+  "amount_capturable": 0,
+  "amount_details": {
+    "tip": {}
+  },
+  "amount_received": 12000,
+  "application": null,
+  "application_fee_amount": null,
+  "automatic_payment_methods": {
+    "allow_redirects": "always",
+    "enabled": true
+  },
+  "canceled_at": null,
+  "cancellation_reason": null,
+  "capture_method": "automatic_async",
+  "client_secret": "pi_3Qxp3HJ0NE1ts5c20in2RW3Q_secret_qdNlWt7IDjmIWeLeGu95p2sBR",
+  "confirmation_method": "automatic",
+  "created": 1740831715,
+  "currency": "usd",
+  "customer": null,
+  "description": null,
+  "id": "pi_3Qxp3HJ0NE1ts5c20in2RW3Q",
+  "invoice": null,
+  "last_payment_error": null,
+  "latest_charge": "ch_3Qxp3HJ0NE1ts5c20oqm9FwW",
+  "livemode": false,
+  "metadata": {
+    "bag": "{\"14_size_standard_flavor_30_topper_None_roses_0\": {\"product_id\": 14, \"quantity\": 1, \"quantity_kilo\": 0.0, \"total_price\": 120.0, \"product_name\": \"Party Sweets\", \"flavor\": \"Chocolate Fudge (Brigadeiro)\", \"size\": \"standard\", \"topper_text\": null, \"roses_quantity\": 0}}",
+    "save_info": "true",
+    "username": "miriammccay"
+  },
+  "next_action": null,
+  "object": "payment_intent",
+  "on_behalf_of": null,
+  "payment_method": "pm_1Qxp3bJ0NE1ts5c2gRVlNYC6",
+  "payment_method_configuration_details": {
+    "id": "pmc_1QsmdAJ0NE1ts5c2ytHvjKCH",
+    "parent": null
+  },
+  "payment_method_options": {
+    "card": {
+      "installments": null,
+      "mandate_options": null,
+      "network": null,
+      "request_three_d_secure": "automatic"
+    },
+    "link": {
+      "persistent_token": null
+    }
+  },
+  "payment_method_types": [
+    "card",
+    "link"
+  ],
+  "processing": null,
+  "receipt_email": null,
+  "review": null,
+  "setup_future_usage": null,
+  "shipping": {
+    "address": {
+      "city": "Dublin, County Dublin",
+      "country": "IE",
+      "line1": "19, Liffey Walk, North Lotts, Dublin - Celular",
+      "line2": "",
+      "postal_code": "",
+      "state": "County Dublin"
+    },
+    "carrier": null,
+    "name": "teste miriam",
+    "phone": "0858855718",
+    "tracking_number": null
+  },
+  "source": null,
+  "statement_descriptor": null,
+  "statement_descriptor_suffix": null,
+  "status": "succeeded",
+  "transfer_data": null,
+  "transfer_group": null
+}
+Internal Server Error: /checkout/wh/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhooks.py", line 55, in webhook
+    response = event_handler(event)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py", line 90, in handle_payment_intent_succeeded
+    email__iexact=billing_details.email,
+AttributeError: 'dict' object has no attribute 'email'
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader

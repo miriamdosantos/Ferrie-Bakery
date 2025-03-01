@@ -1,0 +1,53 @@
+Internal Server Error: /checkout/wh/
+Internal Server Error: /checkout/wh/
+"POST /checkout/wh/ HTTP/1.1" 500 57
+Internal Server Error: /checkout/wh/
+"POST /checkout/wh/ HTTP/1.1" 500 57
+"POST /checkout/wh/ HTTP/1.1" 500 57
+Internal Server Error: /checkout/wh/
+"POST /checkout/wh/ HTTP/1.1" 500 57
+Internal Server Error: /checkout/wh/
+Internal Server Error: /checkout/wh/
+"POST /checkout/wh/ HTTP/1.1" 500 57
+"POST /checkout/wh/ HTTP/1.1" 500 57
+Internal Server Error: /checkout/wh/
+"POST /checkout/wh/ HTTP/1.1" 500 57
+Internal Server Error: /checkout/wh/
+"POST /checkout/wh/ HTTP/1.1" 500 57
+Internal Server Error: /checkout/wh/
+"POST /checkout/wh/ HTTP/1.1" 500 57
+Internal Server Error: /checkout/wh/
+"POST /checkout/wh/ HTTP/1.1" 500 57
+Internal Server Error: /checkout/wh/
+"POST /checkout/wh/ HTTP/1.1" 500 57
+Internal Server Error: /checkout/wh/
+"POST /checkout/wh/ HTTP/1.1" 500 57
+Internal Server Error: /checkout/wh/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 170, in __getattr__
+    return self[k]
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 212, in __getitem__
+    raise err
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 200, in __getitem__
+    return super(StripeObject, self).__getitem__(k)
+KeyError: 'bag'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhooks.py", line 55, in webhook
+    response = event_handler(event)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\checkout\webhook_handler.py", line 51, in handle_payment_intent_succeeded
+    bag = intent.metadata.bag
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\stripe\_stripe_object.py", line 172, in __getattr__
+    raise AttributeError(*err.args) from err
+AttributeError: bag
+"POST /checkout/wh/ HTTP/1.1" 500 117841
