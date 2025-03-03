@@ -23,7 +23,14 @@
         <!-- Coluna de Detalhes do Produto -->
         <div class="col-12 col-md-6 col-lg-7 px-0 ps-lg-4">
             <div class="product-details-container">
-                <h1 class="mb-0 mt-5">{{ product.custom_title|default:product.name }}</h1>
+                <h1 class="mb-0 mt-5">{{ product.custom_title|default:product.name }}
+                    {% if request.user.is_superuser %}
+                    <small class="ml-3">
+                        <a class="text-secondary" href="{% url 'edit_product' product.id %}">Edit</a> |
+                        <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                    </small>
+                    {% endif %}
+                </h1>
 
                 <!-- Preço e descrição -->
                 {% if product.category.name == "Birthday Cake" %}

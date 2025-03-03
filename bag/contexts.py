@@ -77,7 +77,8 @@ def bag_contents(request):
         total += subtotal  
 
         # Ajustando imagem com segurança
-        image_url = getattr(product.image, 'url', None)
+        image_url = product.image.url if product.image else None
+
 
         # Atualizando bag_items para incluir os preços de topper e rosas
         bag_items.append({

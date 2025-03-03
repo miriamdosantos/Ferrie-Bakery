@@ -36,9 +36,12 @@
             <div class="product-card card shadow-lg h-100">
                 <!-- Imagem com Maior Destaque -->
                 <div class="product-image">
-                    <img src="{{ product.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }}">
+                    {% if product.image %}
+                        <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% else %}
+                        <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="Imagem não disponível">
+                    {% endif %}
                 </div>
-
                 <!-- Conteúdo do Card -->
                 <div class="card-body text-center">
 
@@ -63,6 +66,12 @@
                     <a href="{% url 'product_detail' product.id %}" class="btn product-btn-pink btn-primary btn-lg">
                         {% trans "View Details" %}
                     </a>
+                    {% if request.user.is_superuser %}
+                    <small class="ml-3">
+                        <a class="text-secondary" href="{% url 'edit_product' product.id %}">Edit</a> |
+                        <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                    </small>
+                    {% endif %}
                 </div>
             </div>
         </div>

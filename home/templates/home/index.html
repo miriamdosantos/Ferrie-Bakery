@@ -4,97 +4,105 @@
 
 {% block content %}
 
-    <!-- Carrossel de Produtos / Sugestões -->
-    <div id="carouselExample" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <!-- Slide único (imagem destacada) -->
-            <div class="carousel-item active" style="margin-left: -50px; ">
-                <img src="/media/mouses.jpeg" class="img-fluid zoom-effect" alt="{% trans 'Wedding or Birthday Cake' %}">
-                <div class="carousel-caption text-center">
-                    <h5 style="font-size: 3rem; color: #fff; text-shadow: 2px 2px 5px rgba(0,0,0,0.7); ">
-                        {% trans "Order Now!" %}
-                    </h5>
-                    <p class="d-none d-lg-block" style="font-size: 1.8rem; color: #fff; 
+<!-- Carrossel de Produtos / Sugestões -->
+<div id="carouselExample" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        <!-- Slide único (imagem destacada) -->
+        <div class="carousel-item active" style="margin-left: -50px; ">
+            <img src="/media/mouses.jpeg" class="img-fluid zoom-effect" alt="{% trans 'Wedding or Birthday Cake' %}">
+            <div class="carousel-caption text-center">
+                <h5 style="font-size: 3rem; color: #fff; text-shadow: 2px 2px 5px rgba(0,0,0,0.7); ">
+                    {% trans "Order Now!" %}
+                </h5>
+                <p class="d-none d-lg-block" style="font-size: 1.8rem; color: #fff; 
                         text-shadow: 10px 10px 15px rgba(0,0,0,0.7); background-color:#FF70C0; border-radius: 8rem;">
-                        {% trans "Your wedding or birthday cake customized for a special day." %}
-                    </p>
-                    <a href="#product1" class="btn btn-danger btn-lg btn-action"
-                        style="box-shadow: 0px 4px 50px rgba(255,0,0,0.7);">{% trans "Order Now" %}</a>
-                </div>
+                    {% trans "Your wedding or birthday cake customized for a special day." %}
+                </p>
+                <a href="#product1" class="btn btn-danger btn-lg btn-action"
+                    style="box-shadow: 0px 4px 50px rgba(255,0,0,0.7);">{% trans "Order Now" %}</a>
             </div>
         </div>
-        <!-- Controle de Navegação -->
-        <!-- Sem navegação pois agora temos apenas uma imagem -->
     </div>
+    <!-- Controle de Navegação -->
+    <!-- Sem navegação pois agora temos apenas uma imagem -->
+</div>
 
-    <!-- Seção de Best Sellers -->
-    <section class="featured-sections mt-3">
-        <div class="container">
-            <div class="row">
-                <!-- Best Sellers -->
-                <div class="col-12">
-                    <h2 class="text-center font-weight-bold mb-5" style="color: #FF13A4;">
-                        {% trans "Best Sellers" %}
-                    </h2>
-                    <div class="row">
-                        {% for product in best_sellers %}
-                        <div class="col-md-6 col-lg-4 mb-4 offset-md-2 " style="padding-left: 2rem;">
-                            <div class="card shadow-sm" style="background-color: #a8e6cfac;" >
-                                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
-                                <div class="card-body" style="min-height: 200px;">
-                                    <h4 class="card-title">{{ product.name }}</h4>
-                                    <!-- Representação do Rating -->
-                                    <div class="mb-2">
-                                        {% if product.rating %}
-                                            <span class="fw-bold text-muted bg-light p-2 rounded-pill">{% trans "Rating" %}:</span>
-                                            {% for i in stars_range %}
-                                                {% if i <= product.rating %}
-                                                    <span class="text-warning">&#9733;</span> <!-- Estrela cheia -->
-                                                {% else %}
-                                                    <span class="text-muted">&#9733;</span> <!-- Estrela vazia -->
-                                                {% endif %}
-                                            {% endfor %}
+<!-- Seção de Best Sellers -->
+<section class="featured-sections mt-3">
+    <div class="container">
+        <div class="row">
+            <!-- Best Sellers -->
+            <div class="col-12">
+                <h2 class="text-center font-weight-bold mb-5" style="color: #FF13A4;">
+                    {% trans "Best Sellers" %}
+                </h2>
+                <div class="row">
+                    {% for product in best_sellers %}
+                    <div class="col-md-6 col-lg-4 mb-4 offset-md-2 " style="padding-left: 2rem;">
+                        <div class="card shadow-sm" style="background-color: #a8e6cfac;">
+                            {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                            <img src="{% static 'images/noimage.png' %}" alt="Imagem não disponível">
+                            {% endif %}
+
+                            <div class="card-body" style="min-height: 200px;">
+                                <h4 class="card-title">{{ product.name }}</h4>
+                                <!-- Representação do Rating -->
+                                <div class="mb-2">
+                                    {% if product.rating %}
+                                    <span class="fw-bold text-muted bg-light p-2 rounded-pill">{% trans "Rating"
+                                        %}:</span>
+                                    {% for i in stars_range %}
+                                    {% if i <= product.rating %} <span class="text-warning">&#9733;</span>
+                                        <!-- Estrela cheia -->
                                         {% else %}
-                                            <span class="fw-bold text-muted bg-light p-2 rounded-pill ">{% trans "Rating not found" %}</span>
+                                        <span class="text-muted">&#9733;</span> <!-- Estrela vazia -->
                                         {% endif %}
-                                    </div>                                    
-                                    <a href="#" class="btn btn-primary btn-large product-btn-pink product-btn-small " style="font-size: 1.15rem;">
-                                        {{ product.custom_title }}
-                                    </a>
+                                        {% endfor %}
+                                        {% else %}
+                                        <span class="fw-bold text-muted bg-light p-2 rounded-pill ">{% trans "Rating not
+                                            found" %}</span>
+                                        {% endif %}
                                 </div>
+                                <a href="#" class="btn btn-primary btn-large product-btn-pink product-btn-small "
+                                    style="font-size: 1.15rem;">
+                                    {{ product.custom_title }}
+                                </a>
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Seção de Novidades Fresquinhas -->
-    <section class="store-updates mt-5">
-        <div class="container">
-            <h2 class="text-center font-weight-bold mb-4" style="color: #FF13A4;">
-                {% trans "Fresh News" %}
-            </h2>
-            <div class="row">
-                {% for update in stores_updates %}
-                <div class="col-sm-12 col-md-6 mb-4  ">
-                    <div class="card shadow-sm " style="height: 600px; min-width: 22rem;margin-left: 1rem; ">
-                        {% if update.image %}
-                        <img src="{{ update.image.url }}" class="card-img-top update-image" alt="{{ update.title }}"  >
-                        {% endif %}
-                        <div class="card-body " style="background-color: #a8e6cfac;">
-                            <h5 class="card-title">{{ update.title }}</h5>
-                            <p class="card-text mobile-font-size" >{{ update.description|truncatewords:20 }}</p>
-                        </div>
+<!-- Seção de Novidades Fresquinhas -->
+<section class="store-updates mt-5">
+    <div class="container">
+        <h2 class="text-center font-weight-bold mb-4" style="color: #FF13A4;">
+            {% trans "Fresh News" %}
+        </h2>
+        <div class="row">
+            {% for update in stores_updates %}
+            <div class="col-sm-12 col-md-6 mb-4  ">
+                <div class="card shadow-sm " style="height: 600px; min-width: 22rem;margin-left: 1rem; ">
+                    {% if update.image %}
+                    <img src="{{ update.image.url }}" class="card-img-top update-image" alt="{{ update.title }}">
+                    {% endif %}
+                    <div class="card-body " style="background-color: #a8e6cfac;">
+                        <h5 class="card-title">{{ update.title }}</h5>
+                        <p class="card-text mobile-font-size">{{ update.description|truncatewords:20 }}</p>
                     </div>
                 </div>
-                {% empty %}
-                <p class="text-center w-100">{% trans "No updates available at the moment." %}</p>
-                {% endfor %}
             </div>
+            {% empty %}
+            <p class="text-center w-100">{% trans "No updates available at the moment." %}</p>
+            {% endfor %}
         </div>
-    </section>
+    </div>
+</section>
 
 {% endblock %}
