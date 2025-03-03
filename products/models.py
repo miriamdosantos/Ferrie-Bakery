@@ -4,6 +4,9 @@ from django.utils.translation import gettext_lazy as _
 from decimal import Decimal
 
 
+from django.utils.encoding import force_str
+from django.utils.translation import gettext_lazy as _
+
 class Category(models.Model):
     name = models.CharField(max_length=254)
     friendly_name = models.CharField(max_length=254, null=True, blank=True)
@@ -16,19 +19,26 @@ class Category(models.Model):
         ordering = ["name"]
 
     def __str__(self):
-        return self.name
+        # Força a conversão para string
+        return force_str(self.name)
+
+
+from django.utils.encoding import force_str
+from django.utils.translation import gettext_lazy as _
 
 class Flavor(models.Model):
     name = models.CharField(max_length=254, verbose_name=_("Flavor"))
-
     is_truffled = models.BooleanField(default=False, verbose_name=_("Is Truffled"))
 
     class Meta:
-            verbose_name = _("Flavor")
-            verbose_name_plural = _("Flavors")
+        verbose_name = _("Flavor")
+        verbose_name_plural = _("Flavors")
 
     def __str__(self):
-            return f"{self.name} ({'Truffled' if self.is_truffled else 'Traditional'})"
+        # Converte cada parte para string
+        label = 'Truffled' if self.is_truffled else 'Traditional'
+        return f"{force_str(self.name)} ({label})"
+
     
 class Product(models.Model):
     PRICE_UNIT_CHOICES = [
@@ -53,7 +63,7 @@ class Product(models.Model):
 
     category = models.ForeignKey("Category", null=True, blank=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True)
-    name = models.CharField(max_length=254, null=True, blank=True)
+    name = models.CharField(max_length=254, )
     custom_title = models.CharField(
         max_length=254,
         null=True,
@@ -61,31 +71,26 @@ class Product(models.Model):
         verbose_name=_("Custom Title"),
     )
     description = models.TextField(null=True, blank=True)
-    price = models.DecimalField(max_digits=6, decimal_places=2, default=0)
+    price = models.DecimalField(max_digits=6, decimal_places=2, )
     sale_option = models.CharField(
         max_length=20,
         choices=PRICE_UNIT_CHOICES,
-        default="unit",
         verbose_name=_("Sale Option"),
-    )
+    )  # Obrigatório
     size = models.CharField(
         max_length=20,
         choices=SIZE_CHOICES,
         null=True,
         blank=True,
         verbose_name=_("Size"),
-    )
-    shipping_info = models.TextField(
-        null=True,
-        blank=True,
-        verbose_name=_("Shipping Information"),
-    )
+    ) # Opcional, usado somente para alguns produtos
+    shipping_info = models.TextField(blank=True, default="Shipping information ")
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     is_best_seller = models.BooleanField(default=False)
     has_topper = models.BooleanField(default=False, verbose_name=_("Has Topper"))
     has_roses = models.BooleanField(default=False, verbose_name=_("Has Roses"))
     image = models.ImageField(null=True, blank=True)
-    flavors = models.ManyToManyField(Flavor, blank=True, verbose_name=_("Flavors"))
+    flavors = models.ManyToManyField("Flavor",  verbose_name=_("Flavors"))
 
     class Meta:
         ordering = ["name"]
@@ -93,7 +98,13 @@ class Product(models.Model):
         verbose_name_plural = _("Products")
 
     def __str__(self):
-        return self.name or self.custom_title or _("Unnamed Product")
+        # Força a conversão para string em todas as opções
+        if self.name:
+            return force_str(self.name)
+        elif self.custom_title:
+            return force_str(self.custom_title)
+        else:
+            return force_str(_("Unnamed Product"))
     
     def get_average_rating(self):
         """Calcula a média das avaliações associadas."""
