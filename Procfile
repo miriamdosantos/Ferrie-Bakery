@@ -1,3 +1,2 @@
-web: gunicorn ferrie_bakery.wsgi
-
+web: gunicorn ferrie_bakery.wsgi:application
 
