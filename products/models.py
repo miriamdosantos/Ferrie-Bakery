@@ -89,7 +89,12 @@ class Product(models.Model):
     is_best_seller = models.BooleanField(default=False)
     has_topper = models.BooleanField(default=False, verbose_name=_("Has Topper"))
     has_roses = models.BooleanField(default=False, verbose_name=_("Has Roses"))
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(
+    null=True,
+    blank=True,
+    default="noimage.jpg"  # Imagem padrão caso o produto não tenha uma
+)
+
     flavors = models.ManyToManyField("Flavor",  verbose_name=_("Flavors"))
 
     class Meta:
