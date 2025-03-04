@@ -1,0 +1,967 @@
+
+/* Cores principais */
+:root {
+    --primary-color: #FF13A4; /* Rosa Principal */
+    --secondary-color: #A8E6CF; /* Verde Água */
+    --background-color: #F9F9F9; /* Fundo Geral */
+    --text-color: #333333; /* Texto Primário */
+    --text-secondary-color: #666666; /* Texto Secundário */
+    --link-color: #FF70C0; /* Links */
+    --footer-bg-color: #C41284; /* Fundo do Rodapé */
+    --button-text-color: #FFFFFF; /* Texto dos Botões */
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Configurações de Fonte */
+  /* Ajustes no layout */
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Garante que a altura do body ocupe 100% da tela */
+   
+  }
+  
+  header {
+    z-index: 99999; /* O header ainda está acima de outros elementos */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #fff; /* Garante que o header tenha um fundo visível */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil para separação */
+}
+
+  
+main {
+  flex-grow: 1;
+  padding-top: 60px; /* Altura aproximada do header */
+  margin-top: 1.5rem;
+  
+ 
+}
+
+   
+
+  
+html, body {
+  overflow-x: hidden;
+}
+  
+  
+.carousel-item img {
+  margin-top: 5rem;
+    width: 100%;
+    height: 40rem;
+    object-fit: cover;  /* Assegura que as imagens cubram o espaço sem distorcer */
+    object-position: 0% 80%; /* Centraliza a imagem dentro do contêiner */
+  }
+  .carousel-inner {
+    height: 500px; /* Aumenta a altura do carrossel */
+    width: 470px;
+  }
+  
+  .carousel-item {
+    height: 100%; /* Faz com que as imagens se ajustem ao novo tamanho */
+  }
+
+
+  .carousel-inner img {
+    width: 100%;
+    height: 400px
+  }
+  
+  
+  footer {
+    margin-top: auto; /* Empurra o rodapé para o final da página */
+    background-color: #f8f9fa; /* Cor de fundo do rodapé, ajustável */
+    padding: 1rem; /* Espaçamento interno para o rodapé */
+    text-align: center;
+  }
+  
+  /* Cabeçalhos */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif; /* Fonte Principal para Destaques */
+    font-weight: 600; /* Semi-bold */
+    color: var(--text-color);
+    margin: 0;
+    padding: 0.5em 0;
+   
+    
+  }
+
+
+.mobile-font-size{
+  font-size: 1.3rem;
+}
+  
+  /* Links */
+  a {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--button-text-color);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--text-color); /* Rosa Principal */
+    text-decoration: underline;
+    
+  }
+
+  .btn-action:hover{
+    background-color: rgb(255, 19, 165);
+  }
+  
+  
+  
+  
+  /* Inputs e Campos de Formulário */
+  input, textarea, select {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: var(--secondary-color);
+    border: 1px solid var(--text-secondary-color);
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+  }
+  
+  /* Fundo das Seções */
+  .section {
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  /* Rodapé */
+  footer {
+    background-color: var(--footer-bg-color);
+    color: var(--button-text-color);
+    text-align: center;
+    padding: 20px 10px;
+  }
+  
+  footer a {
+    color: var(--button-text-color);
+  }
+  
+  footer a:hover {
+    color: var(--link-color);
+  }
+  
+
+html {
+    height: 100%;
+}
+
+#topnav{
+    background-color:  rgb(255, 19, 165); 
+}
+
+.main-logo-link img {
+    border-radius: 50%;
+    width: 30%;
+    height: 30%;
+    margin-top: -9px;
+    box-shadow: 5px  5px  20px rgb(0, 0, 0); /* Efeito de sombra */
+}
+
+
+/* from Bulma */
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+header i{
+    color:black;
+}
+
+
+
+.dropdown-menu{
+    background-color: var(--secondary-color);
+}
+.dropdown-menu a:hover{
+    color: var(--primary-color);
+    background-color: var(--background-color)
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color:var(--text-color)
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color:var(--text-secondary-color)
+}
+.flashing-sale {
+    color: red; /* Cor inicial */
+    font-weight: bold; /* Destaque */
+    animation: flash 1s infinite; /* Animação infinita de 1 segundo */
+}
+/* Estilização do banner */
+.banner-container {
+  position: relative;
+  text-align: center;
+
+}
+
+.banner-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Ajusta a imagem sem distorcer */
+}
+
+.banner-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.banner-caption h5 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.banner-caption p {
+  font-size: 1.8rem;
+  background-color: var(--secondary-color);
+  border-radius: 8rem;
+  padding: 0.5rem 1.5rem;
+}
+
+.btn-primary{
+  margin-left: 0.3rem;
+}
+.btn-action {
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  box-shadow: 0px 10px 50px #fff;
+}
+
+.update-image {
+  width: 100%; /* Faz com que a imagem ocupe toda a largura do card */
+  height: 200px; /* Ajuste o tamanho de altura conforme necessário */
+  object-fit: cover; /* Faz com que a imagem cubra a área sem distorção */
+}
+
+/* Garantir que todas as imagens no card tenham a mesma largura e altura */
+.card-img-top {
+  width: 100%;
+  height: 380px; /* Tamanho consistente */
+  object-fit: cover; /* Faz a imagem se ajustar sem distorcer */
+  object-position: left 50%;
+  
+}
+
+/* Adicionando mais consistência no layout do card */
+.card-body {
+ 
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  
+  border-radius: 8px; /* Borda arredondada para suavidade */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 
+                0 2px 4px rgba(255, 19, 164, 0.2); /* Sombra leve com tom rosa */
+    padding-top: 2px; /* Ajuste do espaçamento interno */
+    padding-left: 4px;
+    transition: transform 0.3s, box-shadow 0.3s; /* Suavidade ao passar o mouse */
+}
+
+
+
+.card:hover {
+    transform: scale(1.05); /* Aumenta levemente o card no hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 
+                0 4px 8px rgba(255, 19, 164, 0.3); /* Sombra mais pronunciada no hover */
+}
+
+
+.card-title{
+ font-family: 'Playfair Display', serif;
+ font-size:2rem;
+ text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.6), 
+                 0 0 5px rgba(255, 19, 164, 0.5);
+}
+
+.product-card {
+  margin-left: 1rem;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.product-image img {
+  box-shadow: 5px 5px 15px var(--secondary-color);
+  border-radius: 50px;
+  height: 450px; /* Imagem maior para mais destaque */
+  object-fit:cover;
+  width: 100%; /* Garante que a imagem ocupe toda a largura */
+}
+
+.product-btn-pink{
+  background-color: var(--primary-color);
+  border-radius: 20px;
+}
+.product-btn-blue{
+  background-color: var(--secondary-color);
+  border-radius: 20px;
+}
+
+.product-btn-small{
+  min-width:320px ;
+  padding-top: 12px;
+  height: 3.5rem
+}
+.product-btn-pink:hover, .product-btn-blue:hover {
+  background-color: #FF70C0;
+}
+
+.btn-primary-pink {
+  background: #FF13A4;
+  color: white;
+}
+
+.btn-outline-black {
+  background: white;
+  color: black !important; /* use important to override link colors for <a> elements */
+  border: 1px solid black;
+}
+
+.btn-outline-black:hover,
+.btn-outline-black:active,
+.btn-outline-black:focus {
+  background: black;
+  color: white !important;
+}
+
+.increment-qty,
+.decrement-qty{
+  background-color:rgb(252, 250, 250); 
+  border-color: #FF13A4
+}
+.increment-qty i,
+.decrement-qty i{
+  color: #C41284;
+}
+
+
+
+
+.image-container {
+  position: relative;
+  overflow: hidden; /* Garante que o reflexo não ultrapasse os limites */
+}
+
+.image-container img {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra inicial */
+  display: block;
+  width: 100%;
+  
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  margin-left: 7.5rem;
+ 
+}
+
+.image-container img {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 12px var(--secondary-color);
+  width: 94%;
+  height: 80%;
+  margin-top: 7rem;
+  object-fit: cover;
+  
+  
+}
+
+
+.image-container img:hover {
+    transform: scale(1.05); /* Zoom sutil ao passar o mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Intensifica a sombra no hover */
+}
+
+/* Efeito de espelho */
+.image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent, rgba(255, 255, 255, 0.2)); /* Gradiente suave */
+    pointer-events: none; /* Permite interação apenas com a imagem */
+    z-index: 1;
+    mix-blend-mode: screen; /* Cria o efeito de reflexo */
+}
+.product-details-container {
+  background-color: #ff70c142;
+  padding:  0px 2.5rem;
+  border-radius: 15px;
+  min-height: 900px;
+  max-height: 100%;
+  width: 850px;
+ 
+}
+
+.product-details-container h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.product-details-container h2,
+.product-details-container h6,
+.product-details-container p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-details-container small,
+.product-details-container label {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.2rem;
+}
+
+.product-details-container select,
+.product-details-container option{
+  background-color: var(--secondary-color);
+  font-size: 1.2rem;
+}
+
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.btn-primary {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+
+/* Definição da animação */
+@keyframes flash {
+    0%, 100% {
+        opacity: 1; /* Totalmente visível no início e no final */
+    }
+    50% {
+        opacity: 0; /* Invisível no meio do ciclo */
+    }
+}
+
+/* Animação de Salto */
+@keyframes jump {
+  0% {
+    transform: translateY(0); /* Posição original */
+  }
+  30% {
+    transform: translateY(-15px); /* Salto para cima */
+  }
+  50% {
+    transform: translateY(0); /* Volta para a posição original */
+  }
+  70% {
+    transform: translateY(-10px); /* Salto médio */
+  }
+  100% {
+    transform: translateY(0); /* Posição final */
+  }
+}
+/* Animação de Zoom In/Out */
+  @keyframes zoom {
+    0% {
+      transform: scale(1); /* Tamanho original */
+    }
+    50% {
+      transform: scale(1.2); /* Zoom para mais perto */
+    }
+    100% {
+      transform: scale(1); /* Volta ao tamanho original */
+    }
+  }
+
+  /* Aplicando a animação de zoom na imagem */
+  .zoom-effect {
+    animation: zoom 3s ease-in-out infinite; /* Duração e tipo de animação */
+  }
+/* Aplicando a animação de salto na imagem */
+.jump-effect {
+  animation: jump 1s ease-in-out infinite; /* Duração e tipo de animação */
+}
+.whatsapp-container {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+  
+  .btn-whatsapp {
+    background-color: #25D366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn-whatsapp i {
+    margin-right: 10px;
+  }
+  
+  .btn-whatsapp:hover {
+    background-color: #128C7E;
+  }
+
+
+.navbar {
+    width: 100%;
+    padding: 0.5rem 1rem; /* Ajusta o espaçamento para caber em telas menores */
+}
+
+.icon-container {
+  text-align: center;
+}
+.icon-container i {
+  font-size: 1.5rem; /* Ajuste o tamanho conforme necessário */
+  line-height: 1.2;
+}
+.icon-container p {
+  margin-top: 0.5rem;
+  font-size: 0.9rem; /* Ajuste para o texto abaixo do ícone */
+}
+
+.text-primary {
+  color: var(--button-text-color) !important;
+}
+.update-link,
+.remove-item {
+    cursor: pointer;
+   
+}
+
+
+
+input[name='q']::placeholder {
+  color: #aab7c4;
+}
+
+/* ------------------------------- bootstrap toasts */
+
+.custom-toast {
+    overflow: visible;
+}
+
+.toast-capper {
+    height: 2px;
+}
+
+.toast {
+  opacity: 1 !important;
+  position: fixed;
+  top: 120px;
+  right: 15px;
+  z-index:100000;
+}
+
+/* from CSS-tricks.com: https://css-tricks.com/snippets/css/css-triangle/ */
+.arrow-up {
+  width: 0; 
+  height: 0; 
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent; 
+  border-bottom: 10px solid black;
+  position: absolute;
+  top: -10px;
+  right: 36px;
+}
+
+/* Convenience classes - colors copied from Bootstrap */
+.arrow-primary {
+  border-bottom-color: #007bff !important;
+}
+
+.arrow-secondary {
+  border-bottom-color: #6c757d !important;
+}
+
+.arrow-success {
+  border-bottom-color: #28a745 !important;
+}
+
+.arrow-danger {
+  border-bottom-color: #dc3545 !important;
+}
+
+.arrow-warning {
+  border-bottom-color: #ffc107 !important;
+}
+
+.arrow-info {
+  border-bottom-color: #17a2b8 !important;
+}
+
+.arrow-light {
+  border-bottom-color: #f8f9fa !important;
+}
+
+.arrow-dark {
+  border-bottom-color: #343a40 !important;
+}
+
+.bag-notification-wrapper {
+  height: 150px; /* Altura fixa para ativar o scroll quando necessário */
+  overflow-y: auto; /* Scroll apenas na vertical */
+  overflow-x: hidden; /* Esconde a rolagem horizontal */
+  display: flex; /* Mantém os elementos alinhados corretamente */
+  flex-direction: column; /* Garante que os itens fiquem em coluna */
+  scrollbar-width: thin; /* Ajusta o tamanho da barra de rolagem (Firefox) */
+  scrollbar-color: #888 #f1f1f1; /* Cor da barra de rolagem (Firefox) */
+}
+
+
+
+/* Allauth form formatting */
+
+.allauth-form-inner-content p {
+  margin-top: 1.5rem; /* mt-4 */
+  color: #6c757d; /* text-secondary */
+}
+
+.allauth-form-inner-content input {
+  border-color: #000;
+  border-radius: 0;
+}
+
+.allauth-form-inner-content label:not([for='id_remember']) {
+  display: none;
+}
+
+.allauth-form-inner-content input::placeholder {
+  color: #aab7c4;
+}
+
+.allauth-form-inner-content button,
+.allauth-form-inner-content input[type='submit'] {
+/* btn */
+display: inline-block;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: #FF13A4;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0;
+
+  /* standard bootstrap btn transitions */
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.allauth-form-inner-content button:hover,
+.allauth-form-inner-content input[type='submit']:hover {	
+color: #222;
+border-color: #222;
+}
+
+.allauth-form-inner-content a {
+color: #17a2b8; /* text-info */
+}
+
+/* Product Form */
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-file input[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.custom-checkbox .custom-control-label::before {
+  border-radius: 0;
+  border-color: #dc3545;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  border-radius: 0;
+}
+
+
+
+  /* -------------------------------- Media Queries */
+
+/* -------------------------------- Media Queries */
+
+/* Extra small (menos de 576px) */
+@media (max-width: 575.98px) {
+  .image-container {
+    width: 600vw;/* Garantir que a imagem ocupe a largura total da tela */
+    height: 500px;
+    margin-left: 1rem; /* Centralizar imagem */
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    
+    
+    
+   
+  }
+
+  .image-container img {
+    
+    width: 90%;
+    height: 50vh; /* A imagem ocupa toda a largura da div */
+     /* Manter a proporção da imagem */
+    
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-radius: 20px;
+   
+  
+ 
+  }
+
+  .main-logo-link img {
+    
+    width: 12rem;
+    height: 11rem;
+    margin-left: 4rem;
+    
+   
+   
+  }
+  
+  .dropdown-menu{
+    margin-right: -20rem;
+  }
+  
+  .navbar {
+    height: auto;
+   
+  }
+  
+.custom-height {
+  height: 448px;
+}
+  
+
+  
+  
+}
+
+
+
+/* Small (de 576px até 767.98px) */
+@media (max-width: 392px) {
+  main{
+    margin-top: 3.3rem;
+  }
+}
+@media (min-width: 576px) and (max-width: 767.98px) {
+  
+  .main-logo-link img {
+    margin-top: 0.5rem;
+    width: 10rem;
+    height: 12rem;
+    
+  }
+  .custom-height {
+    height: 550px;
+  }
+ 
+  .image-container {
+    width: 600vw;/* Garantir que a imagem ocupe a largura total da tela */
+    height: 900px;
+    margin-left: 1rem; /* Centralizar imagem */
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    
+    
+    
+   
+  }
+
+  .image-container img {
+    
+   
+    height: 65vh; /* A imagem ocupa toda a largura da div */
+   
+  
+ 
+  }
+}
+/* Medium (de 768px até 991.98px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Seus estilos aqui */
+  .main-logo-link img {
+    margin-top: 0.5rem;
+    width: 15rem;
+    height: 15rem;
+    margin-left: 8rem;
+  }
+  .image-container {
+    width: 600vw;/* Garantir que a imagem ocupe a largura total da tela */
+    height: 900px;
+    margin-left: 1rem; /* Centralizar imagem */
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    
+    
+    
+   
+  }
+
+  .image-container img {
+    
+   
+    height: 65vh; /* A imagem ocupa toda a largura da div */
+   
+  
+ 
+  }
+  
+}
+
+/* Large (de 992px até 1199.98px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  /* Seus estilos aqui */
+  
+}
+
+/* Extra large (de 1200px até 1399.98px) */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  /* Seus estilos aqui */
+}
+
+/* Extra extra large (mais de 1400px) */
+@media (min-width: 1400px) {
+  /* Seus estilos aqui */
+}
+
+/* -------------------------------- Custom Media Queries */
+
+/* Slightly larger container on xl screens */
+@media (min-width: 1200px) {
+  .container {
+      max-width: 80%;
+  }
+}
+
+/* Fixed top navbar only on medium and up */
+@media (min-width: 992px) {
+  .fixed-top-desktop-only {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 1030;
+  }
+
+  
+
+  .header-container {
+      padding-top: 164px;
+    
+  }
+ .product-details-container{
+  padding-top: 2rem;
+  margin-top: 7rem;
+ }
+  
+ .product-details-container h2,
+ .product-details-container h6,
+ .product-details-container p {
+   font-size: 1.5rem;
+ }
+}
+
+/* Card adjustments for medium screens */
+@media (max-width: 992px) {
+  .card {
+      width: 350px;
+  }
+  .product-details-container ul li{
+    font-size: 0.9rem;
+  }
+  .product-details-container{
+    
+    width: 100%;
+  }
+
+  .product-details-container{
+    font-size: 2rem ;
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    padding-top: 0;
+  }
+  
+  .product-details-container h2,
+.product-details-container h6,
+.product-details-container p {
+  font-size: 1.5rem;
+  margin-bottom: 0px;
+  margin-top: 0;
+  padding: 0px;
+  
+}
+.product-details-container h1{
+  padding-top: 1rem;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+  
+}
+@media (max-width: 768px) {
+  /* Seus estilos aqui */
+}
+
+
+
