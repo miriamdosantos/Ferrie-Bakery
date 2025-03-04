@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 
 import os
-import env
 import dj_database_url
 # Importa o env.py se existir
 if os.path.isfile('env.py'):
