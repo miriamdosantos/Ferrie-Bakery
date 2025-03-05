@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+
 from django.db.models import Min
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -7,45 +8,17 @@ from django.db.models import Q
 from .models import Product, Category
 from .forms import ProductForm
 
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 
 
 def all_products(request):
-    """A view to show all products, including search queries"""
-    
+    """Exibe todos os produtos."""
     products = Product.objects.all()
-    query = None
-
-    if request.GET:
-        if 'q' in request.GET:
-            query = request.GET['q']
-            if not query:
-                messages.error(request, "You didn't enter any search criteria!")
-                return redirect(reverse('products'))
-            
-            # Corrigindo a lógica de busca
-            queries = Q(name__icontains=query) | Q(description__icontains=query) | Q(flavors__name__icontains=query)
-            products = products.filter(queries).distinct()
-    
-    if not products:
-        messages.error(request, " Search criteria not found!")
-        return redirect(reverse('products'))
-
-    # Se não houver busca, pegue apenas o primeiro produto de cada categoria
-    first_product_ids = (
-        Product.objects
-        .values('category')
-        .annotate(first_product_id=Min('id'))
-        .values_list('first_product_id', flat=True)
-    )
-    
-    products = products.filter(id__in=first_product_ids)
-
-    context = {
-        'products': products,
-        'stars_range': range(1, 6),
-        'search_term': query,
-    }
-
+    context = {'products': products}
     return render(request, 'products/products.html', context)
 
 def product_detail(request, product_id):
@@ -85,27 +58,38 @@ def product_detail(request, product_id):
 
     return render(request, 'products/product_detail.html', context)
 
-def products_by_category(request, slug):
-    if slug == 'all-cakes':
-        # Lógica para buscar todos os bolos
-        products = Product.objects.filter(category__name__in=['Birthday Cake', 'Wedding Cake'])
-        category = 'All Cakes'
-    elif slug == 'all-desserts':
-        products = Product.objects.filter(category__name__in=['Cakes in a Pot', 'Mousses', 'Pies'])
-        category = 'All Desserts'
-    else:
-        category = get_object_or_404(Category, slug=slug)
-        products = Product.objects.filter(category=category)
+from django.shortcuts import render, get_object_or_404
+from .models import Product, Category
 
-    # Verifica se há apenas um produto
-    no_more_items_message = None
-    if products.count() == 1:
-        no_more_items_message = "Option currently available, with more exciting choices coming soon!"
+def products_by_category(request, slug=None):
+    """
+    Exibe uma lista de produtos, filtrando por categoria se um slug de categoria for fornecido.
+    """
+    products = Product.objects.all()
+    category = None
+    no_more_items_message = None  # Inicializa a mensagem
+
+    if slug:
+        if slug == 'all-cakes':
+            categories = Category.objects.filter(name__in=['Birthday Cake', 'Wedding Cake'])
+            products = products.filter(category__in=categories)
+            category = "All Cakes"  # String, não objeto Category
+        elif slug == 'all-desserts':
+            categories = Category.objects.filter(name__in=['Cakes in a Pot', 'Mousses', 'Pies'])
+            products = products.filter(category__in=categories)
+            category = "All Desserts"  # String, não objeto Category
+        else:
+            category = get_object_or_404(Category, slug=slug)
+            products = products.filter(category=category)
+
+        # Verifica se há apenas um produto (APÓS o filtro)
+        if products.count() == 1:
+            no_more_items_message = "Option currently available, with more exciting choices coming soon!"
 
     context = {
-        'category': category,
         'products': products,
-        'no_more_items_message': no_more_items_message,
+        'category': category,  # Pode ser um objeto Category ou uma string
+        'no_more_items_message': no_more_items_message,  # Adiciona a mensagem ao contexto
     }
     
     return render(request, 'products/category_products.html', context)
