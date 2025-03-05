@@ -2,6 +2,8 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from decimal import Decimal
+from cloudinary.models import CloudinaryField
+
 
 
 from django.utils.encoding import force_str
@@ -89,11 +91,7 @@ class Product(models.Model):
     is_best_seller = models.BooleanField(default=False)
     has_topper = models.BooleanField(default=False, verbose_name=_("Has Topper"))
     has_roses = models.BooleanField(default=False, verbose_name=_("Has Roses"))
-    image = models.ImageField(
-    null=True,
-    blank=True,
-    default="noimage.jpg"  # Imagem padrão caso o produto não tenha uma
-)
+    image = CloudinaryField('image', default='noimage.jpg', blank=True, null=True)
 
     flavors = models.ManyToManyField("Flavor",  verbose_name=_("Flavors"))
 

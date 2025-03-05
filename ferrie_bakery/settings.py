@@ -66,13 +66,16 @@ INSTALLED_APPS = [
      # Other
     "crispy_forms",
     "crispy_bootstrap4",
-    'storages'
+    'storages',
+    'cloudinary',
+    'cloudinary_storage',
     
 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -207,29 +210,33 @@ LOCALE_PATHS = [
 import os
 
 
-# Configurações padrões de arquivos estáticos e mídia (usado em desenvolvimento)
+# URL para acessar arquivos estáticos
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+
+# Diretórios onde o Django procurará por arquivos estáticos adicionais
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Diretório onde os arquivos estáticos serão coletados (usado em produção)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Configuração para produção com S3
-USE_AWS = os.environ.get('USE_AWS') == 'True'
-if USE_AWS:
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    
+# URL para acessar arquivos de mídia
+MEDIA_URL = '/media/'
+
+# Diretório onde os arquivos de mídia serão armazenados
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}  
     # Configuração do django-storages para arquivos estáticos e de mídia
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
     
-    # URL que apontará para os arquivos no S3
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+    
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
