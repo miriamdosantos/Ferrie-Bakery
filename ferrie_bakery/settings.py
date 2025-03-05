@@ -40,7 +40,7 @@ DEBUG = False
 
 
 
-ALLOWED_HOSTS = ['192.168.102.7', '127.0.0.1', 'localhost', 'herokuapp.com',
+ALLOWED_HOSTS = ['192.168.102.7', '127.0.0.1', 'localhost', 'ferrie-website-86a828cbe018.herokuapp.com',
 ]
 
 
