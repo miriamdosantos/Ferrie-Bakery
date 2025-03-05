@@ -40,8 +40,7 @@ DEBUG = False
 
 
 
-ALLOWED_HOSTS = ['192.168.102.7', '127.0.0.1', 'localhost', 'ferrie-8f460b776e43.herokuapp.com',
-                 '*'
+ALLOWED_HOSTS = ['192.168.102.7', '127.0.0.1', 'localhost', 'herokuapp.com',
 ]
 
 
@@ -212,30 +211,25 @@ LOCALE_PATHS = [
 
 import os
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# URL para acessar arquivos estáticos
 STATIC_URL = '/static/'
-
-# Diretórios onde o Django procurará por arquivos estáticos adicionais
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
-# Diretório onde os arquivos estáticos serão coletados (usado em produção)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# URL para acessar arquivos de mídia
-MEDIA_URL = '/media/'
-
-# Diretório onde os arquivos de mídia serão armazenados
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
-}  
-    # Configuração do django-storages para arquivos estáticos e de mídia
+# Whitenoise configuration
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Add to the bottom of the file
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Cloudinary configuration
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
     
