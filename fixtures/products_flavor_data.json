@@ -1,0 +1,312 @@
+[
+{
+  "model": "products.flavor",
+  "pk": 2,
+  "fields": {
+    "name": "Milk Powder",
+    "name_en": "Milk Powder",
+    "name_pt_br": "Ninho",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 3,
+  "fields": {
+    "name": "Milk Powder with Strawberry",
+    "name_en": "Milk Powder with Strawberry",
+    "name_pt_br": "Leite Ninho com Morango",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 4,
+  "fields": {
+    "name": "Pineapple",
+    "name_en": "Pineapple",
+    "name_pt_br": "Abacaxi",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 5,
+  "fields": {
+    "name": "Peach with White Cream",
+    "name_en": "Peach with White Cream",
+    "name_pt_br": "Pêssego com creme branco",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 6,
+  "fields": {
+    "name": "Peaches with Dulce de Leche",
+    "name_en": "Peaches with Dulce de Leche",
+    "name_pt_br": "Pêssegos com doce de leite",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 7,
+  "fields": {
+    "name": "Strawberries with White Cream",
+    "name_en": "Strawberries with White Cream",
+    "name_pt_br": "Morango com creme branco",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 8,
+  "fields": {
+    "name": "Strawberries with Dulce de Leche",
+    "name_en": "Strawberries with Dulce de Leche",
+    "name_pt_br": "Morango com doce de leite",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 9,
+  "fields": {
+    "name": "Strawberries with Chocolate Mousse",
+    "name_en": "Strawberries with Chocolate Mousse",
+    "name_pt_br": "Morango com mousse de chocolate",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 10,
+  "fields": {
+    "name": "Prestige (Coconut and Chocolate)",
+    "name_en": "Prestige (Coconut and Chocolate)",
+    "name_pt_br": "Prestígio",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 11,
+  "fields": {
+    "name": "Chocolate Mousse",
+    "name_en": "Chocolate Mousse",
+    "name_pt_br": "Mousse de chocolate",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 12,
+  "fields": {
+    "name": "Chocolate Mousse with Ninho (Powdered Milk)",
+    "name_en": "Chocolate Mousse with Ninho (Powdered Milk)",
+    "name_pt_br": "Mousse de chocolate com ninho",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 13,
+  "fields": {
+    "name": "Milk Chocolate Ganache",
+    "name_en": "Milk Chocolate Ganache",
+    "name_pt_br": "Ganache de chocolate ao leite",
+    "is_truffled": true
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 14,
+  "fields": {
+    "name": "Dark Chocolate Ganache",
+    "name_en": "Dark Chocolate Ganache",
+    "name_pt_br": "Ganache de chocolate meio amargo",
+    "is_truffled": true
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 15,
+  "fields": {
+    "name": "White Chocolate Ganache",
+    "name_en": "White Chocolate Ganache",
+    "name_pt_br": "Ganache de chocolate branco",
+    "is_truffled": true
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 17,
+  "fields": {
+    "name": "Strawberry Brigadeiro (Bicho de Pé)",
+    "name_en": "Strawberry Brigadeiro (Bicho de Pé)",
+    "name_pt_br": "Bicho de pé",
+    "is_truffled": true
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 18,
+  "fields": {
+    "name": "Peanut Candy (Paçoca)",
+    "name_en": "Peanut Candy (Paçoca)",
+    "name_pt_br": "Paçoca",
+    "is_truffled": true
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 19,
+  "fields": {
+    "name": "Strawberry Pie",
+    "name_en": "Strawberry Pie",
+    "name_pt_br": "Torta de Morango",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 20,
+  "fields": {
+    "name": "Chocolate Pie",
+    "name_en": "Chocolate Pie",
+    "name_pt_br": "Torta de chocolate",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 22,
+  "fields": {
+    "name": "Milk Cream Mousse (Ninho)",
+    "name_en": "Milk Cream Mousse (Ninho)",
+    "name_pt_br": "Mousse de leite ninho",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 23,
+  "fields": {
+    "name": "Lime Mousse",
+    "name_en": "Lime Mousse",
+    "name_pt_br": "Mousse de limão",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 24,
+  "fields": {
+    "name": "Passion Fruit Mousse",
+    "name_en": "Passion Fruit Mousse",
+    "name_pt_br": "Mousse de maracujá",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 25,
+  "fields": {
+    "name": "White Chocolate Mousse",
+    "name_en": "White Chocolate Mousse",
+    "name_pt_br": "Mousse de chocolate branco",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 26,
+  "fields": {
+    "name": "Banana Cake",
+    "name_en": "Banana Cake",
+    "name_pt_br": "Bolo da banana",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 27,
+  "fields": {
+    "name": "Dulce de Leche with Plum",
+    "name_en": "Dulce de Leche with Plum",
+    "name_pt_br": "Doce de leite com ameixa",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 28,
+  "fields": {
+    "name": "Dulce de Leche with Strawberry",
+    "name_en": "Dulce de Leche with Strawberry",
+    "name_pt_br": "Doce de leite com morango",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 29,
+  "fields": {
+    "name": "Coconut Kiss (Beijinho)",
+    "name_en": "Coconut Kiss (Beijinho)",
+    "name_pt_br": "Beijinho",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 30,
+  "fields": {
+    "name": "Chocolate Fudge (Brigadeiro)",
+    "name_en": "Chocolate Fudge (Brigadeiro)",
+    "name_pt_br": "Brigadeiro",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 31,
+  "fields": {
+    "name": "Strawberry Fudge (Bicho de Pé)",
+    "name_en": "Strawberry Fudge (Bicho de Pé)",
+    "name_pt_br": "Bicho de Pé",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 33,
+  "fields": {
+    "name": "Strawberry with Ninho, Vanilla Cake, White Ganache, White Cream, and Chocolate Shavings",
+    "name_en": "Strawberry with Ninho, Vanilla Cake, White Ganache, White Cream, and Chocolate Shavings",
+    "name_pt_br": "Morango com ninho, massa de baunilha, ganache branco, creme branco e raspas de chocolate",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 34,
+  "fields": {
+    "name": "Chocolate Mousse with Ganache, Chocolate Cake, White Cream, Strawberries, and Milk Chocolate Shavings",
+    "name_en": "Chocolate Mousse with Ganache, Chocolate Cake, White Cream, Strawberries, and Milk Chocolate Shavings",
+    "name_pt_br": "Mousse de chocolate com ganache, massa de chocolate, creme branco,  morango e raspas de chocolate ao leite",
+    "is_truffled": false
+  }
+},
+{
+  "model": "products.flavor",
+  "pk": 35,
+  "fields": {
+    "name": "Banana with special dulce de leche cream and whipped cream.",
+    "name_en": "Banana with special dulce de leche cream and whipped cream.",
+    "name_pt_br": "banana com doce de leite creme especial e chantilly",
+    "is_truffled": false
+  }
+}
+]
