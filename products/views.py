@@ -19,7 +19,9 @@ def all_products(request):
     """Exibe todos os produtos."""
     products = Product.objects.all()
     context = {'products': products}
+    
     return render(request, 'products/products.html', context)
+
 
 def product_detail(request, product_id):
     """ A view to show individual product details """

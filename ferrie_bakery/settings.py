@@ -40,8 +40,8 @@ DEBUG = False
 
 
 
-ALLOWED_HOSTS = ['ferrie-website-86a828cbe018.herokuapp.com',  # URL gerada pelo Heroku
-    'ferrie-website.herokuapp.com',  # Nome padrão sem identificador (caso funcione)
+ALLOWED_HOSTS = ['ferrie-afe9137c5292.herokuapp.com',  # URL gerada pelo Heroku
+    'ferrie.herokuapp.com',  # Nome padrão sem identificador (caso funcione)
     'localhost',
     '127.0.0.1'
 ]
