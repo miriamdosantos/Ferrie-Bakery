@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from cloudinary.models import CloudinaryField
+
 
 # Create your models here.
 
@@ -9,7 +11,7 @@ class StoreUpdate(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
+    image = CloudinaryField('image', default='noimage.jpg', blank=True, null=True)
 
     class Meta:
         verbose_name = _("Store Update")
