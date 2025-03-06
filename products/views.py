@@ -16,12 +16,27 @@ logger = logging.getLogger(__name__)
 
 
 def all_products(request):
-    """Exibe todos os produtos."""
+    """Exibe todos os produtos, com suporte a busca."""
+
+    query = request.GET.get('q', '').strip()  # Captura e limpa espaços extras
     products = Product.objects.all()
-    context = {'products': products}
+
+    if not query:  # Se a busca estiver vazia
+        messages.warning(request, "Please enter a search term.")
+        return redirect(reverse('home'))  # Redireciona para a página inicial
+
+    # Filtra os produtos pelo termo de busca
+    products = products.filter(
+        Q(name__icontains=query) | Q(description__icontains=query)
+    )
+
+    if not products.exists():  # Se não houver produtos encontrados
+        messages.info(request, "No products found matching your search.")
+        return redirect(reverse('home'))  # Redireciona para a página inicial
+
+    context = {'products': products, 'search_query': query}
     
     return render(request, 'products/products.html', context)
-
 
 def product_detail(request, product_id):
     """ A view to show individual product details """
