@@ -36,7 +36,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 
@@ -56,6 +56,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    
+    # WhiteNoise precisa vir ANTES do staticfiles
+    'whitenoise.runserver_nostatic', 
+
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'allauth',
@@ -69,27 +73,25 @@ INSTALLED_APPS = [
     'checkout',
     'profiles',
 
-     # Other
+    # Other
     "crispy_forms",
     "crispy_bootstrap4",
     'storages',
     'cloudinary',
     'cloudinary_storage',
     'django_extensions',
-    
-
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # <- Adicione essa linha aqui
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # Adicione este middleware:
+ # Adicione este middleware:
     'allauth.account.middleware.AccountMiddleware',
 ]
 
@@ -223,7 +225,11 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Whitenoise configuration
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+if 'DATABASE_URL' in os.environ:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+WHITENOISE_USE_FINDERS = True
 
 # Add to the bottom of the file
 MEDIA_URL = '/media/'
