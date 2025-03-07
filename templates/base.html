@@ -39,6 +39,7 @@
 </head>
 
 <body>
+    
     <header class="container-fluid  ">
         <div id="topnav" class="row pt-lg-2 d-none d-lg-flex">
             <div class="col-12- col-lg-4 my-auto py-1 py-lg-0 d-block">
@@ -126,14 +127,15 @@
             </div>
         </div>
     </header>
-
+    
+    
     <!-- Div do WhatsApp, logo após a barra de navegação -->
     <div class="whatsapp-container fixed-bottom">
         <a href="https://wa.me/5511942852790" target="_blank" class="btn btn-success">
             <i class="fab fa-whatsapp"></i> Chat on WhatsApp
         </a>
     </div>
-    <main>
+    
         {% if messages %}
         <div class="message-container">
             {% for message in messages %}
@@ -156,6 +158,9 @@
         {% endblock %}
 
         {% block content %}
+        <main>
+
+        </main>
         {% endblock %}
 
         {% block postloadjs %}
@@ -164,7 +169,7 @@
             $('.toast').toast('show');
         </script>
             {% endblock %}
-    </main>
+        
 </body>
 
 </html>

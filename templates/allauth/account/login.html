@@ -6,7 +6,7 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block inner_content %}
-
+<main>
 <hr>
 <h2 class="logo-font mb-4">{% trans "Sign In" %}</h2>
 
@@ -36,7 +36,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 <a href="{{ signup_url }}" style="color: black;">sign up</a> first.{% endblocktrans %}</p>
 {% endif %}
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
+<form class="login" method="POST" action="{% url 'account_login' %}" style="margin-bottom: 5rem;">
   {% csrf_token %}
   {{ form|crispy }}
   {% if redirect_field_value %}
@@ -46,5 +46,5 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
   
 </form>
-
+</main>
 {% endblock %}

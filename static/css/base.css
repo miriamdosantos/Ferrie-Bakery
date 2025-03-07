@@ -39,8 +39,8 @@
   
 main {
   flex-grow: 1;
-  padding-top: 60px; /* Altura aproximada do header */
-  margin-top: 1.5rem;
+  padding-top: 280px; /* Altura aproximada do header */
+
   
  
 }
@@ -62,7 +62,7 @@ html, body {
   }
   .carousel-inner {
     height: 500px; /* Aumenta a altura do carrossel */
-    width: 470px;
+    width: 100%
   }
   
   .carousel-item {
@@ -800,9 +800,7 @@ color: #17a2b8; /* text-info */
 
 /* Small (de 576px até 767.98px) */
 @media (max-width: 392px) {
-  main{
-    margin-top: 3.3rem;
-  }
+  
 }
 @media (min-width: 576px) and (max-width: 767.98px) {
   
@@ -836,6 +834,7 @@ color: #17a2b8; /* text-info */
   
  
   }
+  
 }
 /* Medium (de 768px até 991.98px) */
 @media (min-width: 768px) and (max-width: 991.98px) {
@@ -891,6 +890,13 @@ color: #17a2b8; /* text-info */
 @media (min-width: 1200px) {
   .container {
       max-width: 80%;
+  }
+  main {
+    
+    padding-top: 240px; /* Altura aproximada do header */
+  
+    
+   
   }
 }
 

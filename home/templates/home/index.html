@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block content %}
-
+<main>
 <!-- Carrossel de Produtos / Sugestões -->
 <div id="carouselExample" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
@@ -11,15 +11,13 @@
         <div class="carousel-item active" style="margin-left: -50px; ">
             <img src="{% static 'images/mouses.jpeg' %}"class="img-fluid zoom-effect" alt="{% trans 'Wedding or Birthday Cake' %}">
             <div class="carousel-caption text-center">
-                <h5 style="font-size: 3rem; color: #fff; text-shadow: 2px 2px 5px rgba(0,0,0,0.7); ">
-                    {% trans "Order Now!" %}
-                </h5>
+               
                 <p class="d-none d-lg-block" style="font-size: 1.8rem; color: #fff; 
                         text-shadow: 10px 10px 15px rgba(0,0,0,0.7); background-color:#FF70C0; border-radius: 8rem;">
                     {% trans "Your wedding or birthday cake customized for a special day." %}
                 </p>
-                <a href="#product1" class="btn btn-danger btn-lg btn-action"
-                    style="box-shadow: 0px 4px 50px rgba(255,0,0,0.7);">{% trans "Order Now" %}</a>
+                <a href="{% url 'products' %}"class="btn btn-danger btn-lg btn-action"
+                    style="box-shadow: 0px 4px 50px rgba(255,0,0,0.7);">{% trans "Order Now!" %}</a>
             </div>
         </div>
     </div>
@@ -61,8 +59,7 @@
                                         {% endif %}
                                         {% endfor %}
                                         {% else %}
-                                        <span class="fw-bold text-muted bg-light p-2 rounded-pill ">{% trans "Rating not
-                                            found" %}</span>
+                                        <span class="fw-bold text-muted bg-light p-2 rounded-pill ">{% trans "Rating not found" %}</span>
                                         {% endif %}
                                 </div>
                                 <a href="#" class="btn btn-primary btn-large product-btn-pink product-btn-small "
@@ -104,5 +101,6 @@
         </div>
     </div>
 </section>
+</main>
 
 {% endblock %}

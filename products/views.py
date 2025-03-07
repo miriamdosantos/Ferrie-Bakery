@@ -16,26 +16,27 @@ logger = logging.getLogger(__name__)
 
 
 def all_products(request):
-    """Exibe todos os produtos, com suporte a busca."""
+    """Exibe todos os produtos por padrão e aplica filtro se houver busca."""
 
-    query = request.GET.get('q', '').strip()  # Captura e limpa espaços extras
-    products = Product.objects.all()
+    query = request.GET.get('q', '').strip()  # Captura e remove espaços extras
 
-    if not query:  # Se a busca estiver vazia
+    if query:  # Se houver uma busca
+        products = Product.objects.filter(
+            Q(name__icontains=query) | 
+            Q(description__icontains=query) | 
+            Q(flavor__icontains=query) |  # Agora filtra por sabor (flavor)
+            Q(category__name__icontains=query)  # Filtra por nome da categoria
+        )
+        if not products.exists():  # Se nenhum produto for encontrado
+            messages.info(request, "No products found matching your search.")
+            return redirect(reverse('home'))  # Redireciona para a home
+    elif 'q' in request.GET:  # Se o usuário buscou mas não digitou nada
         messages.warning(request, "Please enter a search term.")
-        return redirect(reverse('home'))  # Redireciona para a página inicial
-
-    # Filtra os produtos pelo termo de busca
-    products = products.filter(
-        Q(name__icontains=query) | Q(description__icontains=query)
-    )
-
-    if not products.exists():  # Se não houver produtos encontrados
-        messages.info(request, "No products found matching your search.")
-        return redirect(reverse('home'))  # Redireciona para a página inicial
+        return redirect(reverse('home'))  # Redireciona para a home
+    else:
+        products = Product.objects.all()  # Exibe todos os produtos se não houver busca
 
     context = {'products': products, 'search_query': query}
-    
     return render(request, 'products/products.html', context)
 
 def product_detail(request, product_id):
