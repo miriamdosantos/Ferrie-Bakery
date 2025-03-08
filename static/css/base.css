@@ -61,12 +61,13 @@ html, body {
     object-position: 0% 80%; /* Centraliza a imagem dentro do contêiner */
   }
   .carousel-inner {
-    height: 500px; /* Aumenta a altura do carrossel */
+    height: 60vh; /* Aumenta a altura do carrossel */
     width: 100%
   }
   
   .carousel-item {
     height: 100%; /* Faz com que as imagens se ajustem ao novo tamanho */
+    margin-top: -3rem;
   }
 
 
@@ -247,7 +248,7 @@ header i{
 }
 
 .btn-primary{
-  margin-left: 0.3rem;
+  margin-left: 1rem;
 }
 .btn-action {
   background-color: var(--background-color);
@@ -255,24 +256,25 @@ header i{
   box-shadow: 0px 10px 50px #fff;
 }
 
-.update-image {
-  width: 100%; /* Faz com que a imagem ocupe toda a largura do card */
-  height: 200px; /* Ajuste o tamanho de altura conforme necessário */
-  object-fit: cover; /* Faz com que a imagem cubra a área sem distorção */
-}
+
 
 /* Garantir que todas as imagens no card tenham a mesma largura e altura */
 .card-img-top {
   width: 100%;
-  height: 380px; /* Tamanho consistente */
-  object-fit: cover; /* Faz a imagem se ajustar sem distorcer */
-  object-position: left 50%;
-  
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
 }
 
 /* Adicionando mais consistência no layout do card */
 .card-body {
  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  
+  
   text-align: center;
   font-family: 'Lato', sans-serif;
   
@@ -295,7 +297,7 @@ header i{
 
 .card-title{
  font-family: 'Playfair Display', serif;
- font-size:2rem;
+ font-size:1.5rem;
  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.6), 
                  0 0 5px rgba(255, 19, 164, 0.5);
 }
@@ -329,10 +331,11 @@ header i{
   border-radius: 20px;
 }
 
-.product-btn-small{
-  min-width:320px ;
-  padding-top: 12px;
-  height: 3.5rem
+.product-btn-small {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.75rem 1rem;
+  height: auto;
 }
 .product-btn-pink:hover, .product-btn-blue:hover {
   background-color: #FF70C0;
@@ -792,7 +795,7 @@ color: #17a2b8; /* text-info */
 }
   
 
-  
+
   
 }
 
@@ -833,6 +836,9 @@ color: #17a2b8; /* text-info */
    
   
  
+  }
+  .btn-primary{
+    margin-left: 5rem;
   }
   
 }
@@ -930,9 +936,7 @@ color: #17a2b8; /* text-info */
 
 /* Card adjustments for medium screens */
 @media (max-width: 992px) {
-  .card {
-      width: 350px;
-  }
+  
   .product-details-container ul li{
     font-size: 0.9rem;
   }
@@ -966,7 +970,7 @@ color: #17a2b8; /* text-info */
   
 }
 @media (max-width: 768px) {
-  /* Seus estilos aqui */
+  
 }
 
 

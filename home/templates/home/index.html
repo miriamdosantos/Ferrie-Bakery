@@ -8,7 +8,7 @@
 <div id="carouselExample" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         <!-- Slide único (imagem destacada) -->
-        <div class="carousel-item active" style="margin-left: -50px; ">
+        <div class="carousel-item active"  >
             <img src="{% static 'images/mouses.jpeg' %}"class="img-fluid zoom-effect" alt="{% trans 'Wedding or Birthday Cake' %}">
             <div class="carousel-caption text-center">
                
@@ -17,7 +17,7 @@
                     {% trans "Your wedding or birthday cake customized for a special day." %}
                 </p>
                 <a href="{% url 'products' %}"class="btn btn-danger btn-lg btn-action"
-                    style="box-shadow: 0px 4px 50px rgba(255,0,0,0.7);">{% trans "Order Now!" %}</a>
+                    style="box-shadow: 0px 4px 50px rgba(255,0,0,0.7); margin-bottom: 1rem;">{% trans "Order Now!" %}</a>
             </div>
         </div>
     </div>
@@ -31,15 +31,16 @@
         <div class="row">
             <!-- Best Sellers -->
             <div class="col-12">
-                <h2 class="text-center font-weight-bold mb-5" style="color: #FF13A4;">
+                <h2 class="text-center font-weight-bold mb-2" style="color: #FF13A4; font-size: 2rem;">
                     {% trans "Best Sellers" %}
                 </h2>
                 <div class="row">
                     {% for product in best_sellers %}
-                    <div class="col-md-6 col-lg-4 mb-4 offset-md-2 " style="padding-left: 2rem;">
-                        <div class="card shadow-sm" style="background-color: #a8e6cfac;">
+                    <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2 mb-4">
+
+                        <div class="card shadow-sm w-100 h-100" style="background-color: #a8e6cfac;">
                             {% if product.image %}
-                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top">
                             {% else %}
                             <img src="{% static 'images/noimage.png' %}" alt="Imagem não disponível">
                             {% endif %}
@@ -62,7 +63,7 @@
                                         <span class="fw-bold text-muted bg-light p-2 rounded-pill ">{% trans "Rating not found" %}</span>
                                         {% endif %}
                                 </div>
-                                <a href="#" class="btn btn-primary btn-large product-btn-pink product-btn-small "
+                                <a href="{% url 'products_by_category' product.category.slug %}" class="btn btn-primary btn-large product-btn-pink product-btn-small "
                                     style="font-size: 1.15rem;">
                                     {{ product.custom_title }}
                                 </a>
@@ -85,9 +86,9 @@
         <div class="row">
             {% for update in stores_updates %}
             <div class="col-sm-12 col-md-6 mb-4  ">
-                <div class="card shadow-sm " style="height: 600px; min-width: 22rem;margin-left: 1rem; ">
+                <div class="card shadow-sm w-100 h-100 ">
                     {% if update.image %}
-                    <img src="{{ update.image.url }}" class="card-img-top update-image" alt="{{ update.title }}">
+                    <img src="{{ update.image.url }}" class="card-img-top " alt="{{ update.title }}">
                     {% endif %}
                     <div class="card-body " style="background-color: #a8e6cfac;">
                         <h5 class="card-title">{{ update.title }}</h5>

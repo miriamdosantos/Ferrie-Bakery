@@ -2675,3 +2675,38 @@ Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Starting new HTTPS connection (1): api.cloudinary.com:443
+https://api.cloudinary.com:443 "POST /v1_1/ddotia4k5/image/upload HTTP/11" 200 None
+https://api.cloudinary.com:443 "POST /v1_1/ddotia4k5/image/upload HTTP/11" 200 None
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /media/noimage.png
+Resetting dropped connection: api.cloudinary.com
+https://api.cloudinary.com:443 "POST /v1_1/ddotia4k5/image/upload HTTP/11" 200 None
+https://api.cloudinary.com:443 "POST /v1_1/ddotia4k5/image/upload HTTP/11" 200 None
+https://api.cloudinary.com:443 "POST /v1_1/ddotia4k5/image/upload HTTP/11" 200 None
+Not Found: /media/noimage.png
+Not Found: /media/noimage.png
+Not Found: /media/noimage.png
+Not Found: /media/noimage.png
+Not Found: /{ % url 'products_by_category' product.slug %}
+Not Found: /{ % url 'products_by_category' product.slug %}
+Not Found: /{ % url 'products_by_category' product.slug %}
+Not Found: /{ % url 'products_by_category' product.slug %}
+Watching for file changes with StatReloader
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\ferrie_bakery\settings.py changed, reloading.
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\ferrie_bakery\settings.py changed, reloading.
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\ferrie_bakery\settings.py changed, reloading.
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\ferrie_bakery\settings.py changed, reloading.
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\ferrie_bakery\settings.py changed, reloading.
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\ferrie_bakery\settings.py changed, reloading.
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\ferrie_bakery\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
