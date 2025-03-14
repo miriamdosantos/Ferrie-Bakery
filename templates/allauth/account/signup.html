@@ -6,9 +6,11 @@
 
 {% block inner_content %}
 <main>
-<hr>
+  <hr>
+  <div class="container mt-4 pb-5 mb-5">
+
 <h2 class="logo-font mb-4">{% trans "Sign Up" %}</h2>
-<hr>
+
 
 <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
 
@@ -21,5 +23,6 @@
   <a class="btn btn-outline-black rounded-0" href="{% url 'account_login' %}">Back to Login</a>
   <button type="submit">{% trans "Sign Up" %}</button>
 </form>
+</div>
 </main>
 {% endblock %}

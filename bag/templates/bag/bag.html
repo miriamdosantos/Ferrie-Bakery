@@ -15,7 +15,7 @@
     </div>
 
     <div class="row">
-        <div class="col">
+        <div class="col-12">
             {% if bag_items %}
             <div class="table-responsive rounded" style="background-color: #f8e6e660; ">
                 <table class="table table-sm table-borderless p-4 mt-3">
@@ -24,8 +24,7 @@
                             <th scope="col" class="align-middle">{% trans "Product Info" %}</th>
                             <th scope="col" class="align-middle"></th>
                             <th scope="col" class="align-middle">{% trans "Price" %}</th>
-                            <th scope="col" class="align-middle">{% trans "" %}</th>
-                            <th scope="col" class="align-middle">{% trans "" %}</th>
+                            
                             <th scope="col" class="align-middle">{% trans "Subtotal" %}</th>
                             <th scope="col" class="align-middle"></th>
                         </tr>
@@ -35,10 +34,12 @@
                     <tr>
                         <td class="p-3 w-25">
                             {% if item.product.image %}
-                                        <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-                                        {% else %}
-                                        <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
-                                        {% endif %}
+                            <img class="img-fluid rounded" src="{{ item.product.image.url }}"
+                                alt="{{ item.product.name }}">
+                            {% else %}
+                            <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png"
+                                alt="{{ item.product.name }}">
+                            {% endif %}
                         </td>
 
                         <td class="py-3">
@@ -63,11 +64,21 @@
                             </p>
                             {% endif %}
                             {% if item.topper_text %}
-                            <p class="my-0 ">{% trans "Topper Text" %}: ${{ item.topper_price }} - <small>{% trans " Text " %}:({{ item.topper_text }})</small>
+                            <p class="my-0 ">{% trans "Topper Text" %}: ${{ item.topper_price }} - <small>{% trans "
+                                    Text " %}:({{ item.topper_text }})</small>
                             </p>
                             {% endif %}
 
+                            <!-- Botões Editar e Remover -->
+                            <div class="d-flex me-2 mt-2">
+                                <a href="{% url 'product_detail' item.product.id %}?edit_mode=true&item_key={{ item.item_key }}"
+                                    class="btn btn-secondary btn-sm">{% trans "Edit" %}</a>
 
+                                <form method="post" action="{% url 'remove_item' item.item_key %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">{% trans "Remove" %}</button>
+                                </form>
+                            </div>
                         </td>
 
 
@@ -95,16 +106,7 @@
 
 
                         <!-- Botões Editar e Remover -->
-                        <td class="py-3">
-                            <a href="{% url 'product_detail' item.product.id %}?edit_mode=true&item_key={{ item.item_key }}"
-                                class="btn btn-secondary btn-sm">Edit</a>
 
-                        <td class="py-3">
-                            <form method="post" action="{% url 'remove_item' item.item_key %}">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-                            </form>
-                        </td>
 
                         <td class="py-3">
                             R$ {{ item.subtotal }}

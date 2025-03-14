@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from .models import StoreUpdate
 from products.models import Product, Flavor  # Supondo que Flavor seja o modelo relacionado
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth.hashers import make_password
+
 
 # Create your views here.
 def index(request):
@@ -24,3 +29,22 @@ def index(request):
         'traditional_flavors': traditional_flavors,
     }
     return render(request, 'home/index.html', context)
+
+
+
+
+def password_reset(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        new_password = request.POST.get("new_password")
+        
+        try:
+            user = User.objects.get(email=email)  # Busca o usuário pelo email
+            user.password = make_password(new_password)  # Atualiza a senha
+            user.save()  # Salva no banco de dados
+            messages.success(request, "Password updated successfully! You can now log in.")
+            return redirect("login")  # Redireciona para o login
+        except User.DoesNotExist:
+            messages.error(request, "No account found with this email.")
+
+    return render(request, "account/reset_password.html")

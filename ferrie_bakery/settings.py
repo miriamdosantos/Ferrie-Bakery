@@ -147,6 +147,7 @@ ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
+ACCOUNT_RESET_PASSWORD_URL = 'account_reset_password'
 
 WSGI_APPLICATION = 'ferrie_bakery.wsgi.application'
 

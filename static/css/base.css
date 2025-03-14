@@ -62,7 +62,8 @@ html, body {
   }
   .carousel-inner {
     height: 60vh; /* Aumenta a altura do carrossel */
-    width: 100%
+    width: 100%;
+    margin-top:-3rem
   }
   
   .carousel-item {
@@ -122,7 +123,7 @@ html, body {
   
   
   /* Inputs e Campos de Formulário */
-  input, textarea, select {
+  input, textarea,select {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     color: var(--secondary-color);
@@ -130,6 +131,8 @@ html, body {
     border-radius: 4px;
     padding: 10px;
     width: 100%;
+    
+    
   }
   
   input:focus, textarea:focus, select:focus {
@@ -297,7 +300,7 @@ header i{
 
 .card-title{
  font-family: 'Playfair Display', serif;
- font-size:1.5rem;
+ font-size:1.7rem;
  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.6), 
                  0 0 5px rgba(255, 19, 164, 0.5);
 }
@@ -393,6 +396,8 @@ header i{
   max-width: 100%;
   margin-bottom: 1rem;
   margin-left: 7.5rem;
+  margin-top: -4.5rem;
+  
  
 }
 
@@ -407,6 +412,7 @@ header i{
   
   
 }
+
 
 
 .image-container img:hover {
@@ -431,9 +437,10 @@ header i{
   background-color: #ff70c142;
   padding:  0px 2.5rem;
   border-radius: 15px;
-  min-height: 900px;
-  max-height: 100%;
+  min-height: 800px;
   width: 850px;
+  margin-top: -7rem;
+  
  
 }
 
@@ -782,7 +789,7 @@ color: #17a2b8; /* text-info */
   }
   
   .dropdown-menu{
-    margin-right: -20rem;
+    margin-left: -4rem;
   }
   
   .navbar {
@@ -795,7 +802,13 @@ color: #17a2b8; /* text-info */
 }
   
 
+main {
+  flex-grow: 1;
+  padding-top: 250px; /* Altura aproximada do header */
 
+  
+ 
+}
   
 }
 
@@ -803,7 +816,13 @@ color: #17a2b8; /* text-info */
 
 /* Small (de 576px até 767.98px) */
 @media (max-width: 392px) {
+  main {
+    flex-grow: 1;
+    padding-top: 400px; /* Altura aproximada do header */
   
+    
+   
+  }
 }
 @media (min-width: 576px) and (max-width: 767.98px) {
   
@@ -826,6 +845,7 @@ color: #17a2b8; /* text-info */
     
     
     
+    
    
   }
 
@@ -839,6 +859,10 @@ color: #17a2b8; /* text-info */
   }
   .btn-primary{
     margin-left: 5rem;
+  }
+  .carousel-inner {
+
+    margin-top:-8rem
   }
   
 }
@@ -857,6 +881,7 @@ color: #17a2b8; /* text-info */
     margin-left: 1rem; /* Centralizar imagem */
     margin-bottom: 0px;
     padding-bottom: 0px;
+    margin-top: 4rem;
     
     
     
@@ -866,18 +891,82 @@ color: #17a2b8; /* text-info */
   .image-container img {
     
    
-    height: 65vh; /* A imagem ocupa toda a largura da div */
+    height: 90vh; /* A imagem ocupa toda a largura da div */
    
   
  
+  }
+
+  .product-details-container{
+    margin-top: 6.5rem;
+    width: 100%;
+    
   }
   
 }
 
 /* Large (de 992px até 1199.98px) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
+@media (min-width: 992px)  {
   /* Seus estilos aqui */
+  .fixed-top-desktop-only {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+
+
+.header-container {
+    padding-top: 164px;
   
+}
+.product-details-container{
+padding-top: 7rem;
+margin-top: -7rem;
+width: 100%;
+height: 100%;
+
+}
+
+.product-details-container h2,
+.product-details-container h6,
+.product-details-container p {
+ font-size: 1.5rem;
+}
+.image-container {
+  width: 600vw;/* Garantir que a imagem ocupe a largura total da tela */
+  height: 900px;
+  margin-left: 1rem; /* Centralizar imagem */
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  
+  
+  
+  
+ 
+}
+
+.image-container img {
+  
+ 
+  height: 90vh; /* A imagem ocupa toda a largura da div */
+ 
+
+
+}
+main {
+  flex-grow: 1;
+  padding-top: 180px; /* Altura aproximada do header */
+
+  
+ 
+}
+
+.carousel-inner {
+  margin-top:8rem
+}
 }
 
 /* Extra large (de 1200px até 1399.98px) */
@@ -888,6 +977,13 @@ color: #17a2b8; /* text-info */
 /* Extra extra large (mais de 1400px) */
 @media (min-width: 1400px) {
   /* Seus estilos aqui */
+  main {
+   
+    padding-top: 250px; /* Altura aproximada do header */
+  
+    
+   
+  }
 }
 
 /* -------------------------------- Custom Media Queries */
@@ -897,41 +993,11 @@ color: #17a2b8; /* text-info */
   .container {
       max-width: 80%;
   }
-  main {
-    
-    padding-top: 240px; /* Altura aproximada do header */
   
-    
-   
-  }
 }
 
 /* Fixed top navbar only on medium and up */
 @media (min-width: 992px) {
-  .fixed-top-desktop-only {
-      position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
-      z-index: 1030;
-  }
-
-  
-
-  .header-container {
-      padding-top: 164px;
-    
-  }
- .product-details-container{
-  padding-top: 2rem;
-  margin-top: 7rem;
- }
-  
- .product-details-container h2,
- .product-details-container h6,
- .product-details-container p {
-   font-size: 1.5rem;
- }
 }
 
 /* Card adjustments for medium screens */
@@ -949,7 +1015,7 @@ color: #17a2b8; /* text-info */
     font-size: 2rem ;
     width: 100%;
     height: 100%;
-    margin-top: 0;
+    
     padding-top: 0;
   }
   
@@ -971,6 +1037,7 @@ color: #17a2b8; /* text-info */
 }
 @media (max-width: 768px) {
   
+
 }
 
 
