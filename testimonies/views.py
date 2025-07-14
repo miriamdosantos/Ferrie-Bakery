@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -7,8 +10,10 @@ from .forms import TestimonyForm
 from .models import Testimony
 from products.models import Product
 
+@login_required
 def add_testimony(request, product_id):
     product = get_object_or_404(Product, id=product_id)
+
     if request.method == 'POST':
         form = TestimonyForm(request.POST)
         if form.is_valid():
@@ -16,6 +21,7 @@ def add_testimony(request, product_id):
             testimony.product = product
             testimony.user = request.user
             testimony.save()
+            messages.success(request, "Thank you for your testimony!")
             return redirect('product_detail', product_id=product.id)
     else:
         form = TestimonyForm()

@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -11,6 +12,12 @@ class Testimony(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.TextField()
     rating = models.IntegerField(default=5)  # Opcional: nota de 1 a 5
+    photo = CloudinaryField(
+        "image",
+        default="https://res.cloudinary.com/dx21s72fa/image/upload/v1727857392/w0wngka886ke3rcyr5gd.png",
+        blank=True,
+        null=True,
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

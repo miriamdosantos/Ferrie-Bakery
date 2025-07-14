@@ -5204,3 +5204,14 @@ Traceback (most recent call last):
     raise TemplateDoesNotExist(template_name, chain=chain)
 django.template.exceptions.TemplateDoesNotExist: testimonies/add_testimony.html
 Watching for file changes with StatReloader
+Not Found: /media/noimage.png
+Not Found: /media/noimage.png
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\testimonies\models.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Watching for file changes with StatReloader
+Not Found: /media/noimage.png
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\testimonies\views.py changed, reloading.
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\testimonies\views.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
