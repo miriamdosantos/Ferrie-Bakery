@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import Testimony
 
-# Register your models here.
+@admin.register(Testimony)
+class TestimonyAdmin(admin.ModelAdmin):  # Usando ModelAdmin padrão
+    list_display = ('product', 'user', 'rating', 'created_at')

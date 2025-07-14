@@ -5110,3 +5110,97 @@ C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\ferrie_bakery\sett
 Watching for file changes with StatReloader
 C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\ferrie_bakery\settings.py changed, reloading.
 Watching for file changes with StatReloader
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\ferrie_bakery\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Not Found: /media/noimage.png
+Not Found: /media/noimage.png
+Internal Server Error: /testimonies/add/8/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\testimonies\views.py", line 23, in add_testimony
+    return render(request, 'testimonies/add_testimony.html', {'form': form, 'product': product})
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: testimonies/add_testimony.html
+Watching for file changes with StatReloader
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\testimonies\admin.py changed, reloading.
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\testimonies\admin.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Internal Server Error: /testimonies/add/4/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\testimonies\views.py", line 23, in add_testimony
+    return render(request, 'testimonies/add_testimony.html', {'form': form, 'product': product})
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: testimonies/add_testimony.html
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\testimonies\forms.py changed, reloading.
+C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\testimonies\forms.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /media/noimage.png
+Internal Server Error: /testimonies/add/8/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\testimonies\views.py", line 23, in add_testimony
+    return render(request, 'testimonies/add_testimony.html', {'form': form, 'product': product})
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: testimonies/add_testimony.html
+Watching for file changes with StatReloader
+Not Found: /media/noimage.png
+Internal Server Error: /testimonies/add/8/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\testimonies\views.py", line 23, in add_testimony
+    return render(request, 'testimonies/add_testimony.html', {'form': form, 'product': product})
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: testimonies/add_testimony.html
+Internal Server Error: /testimonies/add/4/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\testimonies\views.py", line 23, in add_testimony
+    return render(request, 'testimonies/add_testimony.html', {'form': form, 'product': product})
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: testimonies/add_testimony.html
+Watching for file changes with StatReloader

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<main class="container mt-5 mb-4">
+    <hr>
+    <div class="container mt-5 pb-5 mb-5">
+
+        <h1 class="logo-font text-center mt-5 mb-4" style="color: var(--primary-color)">We’d Love to Hear About Your Sweet Moments at Ferrie 🍰</h1>
+
+        <h3 class="text-center mt-3 ">Your testimonial helps us improve and provides valuable insights to future clients!</h3> <!-- Subtitle explaining the purpose of testimonials -->
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary-pink rounded-0 text-uppercase float-right" type="submit ">Submit</button>
+
+    </form>
+
+</main>
+{% endblock %}
