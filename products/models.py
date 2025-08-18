@@ -3,6 +3,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from decimal import Decimal
 from cloudinary.models import CloudinaryField
+from django.conf import settings
+
 
 
 
@@ -203,3 +205,46 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.product.name} with rating {self.rating}"
+class PersonalizedCakeOrder(models.Model):
+    SIZE_CHOICES = [
+        ("small", _("Small")),
+        ("medium", _("Medium")),
+        ("large", _("Large")),
+    ]
+
+    
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="personalized_cakes")
+    product = models.ForeignKey("Product", on_delete=models.CASCADE, related_name="personalized_orders")
+
+    size = models.CharField(max_length=20, choices=SIZE_CHOICES)
+    flavor = models.ForeignKey("Flavor", on_delete=models.SET_NULL, null=True, blank=True)
+    message = models.CharField(max_length=100, blank=True, null=True, verbose_name=_("Message on cake"))
+    topper_text = models.CharField(max_length=60, blank=True, null=True, verbose_name=_("Topper text"))
+    roses_quantity = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0)])
+
+    reference_image = CloudinaryField('cake_reference', blank=True, null=True)
+    quantity = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1)])
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _("Personalized Cake Order")
+        verbose_name_plural = _("Personalized Cake Orders")
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.user} • {self.product.name} • {self.size}"
+    def calculate_price(self) -> Decimal:
+        """
+        Reusa a lógica do Product (calculate_total_price).
+        Considera topper/roses conforme flags do Product.
+        """
+        total = self.product.calculate_total_price(
+            quantity=self.quantity,
+            size=self.size,
+            flavor=self.flavor,
+            topper_text=self.topper_text,
+            roses_quantity=self.roses_quantity,
+            is_truffled=getattr(self.flavor, "is_truffled", False),
+        )
+        return Decimal(total)
