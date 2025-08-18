@@ -5,8 +5,8 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
-from .models import Product, Category
-from .forms import ProductForm
+from .models import Product, Category, PersonalizedCakeOrder
+from .forms import ProductForm, PersonalizedCakeForm
 
 import logging
 
@@ -170,3 +170,34 @@ def delete_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
     messages.success(request, 'Product deleted!')
+
+@login_required
+def create_personalized_cake(request, product_slug):
+    product = get_object_or_404(Product, category__slug="personalized-cakes", slug=product_slug) if hasattr(Product, "slug") else \
+              get_object_or_404(Product, category__slug="personalized-cakes", name=product_slug)
+
+    if request.method == "POST":
+        form = PersonalizedCakeForm(request.POST, request.FILES, product=product)
+        if form.is_valid():
+            order: PersonalizedCakeOrder = form.save(commit=False)
+            order.user = request.user
+            order.product = product
+            order.save()
+            messages.success(request, f"Pedido criado! Preço calculado: {order.price_snapshot}.")
+            # aqui você pode adicionar ao carrinho, se usar sessão/OrderItem/etc.
+            # return redirect("cart:detail")
+            return redirect("products:personalized_detail", order_id=order.id)
+    else:
+        form = PersonalizedCakeForm(product=product)
+
+    context = {
+        "product": product,
+        "form": form,
+    }
+    return render(request, "products/create_personalized_cake.html", context)
+
+
+@login_required
+def personalized_detail(request, order_id):
+    order = get_object_or_404(PersonalizedCakeOrder, id=order_id, user=request.user)
+    return render(request, "products/personalized_detail.html", {"order": order})

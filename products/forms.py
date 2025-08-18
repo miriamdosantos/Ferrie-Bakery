@@ -35,18 +35,18 @@ class ProductForm(forms.ModelForm):
         for field in self.fields.values():
             field.widget.attrs['class'] = 'border-black rounded-0'
 
-    class PersonalizedCakeForm(forms.ModelForm):
-        class Meta:
-            model = PersonalizedCakeOrder
-            fields = [
-                "size", "flavor", "filling", "cover",
-                "message", "topper_text", "roses_quantity",
-                "reference_image", "quantity",
-            ]
-            widgets = {
-                "message": forms.TextInput(attrs={"placeholder": "Mensagem no bolo"}),
-                "topper_text": forms.TextInput(attrs={"placeholder": "Texto do topper (se houver)"}),
-                "filling": forms.TextInput(attrs={"placeholder": "Ex.: brigadeiro, doce de leite..."}),
-                "roses_quantity": forms.NumberInput(attrs={"min": 0}),
-                "quantity": forms.NumberInput(attrs={"min": 1}),
-            }
+class PersonalizedCakeForm(forms.ModelForm):
+    class Meta:
+        model = PersonalizedCakeOrder
+        fields = [
+            "size", "flavor", "filling", "cover",
+            "message", "topper_text", "roses_quantity",
+            "reference_image", "quantity",
+        ]
+        widgets = {
+            "message": forms.TextInput(attrs={"placeholder": "Mensagem no bolo"}),
+            "topper_text": forms.TextInput(attrs={"placeholder": "Texto do topper (se houver)"}),
+            "filling": forms.TextInput(attrs={"placeholder": "Ex.: brigadeiro, doce de leite..."}),
+            "roses_quantity": forms.NumberInput(attrs={"min": 0}),
+            "quantity": forms.NumberInput(attrs={"min": 1}),
+        }
