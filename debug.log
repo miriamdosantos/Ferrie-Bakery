@@ -10608,3 +10608,514 @@ Traceback (most recent call last):
   File "C:\Users\miria\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 887, in sendmail
     raise SMTPSenderRefused(code, resp, from_addr)
 smtplib.SMTPSenderRefused: (530, b'5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/accounts/troubleshooter/2402620. 5b1f17b1804b1-47787e43c2fsm483575e9.6 - gsmtp', 'None')
+Watching for file changes with StatReloader
+Internal Server Error: /accounts/signup/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\decorators.py", line 12, in wrap
+    resp = function(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\debug.py", line 143, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 158, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 53, in dispatch
+    response = super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 118, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 82, in post
+    response = self.form_valid(form)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 164, in form_valid
+    self.user, resp = form.try_save(self.request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\forms.py", line 456, in try_save
+    return super().try_save(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\forms.py", line 385, in try_save
+    resp = flows.signup.prevent_enumeration(request, email)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\signup.py", line 16, in prevent_enumeration
+    adapter.send_account_already_exists_mail(email)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 616, in send_account_already_exists_mail
+    self.send_mail("account/email/account_already_exists", email, ctx)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 201, in send_mail
+    msg.send()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\message.py", line 301, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 136, in send_messages
+    sent = self._send(message)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 155, in _send
+    self.connection.sendmail(
+  File "C:\Users\miria\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 887, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+smtplib.SMTPSenderRefused: (530, b'5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/accounts/troubleshooter/2402620. ffacd0b85a97d-42abe62bfa0sm31111454f8f.5 - gsmtp', 'None')
+Internal Server Error: /accounts/signup/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\decorators.py", line 12, in wrap
+    resp = function(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\debug.py", line 143, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 158, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 53, in dispatch
+    response = super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 118, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 82, in post
+    response = self.form_valid(form)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 164, in form_valid
+    self.user, resp = form.try_save(self.request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\forms.py", line 456, in try_save
+    return super().try_save(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\forms.py", line 385, in try_save
+    resp = flows.signup.prevent_enumeration(request, email)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\signup.py", line 16, in prevent_enumeration
+    adapter.send_account_already_exists_mail(email)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 616, in send_account_already_exists_mail
+    self.send_mail("account/email/account_already_exists", email, ctx)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 201, in send_mail
+    msg.send()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\message.py", line 301, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 136, in send_messages
+    sent = self._send(message)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 155, in _send
+    self.connection.sendmail(
+  File "C:\Users\miria\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 887, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+smtplib.SMTPSenderRefused: (530, b'5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/accounts/troubleshooter/2402620. ffacd0b85a97d-42abe63ba87sm31247694f8f.14 - gsmtp', 'None')
+Internal Server Error: /accounts/signup/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\decorators.py", line 12, in wrap
+    resp = function(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\debug.py", line 143, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 158, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 53, in dispatch
+    response = super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 118, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 82, in post
+    response = self.form_valid(form)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 164, in form_valid
+    self.user, resp = form.try_save(self.request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\forms.py", line 456, in try_save
+    return super().try_save(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\forms.py", line 385, in try_save
+    resp = flows.signup.prevent_enumeration(request, email)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\signup.py", line 16, in prevent_enumeration
+    adapter.send_account_already_exists_mail(email)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 616, in send_account_already_exists_mail
+    self.send_mail("account/email/account_already_exists", email, ctx)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 201, in send_mail
+    msg.send()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\message.py", line 301, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 136, in send_messages
+    sent = self._send(message)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 155, in _send
+    self.connection.sendmail(
+  File "C:\Users\miria\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 887, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+smtplib.SMTPSenderRefused: (530, b'5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/accounts/troubleshooter/2402620. ffacd0b85a97d-42abe62bf40sm29374655f8f.9 - gsmtp', 'None')
+Watching for file changes with StatReloader
+Internal Server Error: /accounts/signup/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\decorators.py", line 12, in wrap
+    resp = function(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\debug.py", line 143, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 158, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 53, in dispatch
+    response = super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 118, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 82, in post
+    response = self.form_valid(form)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 169, in form_valid
+    return flows.signup.complete_signup(
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\signup.py", line 72, in complete_signup
+    return perform_login(request, login)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\login.py", line 83, in perform_login
+    return resume_login(request, login)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\login.py", line 92, in resume_login
+    response = ctrl.handle()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\stages.py", line 109, in handle
+    response, cont = stage.handle()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\stages.py", line 148, in handle
+    send_email_confirmation(
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\utils.py", line 284, in send_email_confirmation
+    return flows.email_verification.send_verification_email(
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\email_verification.py", line 208, in send_verification_email
+    email_address.send_confirmation(request, signup=signup)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\models.py", line 107, in send_confirmation
+    confirmation.send(request, signup=signup)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\models.py", line 135, in send
+    get_adapter().send_confirmation_mail(request, self, signup)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 637, in send_confirmation_mail
+    self.send_mail(email_template, emailconfirmation.email_address.email, ctx)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 201, in send_mail
+    msg.send()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\message.py", line 301, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 136, in send_messages
+    sent = self._send(message)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 155, in _send
+    self.connection.sendmail(
+  File "C:\Users\miria\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 887, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+smtplib.SMTPSenderRefused: (530, b'5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/accounts/troubleshooter/2402620. 5b1f17b1804b1-47787e442c2sm3015165e9.7 - gsmtp', 'None')
+Internal Server Error: /accounts/signup/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\decorators.py", line 12, in wrap
+    resp = function(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\debug.py", line 143, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 158, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 53, in dispatch
+    response = super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 118, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 82, in post
+    response = self.form_valid(form)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 169, in form_valid
+    return flows.signup.complete_signup(
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\signup.py", line 72, in complete_signup
+    return perform_login(request, login)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\login.py", line 83, in perform_login
+    return resume_login(request, login)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\login.py", line 92, in resume_login
+    response = ctrl.handle()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\stages.py", line 109, in handle
+    response, cont = stage.handle()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\stages.py", line 148, in handle
+    send_email_confirmation(
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\utils.py", line 284, in send_email_confirmation
+    return flows.email_verification.send_verification_email(
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\email_verification.py", line 208, in send_verification_email
+    email_address.send_confirmation(request, signup=signup)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\models.py", line 107, in send_confirmation
+    confirmation.send(request, signup=signup)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\models.py", line 135, in send
+    get_adapter().send_confirmation_mail(request, self, signup)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 637, in send_confirmation_mail
+    self.send_mail(email_template, emailconfirmation.email_address.email, ctx)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 201, in send_mail
+    msg.send()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\message.py", line 301, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 136, in send_messages
+    sent = self._send(message)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 155, in _send
+    self.connection.sendmail(
+  File "C:\Users\miria\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 887, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+smtplib.SMTPSenderRefused: (530, b'5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/accounts/troubleshooter/2402620. ffacd0b85a97d-42ac677ab75sm29295788f8f.35 - gsmtp', 'None')
+Not Found: /favicon.ico
+Internal Server Error: /accounts/signup/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\decorators.py", line 12, in wrap
+    resp = function(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\debug.py", line 143, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 158, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 53, in dispatch
+    response = super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 118, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 82, in post
+    response = self.form_valid(form)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 169, in form_valid
+    return flows.signup.complete_signup(
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\signup.py", line 72, in complete_signup
+    return perform_login(request, login)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\login.py", line 83, in perform_login
+    return resume_login(request, login)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\login.py", line 92, in resume_login
+    response = ctrl.handle()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\stages.py", line 109, in handle
+    response, cont = stage.handle()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\stages.py", line 148, in handle
+    send_email_confirmation(
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\utils.py", line 284, in send_email_confirmation
+    return flows.email_verification.send_verification_email(
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\email_verification.py", line 208, in send_verification_email
+    email_address.send_confirmation(request, signup=signup)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\models.py", line 107, in send_confirmation
+    confirmation.send(request, signup=signup)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\models.py", line 135, in send
+    get_adapter().send_confirmation_mail(request, self, signup)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 637, in send_confirmation_mail
+    self.send_mail(email_template, emailconfirmation.email_address.email, ctx)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 201, in send_mail
+    msg.send()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\message.py", line 301, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 136, in send_messages
+    sent = self._send(message)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 155, in _send
+    self.connection.sendmail(
+  File "C:\Users\miria\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 887, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+smtplib.SMTPSenderRefused: (530, b'5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/accounts/troubleshooter/2402620. ffacd0b85a97d-42ac6794f6esm34084774f8f.41 - gsmtp', 'None')
+Internal Server Error: /accounts/signup/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\decorators.py", line 12, in wrap
+    resp = function(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\debug.py", line 143, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 158, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 53, in dispatch
+    response = super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 118, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 82, in post
+    response = self.form_valid(form)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 164, in form_valid
+    self.user, resp = form.try_save(self.request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\forms.py", line 456, in try_save
+    return super().try_save(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\forms.py", line 385, in try_save
+    resp = flows.signup.prevent_enumeration(request, email)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\signup.py", line 16, in prevent_enumeration
+    adapter.send_account_already_exists_mail(email)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 616, in send_account_already_exists_mail
+    self.send_mail("account/email/account_already_exists", email, ctx)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 201, in send_mail
+    msg.send()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\message.py", line 301, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 136, in send_messages
+    sent = self._send(message)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 155, in _send
+    self.connection.sendmail(
+  File "C:\Users\miria\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 887, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+smtplib.SMTPSenderRefused: (530, b'5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/accounts/troubleshooter/2402620. 5b1f17b1804b1-47787e95434sm2953545e9.13 - gsmtp', 'None')
+Internal Server Error: /accounts/signup/
+Traceback (most recent call last):
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\decorators.py", line 12, in wrap
+    resp = function(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\debug.py", line 143, in sensitive_post_parameters_wrapper
+    return view(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 158, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 53, in dispatch
+    response = super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 118, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\views\generic\base.py", line 143, in dispatch
+    return handler(request, *args, **kwargs)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\mixins.py", line 82, in post
+    response = self.form_valid(form)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\views.py", line 164, in form_valid
+    self.user, resp = form.try_save(self.request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\forms.py", line 456, in try_save
+    return super().try_save(request)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\forms.py", line 385, in try_save
+    resp = flows.signup.prevent_enumeration(request, email)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\internal\flows\signup.py", line 16, in prevent_enumeration
+    adapter.send_account_already_exists_mail(email)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 616, in send_account_already_exists_mail
+    self.send_mail("account/email/account_already_exists", email, ctx)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\allauth\account\adapter.py", line 201, in send_mail
+    msg.send()
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\message.py", line 301, in send
+    return self.get_connection(fail_silently).send_messages([self])
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 136, in send_messages
+    sent = self._send(message)
+  File "C:\Users\miria\OneDrive\Documents\Ferrie-Bakery\Ferrie-Bakery\venv\lib\site-packages\django\core\mail\backends\smtp.py", line 155, in _send
+    self.connection.sendmail(
+  File "C:\Users\miria\AppData\Local\Programs\Python\Python310\lib\smtplib.py", line 887, in sendmail
+    raise SMTPSenderRefused(code, resp, from_addr)
+smtplib.SMTPSenderRefused: (530, b'5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/accounts/troubleshooter/2402620. ffacd0b85a97d-42b303386f1sm21915407f8f.3 - gsmtp', 'None')
