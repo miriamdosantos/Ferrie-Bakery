@@ -4,6 +4,8 @@ from django.utils.translation import gettext_lazy as _
 from decimal import Decimal
 from cloudinary.models import CloudinaryField
 from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 
 
@@ -205,46 +207,37 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review for {self.product.name} with rating {self.rating}"
+User = get_user_model()
+
+from django.contrib.auth.models import User
+from django.db import models
+from cloudinary.models import CloudinaryField
+from products.models import Product, Flavor
+
+# products/models.py
 class PersonalizedCakeOrder(models.Model):
-    SIZE_CHOICES = [
-        ("small", _("Small")),
-        ("medium", _("Medium")),
-        ("large", _("Large")),
-    ]
-
-    
-
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="personalized_cakes")
-    product = models.ForeignKey("Product", on_delete=models.CASCADE, related_name="personalized_orders")
-
-    size = models.CharField(max_length=20, choices=SIZE_CHOICES)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     flavor = models.ForeignKey("Flavor", on_delete=models.SET_NULL, null=True, blank=True)
-    message = models.CharField(max_length=100, blank=True, null=True, verbose_name=_("Message on cake"))
-    topper_text = models.CharField(max_length=60, blank=True, null=True, verbose_name=_("Topper text"))
-    roses_quantity = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0)])
-
-    reference_image = CloudinaryField('cake_reference', blank=True, null=True)
-    quantity = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1)])
+    quantity_kilo = models.FloatField(default=1.0)
+    topper_text = models.CharField(max_length=100, blank=True, null=True)
+    roses_quantity = models.PositiveIntegerField(default=0)
+    message = models.TextField(blank=True, null=True)
+    photo = models.ImageField(upload_to="cakes_photos/", blank=True, null=True)
+    total_price = models.FloatField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    TOPPER_PRICE = 5
+    ROSE_PRICE = 2
+    MESSAGE_PRICE = 10
 
-    class Meta:
-        verbose_name = _("Personalized Cake Order")
-        verbose_name_plural = _("Personalized Cake Orders")
-        ordering = ["-created_at"]
+    def get_topper_price(self):
+        return self.TOPPER_PRICE if self.topper_text else 0
+
+    def get_roses_price(self):
+        return self.ROSÉ_PRICE * self.roses_quantity
+
+    def get_message_price(self):
+        return self.MESSAGE_PRICE if self.message else 0
 
     def __str__(self):
-        return f"{self.user} • {self.product.name} • {self.size}"
-    def calculate_price(self) -> Decimal:
-        """
-        Reusa a lógica do Product (calculate_total_price).
-        Considera topper/roses conforme flags do Product.
-        """
-        total = self.product.calculate_total_price(
-            quantity=self.quantity,
-            size=self.size,
-            flavor=self.flavor,
-            topper_text=self.topper_text,
-            roses_quantity=self.roses_quantity,
-            is_truffled=getattr(self.flavor, "is_truffled", False),
-        )
-        return Decimal(total)
+        return f"{self.user} - {self.flavor} ({self.created_at})"

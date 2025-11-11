@@ -2,7 +2,8 @@ from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 from .models import Category, Flavor, Product, Review, PersonalizedCakeOrder
 from . import translation
-
+from django.contrib import admin
+from .models import PersonalizedCakeOrder, Product, Flavor, Category
 
 
 @admin.register(Category)
@@ -23,10 +24,12 @@ class ProductAdmin(TranslationAdmin):
 class ReviewAdmin(TranslationAdmin):
     list_display = ('product', 'rating', 'created_at')
 
-class PersonalizedCakeOrderInline(admin.TabularInline):
-    model = PersonalizedCakeOrder
-    extra = 0
-    readonly_fields = ("price_snapshot", "created_at",)
-    fields = ("user", "size", "flavor",  "message", "topper_text",
-              "roses_quantity", "quantity",  "created_at")
-    show_change_link = True
+
+
+@admin.register(PersonalizedCakeOrder)
+class PersonalizedCakeOrderAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'user', 'flavor',  'quantity_kilo', 'total_price', 'created_at'
+    )
+    list_filter = ('created_at', 'flavor', 'user')
+    search_fields = ('user__username', 'flavor__name', 'topper_text', 'message')

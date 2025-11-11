@@ -25,10 +25,16 @@
             <div class="product-details-container">
                 <h1 class="mb-0 mt-5">{{ product.custom_title|default:product.name }}
                     {% if request.user.is_superuser %}
-                    <small class="ml-3">
-                        <a class="text-secondary" href="{% url 'edit_product' product.id %}">Edit</a> |
-                        <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
-                    </small>
+                        {% if product.id %}
+                            <!-- Produto real: mostra links de edição/exclusão -->
+                            <small class="ml-3">
+                                <a class="text-secondary" href="{% url 'edit_product' product.id %}">Edit</a> |
+                                <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                            </small>
+                        {% else %}
+                            <!-- Produto temporário: aviso -->
+                            <small class="ml-3 text-muted">Personalized product (cannot be edited)</small>
+                        {% endif %}
                     {% endif %}
                 </h1>
 
@@ -38,8 +44,12 @@
                     {% trans "Price from:" %} ${{ base_price }} {% trans "per kilo" %}
                 </h2>
                 <small class="text-muted">
-                    {% trans "Traditional:" %} $50.00 {% trans "per kilo" %} |
-                    {% trans "Truffled:" %} $75.00 {% trans "per kilo" %}
+                    {% if traditional_flavors %}
+                        {% trans "Traditional:" %} ${{ traditional_price }} {% trans "per kilo" %} |
+                    {% endif %}
+                    {% if truffled_flavors %}
+                        {% trans "Truffled:" %} ${{ truffled_price }} {% trans "per kilo" %}
+                    {% endif %}
                 </small>
                 {% elif product.name == 'Party Sweets' %}
                 <h2 class="lead mb-0 text-left font-weight-bold mt-4">
@@ -62,13 +72,12 @@
 
                 <!-- Formulário para Adicionar ao Carrinho -->
                 <form method="POST" action="{% url 'add_to_bag' product.id %}">
-
                     {% csrf_token %}
                     <input type="hidden" name="edit_mode" value="{{ request.GET.edit_mode }}">
                     <input type="hidden" name="item_key" value="{{ request.GET.item_key }}">
 
+                    <!-- Sabores -->
                     <div class="form-group mt-4">
-                        <!-- Sabores -->
                         {% if truffled_flavors or traditional_flavors %}
                         <label for="flavor-select">{% trans "Choose Your Flavor:" %}</label>
                         <select id="flavor-select" name="flavor" class="form-control mb-3" required>
@@ -80,7 +89,6 @@
                                 {% endfor %}
                             </optgroup>
                             {% endif %}
-
                             {% if traditional_flavors %}
                             <optgroup label="Traditional Flavors">
                                 {% for flavor in traditional_flavors %}
@@ -88,7 +96,6 @@
                                 {% endfor %}
                             </optgroup>
                             {% endif %}
-
                         </select>
                         {% else %}
                         <p>{% trans "No flavors available." %}</p>
@@ -110,30 +117,20 @@
                     <p>{% trans "No sizes available for this product." %}</p>
                     {% endif %}
 
-
-                    <!-- Quantidade em Quilos -->
                     <!-- Quantidade em Quilos -->
                     {% if product.sale_option == 'kilo' %}
                     <div class="form-group mt-4">
                         <label for="quantity_kilo">{% trans "Quantity (in kilos):" %}</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <button class="decrement-qty btn btn-black rounded-0" data-item_id="{{ product.id }}"
-                                    id="decrement-qty_kilo_{{ product.id }}">
-                                    <span class="icon">
-                                        <i class="fas fa-minus"></i>
-                                    </span>
+                                <button class="decrement-qty btn btn-black rounded-0" data-item_id="{{ product.id }}" id="decrement-qty_kilo_{{ product.id }}">
+                                    <span class="icon"><i class="fas fa-minus"></i></span>
                                 </button>
                             </div>
-                            <input class="form-control qty_input" type="number" name="quantity_kilo" value="1" min="1"
-                                step="1" data-item_id="{{ product.id }}" id="id_qty_kilo_{{ product.id }}"
-                                style="max-width: 350px;">
+                            <input class="form-control qty_input" type="number" name="quantity_kilo" value="1" min="1" step="1" data-item_id="{{ product.id }}" id="id_qty_kilo_{{ product.id }}" style="max-width: 350px;">
                             <div class="input-group-append">
-                                <button class="increment-qty btn btn-black rounded-0" data-item_id="{{ product.id }}"
-                                    id="increment-qty_kilo_{{ product.id }}">
-                                    <span class="icon">
-                                        <i class="fas fa-plus"></i>
-                                    </span>
+                                <button class="increment-qty btn btn-black rounded-0" data-item_id="{{ product.id }}" id="increment-qty_kilo_{{ product.id }}">
+                                    <span class="icon"><i class="fas fa-plus"></i></span>
                                 </button>
                             </div>
                         </div>
@@ -141,33 +138,24 @@
                     {% endif %}
 
                     <!-- Quantidade Normal -->
-                    <!-- Quantidade Normal -->
                     <div class="col-12">
                         <label for="quantity_kilo">{% trans "Quantity" %}</label>
                         <div class="form-group w-50">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <button class="decrement-qty btn btn-black rounded-0"
-                                        data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
-                                        <span class="icon">
-                                            <i class="fas fa-minus"></i>
-                                        </span>
+                                    <button class="decrement-qty btn btn-black rounded-0" data-item_id="{{ product.id }}" id="decrement-qty_{{ product.id }}">
+                                        <span class="icon"><i class="fas fa-minus"></i></span>
                                     </button>
                                 </div>
-                                <input class="form-control qty_input" type="number" name="quantity" value="1" min="1"
-                                    max="99" step="1" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                                <input class="form-control qty_input" type="number" name="quantity" value="1" min="1" max="99" step="1" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
                                 <div class="input-group-append">
-                                    <button class="increment-qty btn  rounded-0" data-item_id="{{ product.id }}"
-                                        id="increment-qty_{{ product.id }}">
-                                        <span class="icon">
-                                            <i class="fas fa-plus" style="color: #FF13A4;"></i>
-                                        </span>
+                                    <button class="increment-qty btn  rounded-0" data-item_id="{{ product.id }}" id="increment-qty_{{ product.id }}">
+                                        <span class="icon"><i class="fas fa-plus" style="color: #FF13A4;"></i></span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
 
                     <!-- Adicionais -->
                     {% if product.has_topper or product.has_roses %}
@@ -175,37 +163,30 @@
                         <h3>{% trans "Additionals:" %}</h3>
                         {% if product.has_topper %}
                         <label for="topper-text">{% trans "Topper Text:" %}</label>
-                        <small class="text-muted">
-                            ($ 8.00 for {% trans "Topper" %})
-                        </small>
-                        <input type="text" id="topper-text" name="topper_text" class="form-control"
-                            placeholder="{% trans 'Enter topper text' %}">
+                        <small class="text-muted">($ 8.00 for {% trans "Topper" %})</small>
+                        <input type="text" id="topper-text" name="topper_text" class="form-control" placeholder="{% trans 'Enter topper text' %}">
                         {% endif %}
                         {% if product.has_roses %}
                         <label for="roses-quantity">{% trans "Number of Roses:" %}</label>
-                        <small class="text-muted">
-                            ($ 5.00 {% trans "each" %} )
-                        </small>
-                        <input type="number" id="roses-quantity" name="roses_quantity" class="form-control" min="0"
-                            value="0">
+                        <small class="text-muted">($ 5.00 {% trans "each" %})</small>
+                        <input type="number" id="roses-quantity" name="roses_quantity" class="form-control" min="0" value="0">
                         {% endif %}
                     </div>
                     {% endif %}
 
                     <!-- Botões -->
-                    <div class="d-flex  mt-4">
+                    <div class="d-flex mt-4">
                         <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0">
                             <i class="fas fa-chevron-left"></i> {% trans "Keep Shopping" %}
                         </a>
-                        <input type="submit" class="btn btn-primary-pink rounded-0 text-uppercase"
-                            value="{% trans 'Add to Bag' %}" style="width: 300px;">
+                        <input type="submit" class="btn btn-primary-pink rounded-0 text-uppercase" value="{% trans 'Add to Bag' %}" style="width: 300px;">
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     </div>
-
-                    
-
                 </form>
+
+                <!-- Reviews / Testemunhos -->
                 <h3>{% trans "Reviews:" %}</h3>
+                {% if product.id %}
                     {% for t in product.testimonies.all %}
                     <div>
                         <strong>{{ t.user.username }}</strong> ({{ t.rating }}/5):<br>
@@ -215,22 +196,25 @@
                     {% empty %}
                     <p>{% trans "No testimonies yet — be the first to leave one!" %}</p>
                     {% endfor %}
+                {% else %}
+                    <p>{% trans "No reviews available for personalized products." %}</p>
+                {% endif %}
 
-                    {% if user.is_authenticated %}
-                    <a class="btn btn-outline-black rounded-0" href="{% url 'add_testimony' product.id %}">{% trans "Leave a testimony" %}</a>
-                    {% else %}
-                    <p>
-                        <a class="btn btn-primary-pink rounded-0 text-uppercase" href="{% url 'account_login' %}">
-                            {% trans "Log in" %}
-                        </a> {% trans "to leave a testimony." %}
-                    </p>
-                    {% endif %}
-
+                {% if user.is_authenticated %}
+                <a class="btn btn-outline-black rounded-0" href="{% url 'add_testimony' product.id %}">{% trans "Leave a testimony" %}</a>
+                {% else %}
+                <p>
+                    <button class="btn btn-primary-pink rounded-0 text-uppercase" href="{% url 'account_login' %}">
+                        {% trans "Log in" %}
+                    </button> {% trans "to leave a testimony." %}
+                </p>
+                {% endif %}
             </div>
         </div>
     </div>
 </main>
 {% endblock %}
+
 {% block postloadjs %}
 {{ block.super }}
 {% include 'products/includes/quantity_input_script.html' %}

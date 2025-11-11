@@ -478,6 +478,10 @@ header i{
   width: 100%;
 }
 
+#id_flavor:hover,
+#id_flavor:focus {
+    background-color: var(--secondary-color);
+}
 
 /* Definição da animação */
 @keyframes flash {

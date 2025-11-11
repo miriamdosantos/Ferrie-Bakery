@@ -1,12 +1,17 @@
 from django.shortcuts import render, get_object_or_404
-
+from decimal import Decimal, InvalidOperation
 from django.db.models import Min
+from decimal import Decimal
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
 from .models import Product, Category, PersonalizedCakeOrder
 from .forms import ProductForm, PersonalizedCakeForm
+from checkout.models import Order, OrderLineItem
+from profiles.models import UserProfile
+from bag.views import add_to_bag
+from .models import Flavor, PersonalizedCakeOrder
 
 import logging
 
@@ -40,19 +45,19 @@ def all_products(request):
     return render(request, 'products/products.html', context)
 
 def product_detail(request, product_id):
-    """ A view to show individual product details """
-
+    """A view to show individual product details."""
     product = get_object_or_404(Product, pk=product_id)
     reviews = product.reviews.all()
     avg_rating = product.get_average_rating()
+    
     truffled_flavors = product.flavors.filter(is_truffled=True)
     traditional_flavors = product.flavors.filter(is_truffled=False)
 
-    # Inicializa as variáveis de preço
-    base_price = product.price
+    # Inicializa variáveis de preço
     size_prices = {}
+    base_price = product.price
 
-    # Verifica se o produto deve ter opções de tamanho
+    # Preços por tamanho, se aplicável
     if product.sale_option == "size":
         size_prices = {
             'small': product.calculate_price_by_size('small'),
@@ -60,21 +65,30 @@ def product_detail(request, product_id):
             'large': product.calculate_price_by_size('large'),
         }
 
-    # Debug: Verifique se os tamanhos estão sendo passados corretamente
-    print(f"Product: {product.name}, Sale Option: {product.sale_option}, Size Prices: {size_prices}")
+    # Preço tradicional e truffled (considerando 1 unidade)
+    traditional_price = product.calculate_total_price(
+        quantity=1,
+        flavor=traditional_flavors.first() if traditional_flavors.exists() else None
+    )
+    truffled_price = product.calculate_total_price(
+        quantity=1,
+        flavor=truffled_flavors.first() if truffled_flavors.exists() else None
+    )
 
     context = {
         "product": product,
         "reviews": reviews,
         "avg_rating": avg_rating,
+        "truffled_flavors": truffled_flavors,
+        "traditional_flavors": traditional_flavors,
+        "traditional_price": traditional_price,
+        "truffled_price": truffled_price,
         "base_price": base_price,
-        "size_prices": size_prices,  # Passa sempre, mesmo que vazio
+        "size_prices": size_prices,
         "stars_range": range(1, 6),
-        'truffled_flavors': truffled_flavors,
-        'traditional_flavors': traditional_flavors,
     }
 
-    return render(request, 'products/product_detail.html', context)
+    return render(request, "products/product_detail.html", context)
 
 from django.shortcuts import render, get_object_or_404
 from .models import Product, Category
@@ -170,34 +184,104 @@ def delete_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
     messages.success(request, 'Product deleted!')
+# Pedido genérico (do menu principal)
+
+
+
+
 
 @login_required
-def create_personalized_cake(request, product_slug):
-    product = get_object_or_404(Product, category__slug="personalized-cakes", slug=product_slug) if hasattr(Product, "slug") else \
-              get_object_or_404(Product, category__slug="personalized-cakes", name=product_slug)
+def safe_decimal(value):
+    """Converte valores para Decimal com fallback 0.00"""
+    try:
+        return Decimal(value)
+    except (TypeError, ValueError, InvalidOperation):
+        return Decimal('0.00')
+
+def safe_int(value):
+    """Converte valores para int com fallback 0"""
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
+
+def safe_decimal(value):
+    try:
+        return Decimal(str(value))
+    except (TypeError, ValueError):
+        return Decimal('0.00')
+
+def safe_int(value):
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
+
+def create_personalized_cake(request):
+    product, _ = Product.objects.get_or_create(
+        name="Personalized Cake",
+        defaults={"price": 50, "sale_option": "weight"}
+    )
 
     if request.method == "POST":
-        form = PersonalizedCakeForm(request.POST, request.FILES, product=product)
+        form = PersonalizedCakeForm(request.POST, request.FILES)
         if form.is_valid():
-            order: PersonalizedCakeOrder = form.save(commit=False)
+            # Cria e salva o bolo personalizado no banco
+            order = form.save(commit=True)
             order.user = request.user
-            order.product = product
-            order.save()
-            messages.success(request, f"Pedido criado! Preço calculado: {order.price_snapshot}.")
-            # aqui você pode adicionar ao carrinho, se usar sessão/OrderItem/etc.
-            # return redirect("cart:detail")
-            return redirect("products:personalized_detail", order_id=order.id)
+            order.save()  # garante que o order está salvo
+
+            # Extrai os dados para a bag
+            quantity_kilo = safe_decimal(order.quantity_kilo)
+            topper_text = order.topper_text or ''
+            roses_quantity = safe_int(order.roses_quantity)
+            message = order.message or ''
+            flavor = order.flavor
+
+            # Calcula subtotal do item
+            subtotal = safe_decimal(product.price) * quantity_kilo
+            subtotal += Decimal('5.00') if topper_text else Decimal('0.00')
+            subtotal += Decimal('2.00') * Decimal(roses_quantity)
+            subtotal += Decimal('10.00') if message else Decimal('0.00')
+
+            # Monta a chave única da bag
+            item_key = f"personalized_{order.id}_flavor_{flavor.id if flavor else 'none'}_topper_{topper_text}_roses_{roses_quantity}"
+
+            # Recupera ou cria a bag
+            bag = request.session.get("bag", {})
+
+            # Adiciona item à bag
+            bag[item_key] = {
+                'product_id': product.id,
+                'quantity': 1,  # sempre 1
+                'quantity_kilo': float(quantity_kilo),
+                'price': float(product.price),
+                'subtotal': float(subtotal),
+                'product_name': product.name,
+                'flavor': flavor.name if flavor else None,
+                'size': None,
+                'topper_text': topper_text,
+                'topper_price': float(5 if topper_text else 0),
+                'roses_quantity': roses_quantity,
+                'roses_price_each': float(2),
+                'roses_price': float(2 * roses_quantity),
+                'message': message,
+                'message_price': float(10 if message else 0),
+                'photo_url': order.photo.url if order.photo else None,
+            }
+
+            request.session["bag"] = bag
+            # Atualiza contagem de produtos de forma segura
+            request.session['product_count'] = sum(
+                safe_int(item.get('quantity')) + safe_int(item.get('quantity_kilo'))
+                for item in bag.values()
+            )
+
+            messages.success(request, f"{product.name} added to your bag!")
+            return redirect("view_bag")
+        else:
+            messages.error(request, "Please correct the errors in the form.")
     else:
-        form = PersonalizedCakeForm(product=product)
+        form = PersonalizedCakeForm()
 
-    context = {
-        "product": product,
-        "form": form,
-    }
-    return render(request, "products/create_personalized_cake.html", context)
-
-
-@login_required
-def personalized_detail(request, order_id):
-    order = get_object_or_404(PersonalizedCakeOrder, id=order_id, user=request.user)
-    return render(request, "products/personalized_detail.html", {"order": order})
+    return render(request, "products/personalized_cake_form.html", {"form": form, "product": product})

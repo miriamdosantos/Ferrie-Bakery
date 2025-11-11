@@ -1,11 +1,21 @@
-core.Microsoft*
-core.mongo*
-core.python*
-env.py
+# Virtual environment
+venv/
+
+# Python cache
 __pycache__/
 *.py[cod]
+
+# Local env files
+env.py
+
+# Node modules
 node_modules/
+
+# GitHub config
 .github/
+
+# Cloudinary
 cloudinary_python.txt
-".sqlite3
-".pyc
+
+# SQLite database
+*.sqlite3

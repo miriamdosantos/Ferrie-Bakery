@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<main class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="personalized-product-container mt-5">
+
+                <!-- Nome do Produto -->
+                <h1 class="mb-4"
+                    style="color:#FF13A4; text-shadow: 5px 5px 15px #17010e73; font-weight: bold; text-decoration: underline;">
+                    {{ product.name }}
+                </h1>
+
+                <!-- Preço base -->
+                <h2 class="lead mb-3">
+                    {% trans "Base Price:" %} €{{ product.price|floatformat:2 }} {% trans "per kg" %} 
+                </h2>
+                <p>
+                    {% trans "The price is the same for all flavors (traditional or truffled)." %}
+                </p>
+                
+                
+                
+
+                <!-- Formulário -->
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <!-- Flavor -->
+                    <div class="form-group mb-3" >
+                        <label for="id_flavor">Choose Your Flavor:</label>
+                        {{ form.flavor }}
+                    </div>
+                    
+                    
+
+
+                    <!-- Quantity in kg -->
+                    <div class="form-group mb-3">
+                        <label for="id_quantity_kilo">{% trans "Weight (kg):" %}</label>
+                        {{ form.quantity_kilo }}
+                        {% if form.quantity_kilo.errors %}
+                        <div class="text-danger">{{ form.quantity_kilo.errors }}</div>
+                        {% endif %}
+                    </div>
+
+
+                    <!-- Topper Text -->
+                    <div class="form-group mb-3">
+                        <label for="id_topper_text">{% trans "Topper Text (optional)  (+€5)::" %}</label>
+                        {{ form.topper_text }}
+                        {% if form.topper_text.errors %}
+                        <div class="text-danger">{{ form.topper_text.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Roses -->
+                    <div class="form-group mb-3">
+                        <label for="id_roses_quantity">{% trans "Number of Roses (+€2 each):" %}</label>
+                        {{ form.roses_quantity }}
+                        {% if form.roses_quantity.errors %}
+                        <div class="text-danger">{{ form.roses_quantity.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Message -->
+                    <div class="form-group mb-3">
+                        <label for="id_message">{% trans "Message for the cake (+€10):" %}</label>
+                        {{ form.message }}
+                        {% if form.message.errors %}
+                        <div class="text-danger">{{ form.message.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Photo Upload -->
+                    <div class="form-group mb-3">
+                        <label for="id_photo">{% trans "Upload a reference photo (optional):" %}</label>
+                        {{ form.photo }}
+                        {% if form.photo.errors %}
+                        <div class="text-danger">{{ form.photo.errors }}</div>
+                        {% endif %}
+                    </div>
+
+
+                    <!-- Botões -->
+                    <div class="d-flex justify-content-between mt-4 mb-4">
+                        <a href="{% url 'products' %}" class="btn btn-outline-black">{% trans "Back to Products" %}</a>
+                        <button type="submit" class="btn btn-primary-pink">{% trans "Add to Bag" %}</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+
+{% endblock %}

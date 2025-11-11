@@ -19,6 +19,9 @@
                 <a href="{% url 'products_by_category' 'birthday-cake' %}" class="dropdown-item">{% trans "Birthday Cakes" %}</a>
                 <a href="{% url 'products_by_category' 'wedding-cake' %}" class="dropdown-item">{% trans "Wedding Cakes" %}</a>
                 <a href="{% url 'products_by_category' 'homemade-cakes' %}" class="dropdown-item">{% trans "Homemade Cakes" %}</a>
+                <a href="{% url 'personalized_detail' %}" class="dropdown-item">
+                    {% trans "Personalized Cakes" %}
+                </a>
                 <a href="{% url 'products_by_category' 'all-cakes' %}" class="dropdown-item">{% trans "All Cakes" %}</a>
             </div>
         </li>
@@ -32,8 +35,9 @@
                 <a href="{% url 'products_by_category' 'pies' %}" class="dropdown-item">{% trans "Pies" %}</a>
                 <a href="{% url 'products_by_category' 'mousses' %}" class="dropdown-item">{% trans "Mousses" %}</a>
                 <a href="{% url 'products_by_category' 'cakes-in-a-pot' %}" class="dropdown-item">{% trans "Cakes in a Pot" %}</a>
-                <a href="{% url 'products_by_category' 'party-desserts' %}" class="dropdown-item">{% trans "Party Desserts" %}</a>
-                <a href="{% url 'products_by_category' 'all-desserts' %}" class="dropdown-item">{% trans "All Desserts" %}</a>
+                
+                
+                <a href="{% url 'products_by_category' 'all-desserts' %}" class="dropdown-item">{% trans "All Desserts " %}</a>
             </div>
         </li>
 

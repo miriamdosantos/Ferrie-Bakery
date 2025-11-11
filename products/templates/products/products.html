@@ -9,7 +9,7 @@
         <div class="col-12 offset-3 mt-5"></div>
         <h1 class="text-center"
             style="color:#FF13A4; text-shadow: 5px 5px 15px #17010e73; font-weight: bold; text-decoration: underline;">
-            {% trans "Discorver Our Delicious Products" %}
+            {% trans "Discover Our Delicious Products" %}
         </h1>
     </div>
 
@@ -34,56 +34,61 @@
                 {% endif %}
             </div>
 
-                <!-- Conteúdo do Card -->
-                <div class="card-body text-center">
-                    {% if product.name %}
+            <!-- Conteúdo do Card -->
+            <div class="card-body text-center">
+                {% if product.name %}
                     <p class="card-title product-name">{{ product.name }}</p>
-                    {% endif %}
+                {% endif %}
 
-                    <!-- Representação do Rating -->
-                    <div class="mb-2 {% if not product.name %}mt-3{% endif %}">
-                        {% with product.get_average_rating as avg_rating %}
-                        {% if avg_rating > 0 %}
+                <!-- Representação do Rating -->
+                <div class="mb-2 {% if not product.name %}mt-3{% endif %}">
+                    {% with product.get_average_rating as avg_rating %}
+                    {% if avg_rating > 0 %}
                         <span class="fw-bold text-muted">{% trans "Rating" %}:</span>
                         {% for i in stars_range %}
-                        {% if i <= avg_rating %} <span class="text-warning">&#9733;</span> <!-- Estrela cheia -->
+                            {% if i <= avg_rating %}
+                                <span class="text-warning">&#9733;</span> <!-- Estrela cheia -->
                             {% else %}
-                            <span class="text-muted">&#9733;</span> <!-- Estrela vazia -->
+                                <span class="text-muted">&#9733;</span> <!-- Estrela vazia -->
                             {% endif %}
-                            {% endfor %}
-                            {% else %}
-                            <span class="fw-bold text-muted bg-light p-2 rounded-pill ">{% trans "No reviews yet" %}</span>
-                            {% endif %}
-                            {% endwith %}
-                    </div>
+                        {% endfor %}
+                    {% else %}
+                        <span class="fw-bold text-muted bg-light p-2 rounded-pill">{% trans "No reviews yet" %}</span>
+                    {% endif %}
+                    {% endwith %}
+                </div>
 
-                    <div class="d-flex justify-content-around ">
-                        <a href="{% url 'product_detail' product.id %}"
-                            class="btn product-btn-pink btn-primary btn-lg me-2">
-                            {% trans "Order Now" %}
+                <div class="d-flex justify-content-around ">
+                    <a href="{% url 'product_detail' product.id %}"
+                        class="btn product-btn-pink btn-primary btn-lg me-2">
+                        {% trans "Order Now" %}
+                    </a>
+                    {% if product.category %}
+                        <a href="{% url 'products_by_category' product.category.slug %}" 
+                           class="btn product-btn-blue btn-primary btn-light btn-lg">
+                            {% trans "See More" %}
                         </a>
-                        <a href="{% url 'products_by_category' product.category.slug %}" class="btn product-btn-blue btn-primary btn-light btn-lg">
-                        {% trans "See More" %}
-                        </a>
-                    </div>
-                    {% if request.user.is_superuser %}
+                    {% endif %}
+                </div>
+
+                {% if request.user.is_superuser %}
                     <small class="ml-3">
                         <a class="text-secondary" href="{% url 'edit_product' product.id %}">Edit</a> |
                         <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
                     </small>
-                    {% endif %}
-                </div>
+                {% endif %}
             </div>
         </div>
-
-        <!-- Linha <hr> após cada 3 cards em telas grandes -->
-        {% if forloop.counter|divisibleby:3 %}
-        <div class="col-12 d-none d-lg-block mb-5">
-            <hr>
-        </div>
-        {% endif %}
-        {% endfor %}
     </div>
+
+    <!-- Linha <hr> após cada 3 cards em telas grandes -->
+    {% if forloop.counter|divisibleby:3 %}
+    <div class="col-12 d-none d-lg-block mb-5">
+        <hr>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
 </main>
 
 {% endblock %}

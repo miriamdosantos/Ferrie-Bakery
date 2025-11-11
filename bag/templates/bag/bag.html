@@ -4,7 +4,6 @@
 
 {% block content %}
 <main class="container mb-4">
-    <!-- Título da Página -->
     <div class="row mt-5">
         <div class="col-12 mt-5">
             <h1 class="text-center"
@@ -17,210 +16,129 @@
     <div class="row">
         <div class="col-12">
             {% if bag_items %}
-            <div class="table-responsive rounded" style="background-color: #f8e6e660; ">
+            <div class="table-responsive rounded" style="background-color: #f8e6e660;">
                 <table class="table table-sm table-borderless p-4 mt-3">
                     <thead class="text-black">
                         <tr>
                             <th scope="col" class="align-middle">{% trans "Product Info" %}</th>
                             <th scope="col" class="align-middle"></th>
-                            <th scope="col" class="align-middle">{% trans "Price" %}</th>
-                            
+                            <th scope="col" class="align-middle">{% trans "Unit Price" %}</th>
                             <th scope="col" class="align-middle">{% trans "Subtotal" %}</th>
                             <th scope="col" class="align-middle"></th>
                         </tr>
                     </thead>
 
+                    <tbody>
                     {% for item in bag_items %}
-                    <tr>
-                        <td class="p-3 w-25">
-                            {% if item.product.image %}
-                            <img class="img-fluid rounded" src="{{ item.product.image.url }}"
-                                alt="{{ item.product.name }}">
-                            {% else %}
-                            <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png"
-                                alt="{{ item.product.name }}">
-                            {% endif %}
-                        </td>
-
-                        <td class="py-3">
-                            {% if item.quantity %}
-                            <span class="my-0"><strong> {{ item.quantity }} X </strong></span>
-                            {% endif %}
-                            <span class="my-0"><strong>{{ item.product.name }}</strong></span>
-
-                            {% if item.size %}
-                            <p class="my-0 ">{% trans "Size" %}: {{ item.size }}</p>
-                            {% endif %}
-                            {% if item.flavor %}
-                            <p class="my-0 ">{% trans "Flavor" %}: {{ item.flavor.name }}</p>
-                            {% endif %}
-                            {% if item.quantity_kilo %}
-                            <p class="my-0 ">{% trans "Quantity Kilo" %}: {{ item.quantity_kilo}}Kg
-                                {% endif %}
-                            </p>
-                            {% if item.roses_quantity > 0 %}
-                            <p class="my-0 ">{% trans "Roses Quantity" %}: {{ item.roses_quantity }}
-                                (each ${{ item.roses_price_each }} - total ${{ item.roses_price }})
-                            </p>
-                            {% endif %}
-                            {% if item.topper_text %}
-                            <p class="my-0 ">{% trans "Topper Text" %}: ${{ item.topper_price }} - <small>{% trans "
-                                    Text " %}:({{ item.topper_text }})</small>
-                            </p>
-                            {% endif %}
-
-                            <!-- Botões Editar e Remover -->
-                            <div class="d-flex me-2 mt-2">
-                                <a href="{% url 'product_detail' item.product.id %}?edit_mode=true&item_key={{ item.item_key }}"
-                                    class="btn btn-secondary btn-sm">{% trans "Edit" %}</a>
-
-                                <form method="post" action="{% url 'remove_item' item.item_key %}">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger btn-sm">{% trans "Remove" %}</button>
-                                </form>
-                            </div>
-                        </td>
-
-
-                        <td class="py-3">
-                            <p class="my-0">
-                                {% if item.product.sale_option == "kilo" and item.is_truffled %}
-                                ${{ 75.00|floatformat:2 }} {% trans "Truffled Per Kilo" %}
-                                {% elif item.product.sale_option == "kilo" %}
-                                ${{ item.product.price|floatformat:2 }} {% trans "Traditional Per Kilo" %}
-                                {% elif item.product.sale_option == "size" and item.size %}
-                                ${{ item.price|floatformat:2 }} {% trans "By Size " %} ({{item.size}})
-
-                                {% elif item.product.sale_option == "unit" %}
-                                ${{ item.product.price|floatformat:2 }} {% trans "Per Unit" %}
-                                {% elif item.product.sale_option == "hundred" %}
-                                ${{ item.product.price|floatformat:2 }} {% trans "Per Hundred" %}
-                                {% elif item.product.sale_option == "piece" %}
-                                ${{ item.product.price|floatformat:2 }} {% trans "Per Piece" %}
+                        <tr>
+                            <!-- Product Image -->
+                            <td class="p-3 w-25">
+                                {% if item.product.image %}
+                                    <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
                                 {% else %}
-                                ${{ item.product.price|floatformat:2 }}
+                                    <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
                                 {% endif %}
-                            </p>
-                        </td>
+                            </td>
 
+                            <!-- Product Info -->
+                            <td class="py-3">
+                                {% if item.quantity %}
+                                    <span class="my-0"><strong>{{ item.quantity }} X </strong></span>
+                                {% endif %}
+                                <span class="my-0"><strong>{{ item.product.name }}</strong></span>
+                                {% if item.quantity_kilo %}
+                                    <span class="my-0">({{ item.quantity_kilo|floatformat:2 }} Kg)</span>
+                                {% endif %}
 
+                                {% if item.size %}
+                                    <p class="my-0">{% trans "Size" %}: {{ item.size }}</p>
+                                {% endif %}
+                                {% if item.flavor %}
+                                    <p class="my-0">{% trans "Flavor" %}: {{ item.flavor.name }}</p>
+                                {% endif %}
 
-                        <!-- Botões Editar e Remover -->
+                                {% if item.roses_quantity|default:0 > 0 %}
+                                    <p class="my-0">{% trans "Roses Quantity" %}: {{ item.roses_quantity|default:0 }}
+                                        (each €{{ item.roses_price_each|floatformat:2 }} - total €{{ item.roses_price|floatformat:2 }})
+                                    </p>
+                                {% endif %}
+                                {% if item.topper_text %}
+                                    <p class="my-0">{% trans "Topper Text" %}: €{{ item.topper_price|floatformat:2 }} - <small>{{ item.topper_text }}</small></p>
+                                {% endif %}
+                                {% if item.message %}
+                                    <p class="my-0">{% trans "Message" %}: €{{ item.message_price|floatformat:2 }} - "{{ item.message }}"</p>
+                                {% endif %}
 
+                                <!-- Edit & Remove Buttons -->
+                                <div class="d-flex me-2 mt-2">
+                                    <a href="{% url 'product_detail' item.product.id %}?edit_mode=true&item_key={{ item.item_key }}"
+                                       class="btn btn-secondary btn-sm">{% trans "Edit" %}</a>
 
-                        <td class="py-3">
-                            R$ {{ item.subtotal }}
-                        </td>
-                    </tr>
+                                    <form method="post" action="{% url 'remove_item' item.item_key %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger btn-sm">{% trans "Remove" %}</button>
+                                    </form>
+                                </div>
+                            </td>
+
+                            <!-- Unit Price including extras -->
+                            <td class="py-3">
+                                €{{ item.unit_price|floatformat:2 }}
+                            </td>
+
+                            <!-- Subtotal per item -->
+                            <td class="py-3">
+                                €{{ item.subtotal|floatformat:2 }}
+                            </td>
+                        </tr>
                     {% endfor %}
+                    </tbody>
 
-                    <!-- Total da Sacola -->
-                    <tr>
-                        <td colspan="5" class="pt-5 text-right">
-                            <h6><strong>{% trans "Bag Total" %}: ${{ total|floatformat:2 }}</strong></h6>
-                            <h6>{% trans "Delivery" %}: ${{delivery|floatformat:2}}</h6>
-                            <h4 class="mt-4"><strong>{% trans "Grand Total" %}: ${{ grand_total|floatformat:2}}</strong>
-                            </h4>
-                            {% if free_delivery_delta > 0 %}
-                            <p class="mb-1 text-danger">
-                                {% trans "You could get free delivery by spending just" %} <strong>${{
-                                    free_delivery_delta }}</strong> {% trans "more!" %}
-                            </p>
-                            {% endif %}
-                        </td>
-                    </tr>
+                    <!-- Bag Totals -->
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" class="pt-5 text-right">
+                                <h6><strong>{% trans "Bag Total" %}: €{{ total|floatformat:2 }}</strong></h6>
+                                <h6>{% trans "Delivery" %}: €{{ delivery|floatformat:2 }}</h6>
+                                <h4 class="mt-4"><strong>{% trans "Grand Total" %}: €{{ grand_total|floatformat:2 }}</strong></h4>
+                                {% if free_delivery_delta > 0 %}
+                                    <p class="mb-1 text-danger">
+                                        {% trans "You could get free delivery by spending just" %} <strong>€{{ free_delivery_delta|floatformat:2 }}</strong> {% trans "more!" %}
+                                    </p>
+                                {% endif %}
+                            </td>
+                        </tr>
 
-                    <!-- Botões de Ação -->
-                    <tr>
-                        <td colspan="5" class="text-right">
-                            <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
-                                <span class="icon">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="text-uppercase">{% trans "Keep Shopping" %}</span>
-                            </a>
-                            <a href="{% url 'checkout' %}" class="btn btn-primary-pink rounded-0 btn-lg">
-                                <span class="text-uppercase">{% trans "Secure Checkout" %}</span>
-                                <span class="icon">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                            </a>
-                        </td>
-                    </tr>
+                        <!-- Action Buttons -->
+                        <tr>
+                            <td colspan="5" class="text-right">
+                                <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
+                                    <span class="icon"><i class="fas fa-chevron-left"></i></span>
+                                    <span class="text-uppercase">{% trans "Keep Shopping" %}</span>
+                                </a>
+                                <a href="{% url 'checkout' %}" class="btn btn-primary-pink rounded-0 btn-lg">
+                                    <span class="text-uppercase">{% trans "Secure Checkout" %}</span>
+                                    <span class="icon"><i class="fas fa-lock"></i></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
             {% else %}
-            <!-- Sacola Vazia -->
             <p class="lead mb-5">{% trans "Your bag is empty." %}</p>
             <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
-                <span class="icon">
-                    <i class="fas fa-chevron-left"></i>
-                </span>
+                <span class="icon"><i class="fas fa-chevron-left"></i></span>
                 <span class="text-uppercase">{% trans "Keep Shopping" %}</span>
             </a>
             {% endif %}
 
-            <!-- Botão para Limpar Sacola -->
+            <!-- Clear Bag -->
             <form action="{% url 'clear_bag' %}" method="post" class="mt-3">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger">{% trans "Clear Bag" %}</button>
             </form>
         </div>
     </div>
-
 </main>
-{% endblock %}
-
-{% block postloadjs %}
-{{ block.super }}
-{% include 'products/includes/quantity_input_script.html' %}
-
-<script type="text/javascript">
-    // Update quantity on click
-    // Update quantity on click
-    $('.update-link').click(function (e) {
-        e.preventDefault();
-        var form = $(this).closest('.update-form');
-        form.submit();
-    });
-
-    // Remove item and reload on click
-    $(document).ready(function () {
-        $('.remove-item').click(function (e) {
-            e.preventDefault();
-
-            // Captura o botão e a chave do item
-            var $button = $(this);
-            var itemKey = $button.data('item_key');
-
-            // Depuração
-            console.log("Item Key:", itemKey);  // Verifique se o itemKey está correto
-
-            if (!itemKey) {
-                console.error("Erro: itemKey não encontrado.");
-                return;
-            }
-
-            var csrfToken = "{{ csrf_token }}";  // Token CSRF
-
-            // URL para remover o item
-            var url = `/bag/remove/${itemKey}/`;
-
-            $.post(url, { csrfmiddlewaretoken: csrfToken })
-                .done(function () {
-                    location.reload();  // Recarrega a página após remover o item
-                })
-                .fail(function () {
-                    alert("Erro ao remover o item!");
-                    console.error("Erro ao remover item:", itemKey);
-                });
-        });
-    });
-
-
-
-</script>
-
-
-
 {% endblock %}
